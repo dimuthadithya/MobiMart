@@ -1,4 +1,8 @@
+<?php
+ session_start();
+include_once('../../config/db.php');
 
+?>
 
 
 
@@ -257,24 +261,24 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
         <div class="container">
-          <a class="navbar-brand" href="#">
-            <img src="../../assets/images/main-logo.png" alt="Mobile Shop">
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto w-100 d-flex justify-content-end p-3">
-              <li class="nav-item">
-                <a class="nav-link" href="#">User Name</a>
-              </li>
-            </ul>
-            <div class="d-flex align-items-center">
-              <i class="fa fa-phone"></i>
+            <a class="navbar-brand" href="../../index.php">
+                <img src="../../assets/images/main-logo.png" alt="Mobile Shop">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto w-100 d-flex justify-content-end p-3">
+                    <li class="nav-item">
+                    <a class="nav-link" href="#"><?php echo $_SESSION['email'] ?></a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <i class="fa fa-phone"></i>
+                </div>
             </div>
-          </div>
         </div>
-      </nav>
+    </nav>
 
     <div class="container-fluid px-4 py-4">
         <div class="row">
@@ -284,31 +288,31 @@
                     <div class="card-body">
                         <ul class="sidebar-menu">
                             <li>
-                                <a href="./dashboard.html">
+                                <a href="./dashboard.php">
                                     <i class="fas fa-th-large"></i>
                                     <span>Dashboard</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="./product.html">
+                                <a href="./product.php">
                                     <i class="fas fa-mobile-alt"></i>
                                     <span>Products</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="./brands.html">
+                                <a href="./brands.php">
                                     <i class="fas fa-users"></i>
                                     <span>Brands</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="./user.html" class="active">
+                                <a href="./user.php" class="active">
                                     <i class="fas fa-users"></i>
                                     <span>Customers</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="./orders.html">
+                                <a href="./orders.php">
                                     <i class="fas fa-shopping-cart"></i>
                                     <span>Orders</span>
                                 </a>

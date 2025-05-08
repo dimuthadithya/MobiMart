@@ -258,24 +258,24 @@ include_once('../../config/db.php');
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
         <div class="container">
-          <a class="navbar-brand" href="#">
-            <img src="../../assets/images/main-logo.png" alt="Mobile Shop">
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto w-100 d-flex justify-content-end p-3">
-              <li class="nav-item">
-                <a class="nav-link" href="#"><?php echo $_SESSION['email'] ?></a>
-              </li>
-            </ul>
-            <div class="d-flex align-items-center">
-              <i class="fa fa-phone"></i>
+            <a class="navbar-brand" href="../../index.php">
+                <img src="../../assets/images/main-logo.png" alt="Mobile Shop">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto w-100 d-flex justify-content-end p-3">
+                    <li class="nav-item">
+                    <a class="nav-link" href="#"><?php echo $_SESSION['email'] ?></a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <i class="fa fa-phone"></i>
+                </div>
             </div>
-          </div>
         </div>
-      </nav>
+    </nav>
 
     <div class="container-fluid px-4 py-4">
         <div class="row">
