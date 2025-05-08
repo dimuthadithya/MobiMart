@@ -3,6 +3,15 @@
 session_start();
 include_once('../../config/db.php');
 
+$products = $conn->query("SELECT * FROM products LIMIT 5")->fetchAll(PDO::FETCH_ASSOC);
+
+$orders = $conn->query("SELECT * FROM orders LIMIT 5")->fetchAll(PDO::FETCH_ASSOC);
+
+$totalSales = $conn->query("SELECT SUM(total_amount) AS total FROM orders")->fetchColumn();
+$totalProducts = $conn->query("SELECT COUNT(*) AS total FROM products")->fetchColumn();
+$newOrders = $conn->query("SELECT COUNT(*) AS total FROM orders WHERE status = 'pending'")->fetchColumn();
+
+
 ?>
 
 
@@ -270,7 +279,7 @@ include_once('../../config/db.php');
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto w-100 d-flex justify-content-end p-3">
                     <li class="nav-item">
-                    <a class="nav-link" href="#"><?php echo $_SESSION['email'] ?></a>
+                        <a class="nav-link" href="#"><?php echo $_SESSION['email'] ?></a>
                     </li>
                 </ul>
                 <div class="d-flex align-items-center">
@@ -365,7 +374,7 @@ include_once('../../config/db.php');
                                         <i class="fas fa-dollar-sign"></i>
                                     </div>
                                     <div>
-                                        <h5 class="stat-number">$24,589</h5>
+                                        <h5 class="stat-number"><?php echo $totalSales ?> LKR</h5>
                                         <p class="stat-label">Total Sales</p>
                                     </div>
                                 </div>
@@ -380,7 +389,7 @@ include_once('../../config/db.php');
                                         <i class="fas fa-mobile-alt"></i>
                                     </div>
                                     <div>
-                                        <h5 class="stat-number">256</h5>
+                                        <h5 class="stat-number"><?php echo $totalProducts ?></h5>
                                         <p class="stat-label">Total Products</p>
                                     </div>
                                 </div>
@@ -410,7 +419,7 @@ include_once('../../config/db.php');
                                         <i class="fas fa-shopping-bag"></i>
                                     </div>
                                     <div>
-                                        <h5 class="stat-number">468</h5>
+                                        <h5 class="stat-number"><?php echo $newOrders ?></h5>
                                         <p class="stat-label">New Orders</p>
                                     </div>
                                 </div>
@@ -434,52 +443,45 @@ include_once('../../config/db.php');
                                     <thead>
                                         <tr>
                                             <th>Order ID</th>
-                                            <th>Customer</th>
-                                            <th>Product</th>
                                             <th>Date</th>
                                             <th>Amount</th>
+                                            <th>Payment Method</th>
                                             <th>Status</th>
+                                            <th>Address</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>#7865</td>
-                                            <td>Emily Wilson</td>
-                                            <td>iPhone 15 Pro</td>
-                                            <td>May 08, 2025</td>
-                                            <td>$1,299</td>
-                                            <td><span class="order-status status-delivered">Delivered</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>#7864</td>
-                                            <td>Michael Chen</td>
-                                            <td>Samsung S24</td>
-                                            <td>May 07, 2025</td>
-                                            <td>$999</td>
-                                            <td><span class="order-status status-pending">Pending</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>#7863</td>
-                                            <td>Sarah Johnson</td>
-                                            <td>Google Pixel 8</td>
-                                            <td>May 07, 2025</td>
-                                            <td>$799</td>
-                                            <td><span class="order-status status-delivered">Delivered</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>#7862</td>
-                                            <td>John Smith</td>
-                                            <td>OnePlus 12</td>
-                                            <td>May 06, 2025</td>
-                                            <td>$899</td>
-                                            <td><span class="order-status status-cancelled">Cancelled</span></td>
-                                        </tr>
+                                        <?php
+                                        foreach ($orders as $order) {
+                                            $order_id = $order['order_id'];
+
+
+                                            $findUserSql = "SELECT * FROM users WHERE user_id = :user_id";
+                                            $stmt = $conn->prepare($findUserSql);
+                                            $stmt->execute(['user_id' => $order['user_id']]);
+                                            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+
+                                            $orderDate = $order['order_date'];
+                                            $orderAmount = $order['total_amount'];
+                                            $paymentMethod = $order['payment_method'];
+                                            $orderStatus = $order['status'];
+                                            $shippingAddress = $order['shipping_address'];
+
+
+                                            include "../../includes/lastOrderRow.php";
+                                        }
+
+
+                                        ?>
+
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                         <div class="card-footer bg-white text-end">
-                            <a href="#" class="btn btn-sm dark-btn p-2">View All Orders</a>
+                            <a href="./orders.php" class="btn btn-sm dark-btn p-2">View All Orders</a>
                         </div>
                     </div>
                 </div>
@@ -497,91 +499,34 @@ include_once('../../config/db.php');
                                         <thead>
                                             <tr>
                                                 <th>Product</th>
-                                                <th>Category</th>
                                                 <th>Brand</th>
                                                 <th>Price</th>
                                                 <th>Stock</th>
                                                 <th>Status</th>
-                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="/api/placeholder/80/80" alt="iPhone" class="product-img me-2">
-                                                        <span>iPhone 15 Pro Max</span>
-                                                    </div>
-                                                </td>
-                                                <td>Smartphone</td>
-                                                <td>Apple</td>
-                                                <td>$1,299</td>
-                                                <td>3</td>
-                                                <td><span class="badge bg-warning">Low Stock</span></td>
-                                                <td>
-                                                    <div class="btn-group gap-3">
-                                                        <button class="btn btn-sm dark-btn"><i class="fas fa-edit"></i></button>
-                                                        <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="/api/placeholder/80/80" alt="Samsung" class="product-img me-2">
-                                                        <span>Samsung Galaxy S24 Ultra</span>
-                                                    </div>
-                                                </td>
-                                                <td>Smartphone</td>
-                                                <td>Samsung</td>
-                                                <td>$1,199</td>
-                                                <td>5</td>
-                                                <td><span class="badge bg-warning">Low Stock</span></td>
-                                                <td>
-                                                    <div class="btn-group gap-3">
-                                                        <button class="btn btn-sm dark-btn"><i class="fas fa-edit"></i></button>
-                                                        <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="/api/placeholder/80/80" alt="Pixel" class="product-img me-2">
-                                                        <span>Google Pixel 8 Pro</span>
-                                                    </div>
-                                                </td>
-                                                <td>Smartphone</td>
-                                                <td>Google</td>
-                                                <td>$899</td>
-                                                <td>2</td>
-                                                <td><span class="badge bg-warning">Low Stock</span></td>
-                                                <td>
-                                                    <div class="btn-group gap-3">
-                                                        <button class="btn btn-sm dark-btn"><i class="fas fa-edit"></i></button>
-                                                        <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="/api/placeholder/80/80" alt="OnePlus" class="product-img me-2">
-                                                        <span>OnePlus 12</span>
-                                                    </div>
-                                                </td>
-                                                <td>Smartphone</td>
-                                                <td>OnePlus</td>
-                                                <td>$899</td>
-                                                <td>15</td>
-                                                <td><span class="badge bg-success">In Stock</span></td>
-                                                <td>
-                                                    <div class="btn-group gap-3">
-                                                        <button class="btn btn-sm dark-btn"><i class="fas fa-edit"></i></button>
-                                                        <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                            <?php
+                                            foreach ($products as $product) {
+
+                                                $productName = $product['product_name'];
+                                                $productPrice = $product['price'];
+                                                $productDescription = $product['description'];
+                                                $productSku = $product['sku'];
+                                                $productStock = $product['quantity'];
+                                                $productImage = $product['image_url'];
+                                                $productBrandId = $product['brand_id'];
+
+                                                $findBrandSql = "SELECT * FROM brands WHERE brand_id = $productBrandId";
+                                                $stmt = $conn->prepare($findBrandSql);
+                                                $stmt->execute();
+                                                $productBrand = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                                                $productBrandName = $productBrand['brand_name'];
+
+                                                include "../../includes/inventoryRow.php";
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
