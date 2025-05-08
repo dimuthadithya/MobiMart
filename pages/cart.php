@@ -1,6 +1,6 @@
 <?php
-
 include_once '../config/db.php';
+
 session_start();
 
 $userId = $_SESSION['user_id'] ?? null;
@@ -15,6 +15,7 @@ $stmt = $conn->prepare($cartItemsSql);
 $stmt->execute(['user_id' => $userId]);
 $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+$cartCount = count($cartItems);
 ?>
 
 <!DOCTYPE html>
@@ -372,6 +373,7 @@ $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <a href="#" class="nav-icon">
             <i class="fas fa-shopping-cart"></i>
             <span class="cart-count">3</span>
+
           </a>
         </div>
       </div>
@@ -384,13 +386,14 @@ $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <!-- Cart Content -->
   <div class="container cart-container">
     <div class="cart-header">
-      <h1 class="fw-bold">Shopping Cart <span class="text-muted fs-6">(3 items)</span></h1>
+      <h1 class="fw-bold">Shopping Cart <span class="text-muted fs-6">(<?php echo $cartCount ?>)</span></h1>
     </div>
 
     <div class="row">
       <!-- Cart Items Column -->
       <div class="col-lg-8 mb-4">
         <?php
+        $toatlPrice = 0;
         foreach ($cartItems as $item) {
 
           $productId = $item['product_id'];
@@ -415,7 +418,9 @@ $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
           $brandName = $brand['brand_name'];
 
-          include_once "../includes/cartItem.php";
+          $toatlPrice += $productPrice;
+
+          include "../includes/cartItem.php";
         }
         ?>
 
@@ -469,20 +474,20 @@ $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
           <div class="summary-item">
             <span>Subtotal</span>
-            <span>$1,297.00</span>
+            <span>LKR <?php echo $toatlPrice ?>.00</span>
           </div>
           <div class="summary-item">
             <span>Shipping</span>
-            <span>$0.00</span>
+            <span>LKR 0.00</span>
           </div>
           <div class="summary-item">
             <span>Tax</span>
-            <span>$103.76</span>
+            <span>LKR 0</span>
           </div>
 
           <div class="summary-total">
             <span>Total</span>
-            <span>$1,400.76</span>
+            <span>LKR <?php echo $toatlPrice ?>.00</span>
           </div>
 
           <!-- Promo Code Section -->
