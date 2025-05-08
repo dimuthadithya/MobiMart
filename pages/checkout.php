@@ -32,9 +32,9 @@ if (count($cartItems) == 0) {
   <title>Mobile Shop - Checkout</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="./assets/css/style.css">
-  <link rel="stylesheet" href="./assets/css/vendor.css">
-  <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/vendor.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
   <style>
     body {
       background-color: #f4f6f9;
@@ -464,7 +464,7 @@ if (count($cartItems) == 0) {
   <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
     <div class="container">
       <a class="navbar-brand" href="../index.php">
-        <img src="./assets/images/main-logo.png" alt="Mobile Shop">
+        <img src="../assets/images/main-logo.png" alt="Mobile Shop">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
@@ -494,7 +494,7 @@ if (count($cartItems) == 0) {
           <a href="#" class="nav-icon">
             <i class="fas fa-heart"></i>
           </a>
-          <a href="./cart.php" class="nav-icon">
+          <a href="../cart.php" class="nav-icon">
             <i class="fas fa-shopping-cart"></i>
             <span class="cart-count">3</span>
           </a>

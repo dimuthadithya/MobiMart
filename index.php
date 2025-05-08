@@ -228,9 +228,6 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <a href="#" title="Mobile Phones">Mobile Phones</a>
         </li>
         <li class="cat-list-item">
-          <a href="#" title="Smart Watches">Smart Watches</a>
-        </li>
-        <li class="cat-list-item">
           <a href="#" title="Headphones">Headphones</a>
         </li>
         <li class="cat-list-item">
@@ -290,7 +287,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
               id="navbar"
               class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link me-4 active" href="#billboard">Home</a>
+                <a class="nav-link me-4 active" href="./index.php">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link me-4" href="#company-services">Services</a>
@@ -299,48 +296,9 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <a class="nav-link me-4" href="#mobile-products">Products</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4" href="#smart-watches">Watches</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link me-4" href="#yearly-sale">Sale</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link me-4" href="#latest-blog">Blog</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link me-4 dropdown-toggle link-dark"
-                  data-bs-toggle="dropdown"
-                  href="#"
-                  role="button"
-                  aria-expanded="false">Pages</a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a href="about.html" class="dropdown-item">About</a>
-                  </li>
-                  <li>
-                    <a href="blog.html" class="dropdown-item">Blog</a>
-                  </li>
-                  <li>
-                    <a href="shop.html" class="dropdown-item">Shop</a>
-                  </li>
-                  <li>
-                    <a href="cart.html" class="dropdown-item">Cart</a>
-                  </li>
-                  <li>
-                    <a href="checkout.html" class="dropdown-item">Checkout</a>
-                  </li>
-                  <li>
-                    <a href="single-post.html" class="dropdown-item">Single Post</a>
-                  </li>
-                  <li>
-                    <a href="single-product.html" class="dropdown-item">Single Product</a>
-                  </li>
-                  <li>
-                    <a href="contact.html" class="dropdown-item">Contact</a>
-                  </li>
-                </ul>
-              </li>
+
               <li class="nav-item">
                 <div class="user-items ps-5">
                   <ul class="d-flex justify-content-end list-unstyled">
@@ -572,80 +530,6 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
       </div>
       <div class="col-md-6 col-sm-12"></div>
-    </div>
-  </section>
-
-  <section id="latest-blog" class="padding-large">
-    <div class="container">
-      <div class="row">
-        <div class="display-header d-flex justify-content-between pb-3">
-          <h2 class="display-7 text-dark text-uppercase">Latest Posts</h2>
-          <div class="btn-right">
-            <a
-              href="blog.html"
-              class="btn btn-medium btn-normal text-uppercase">Read Blog</a>
-          </div>
-        </div>
-        <div class="post-grid d-flex flex-wrap justify-content-between">
-          <div class="col-lg-4 col-sm-12">
-            <div class="card border-none me-3">
-              <div class="card-image">
-                <img
-                  src="./assets/images/post-item1.jpg"
-                  alt=""
-                  class="img-fluid" />
-              </div>
-            </div>
-            <div class="card-body text-uppercase">
-              <div class="card-meta text-muted">
-                <span class="meta-date">feb 22, 2023</span>
-                <span class="meta-category">- Gadgets</span>
-              </div>
-              <h3 class="card-title">
-                <a href="#">Get some cool gadgets in 2023</a>
-              </h3>
-            </div>
-          </div>
-          <div class="col-lg-4 col-sm-12">
-            <div class="card border-none me-3">
-              <div class="card-image">
-                <img
-                  src="./assets/images/post-item2.jpg"
-                  alt=""
-                  class="img-fluid" />
-              </div>
-            </div>
-            <div class="card-body text-uppercase">
-              <div class="card-meta text-muted">
-                <span class="meta-date">feb 25, 2023</span>
-                <span class="meta-category">- Technology</span>
-              </div>
-              <h3 class="card-title">
-                <a href="#">Technology Hack You Won't Get</a>
-              </h3>
-            </div>
-          </div>
-          <div class="col-lg-4 col-sm-12">
-            <div class="card border-none me-3">
-              <div class="card-image">
-                <img
-                  src="./assets/images/post-item3.jpg"
-                  alt=""
-                  class="img-fluid" />
-              </div>
-            </div>
-            <div class="card-body text-uppercase">
-              <div class="card-meta text-muted">
-                <span class="meta-date">feb 22, 2023</span>
-                <span class="meta-category">- Camera</span>
-              </div>
-              <h3 class="card-title">
-                <a href="#">Top 10 Small Camera In The World</a>
-              </h3>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -943,7 +827,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <h5 class="widget-title pb-2">Quick Links</h5>
                 <ul class="menu-list list-unstyled text-uppercase">
                   <li class="menu-item pb-2">
-                    <a href="#">Home</a>
+                    <a href="./index.php">Home</a>
                   </li>
                   <li class="menu-item pb-2">
                     <a href="#">About</a>

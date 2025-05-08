@@ -361,7 +361,7 @@ if (!$product) {
         <nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.html">
-                    <img src="./assets/images/main-logo.png" class="logo" />
+                    <img src="../assets/images/main-logo.png" class="logo" />
                 </a>
                 <button
                     class="navbar-toggler d-flex d-lg-none order-3 p-2"
@@ -382,7 +382,7 @@ if (!$product) {
                     aria-labelledby="bdNavbarOffcanvasLabel">
                     <div class="offcanvas-header px-4 pb-0">
                         <a class="navbar-brand" href="index.html">
-                            <img src="./assets/images/main-logo.png" class="logo" />
+                            <img src="../assets/images/main-logo.png" class="logo" />
                         </a>
                         <button
                             type="button"
@@ -396,7 +396,7 @@ if (!$product) {
                             id="navbar"
                             class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
                             <li class="nav-item">
-                                <a class="nav-link me-4 active" href="#billboard">Home</a>
+                                <a class="nav-link me-4 active" href="../index.php">Home</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link me-4" href="#company-services">Services</a>
@@ -1158,7 +1158,7 @@ if (!$product) {
                             href="https://templatesjungle.com/"
                             class="image-link position-relative">
                             <img
-                                src="./assets/images/insta-item1.jpg"
+                                src="../assets/images/insta-item1.jpg"
                                 alt="instagram"
                                 class="insta-image" />
                             <div
@@ -1174,7 +1174,7 @@ if (!$product) {
                             href="https://templatesjungle.com/"
                             class="image-link position-relative">
                             <img
-                                src="./assets/images/insta-item2.jpg"
+                                src="../assets/images/insta-item2.jpg"
                                 alt="instagram"
                                 class="insta-image" />
                             <div
@@ -1190,7 +1190,7 @@ if (!$product) {
                             href="https://templatesjungle.com/"
                             class="image-link position-relative">
                             <img
-                                src="./assets/images/insta-item3.jpg"
+                                src="../assets/images/insta-item3.jpg"
                                 alt="instagram"
                                 class="insta-image" />
                             <div
@@ -1206,7 +1206,7 @@ if (!$product) {
                             href="https://templatesjungle.com/"
                             class="image-link position-relative">
                             <img
-                                src="./assets/images/insta-item4.jpg"
+                                src="../assets/images/insta-item4.jpg"
                                 alt="instagram"
                                 class="insta-image" />
                             <div
@@ -1222,7 +1222,7 @@ if (!$product) {
                             href="https://templatesjungle.com/"
                             class="image-link position-relative">
                             <img
-                                src="./assets/images/insta-item5.jpg"
+                                src="../assets/images/insta-item5.jpg"
                                 alt="instagram"
                                 class="insta-image" />
                             <div
@@ -1245,7 +1245,7 @@ if (!$product) {
                     <div class="row d-flex flex-wrap justify-content-between">
                         <div class="col-lg-3 col-sm-6 pb-3">
                             <div class="footer-menu">
-                                <img src="./assets/images/main-logo.png" alt="logo" />
+                                <img src="../assets/images/main-logo.png" alt="logo" />
                                 <p>
                                     Nisi, purus vitae, ultrices nunc. Sit ac sit suscipit
                                     hendrerit. Gravida massa volutpat aenean odio erat nullam
@@ -1297,16 +1297,13 @@ if (!$product) {
                                 <h5 class="widget-title pb-2">Quick Links</h5>
                                 <ul class="menu-list list-unstyled text-uppercase">
                                     <li class="menu-item pb-2">
-                                        <a href="#">Home</a>
+                                        <a href="../index.php">Home</a>
                                     </li>
                                     <li class="menu-item pb-2">
                                         <a href="#">About</a>
                                     </li>
                                     <li class="menu-item pb-2">
                                         <a href="#">Shop</a>
-                                    </li>
-                                    <li class="menu-item pb-2">
-                                        <a href="#">Blogs</a>
                                     </li>
                                     <li class="menu-item pb-2">
                                         <a href="#">Contact</a>
@@ -1363,8 +1360,8 @@ if (!$product) {
                     <div class="Shipping d-flex">
                         <p>We ship with:</p>
                         <div class="card-wrap ps-2">
-                            <img src="./assets/images/dhl.png" alt="visa" />
-                            <img src="./assets/images/shippingcard.png" alt="mastercard" />
+                            <img src="../assets/images/dhl.png" alt="visa" />
+                            <img src="../assets/images/shippingcard.png" alt="mastercard" />
                         </div>
                     </div>
                 </div>
@@ -1372,18 +1369,16 @@ if (!$product) {
                     <div class="payment-method d-flex">
                         <p>Payment options:</p>
                         <div class="card-wrap ps-2">
-                            <img src="./assets/images/visa.jpg" alt="visa" />
-                            <img src="./assets/images/mastercard.jpg" alt="mastercard" />
-                            <img src="./assets/images/paypal.jpg" alt="paypal" />
+                            <img src="../assets/images/visa.jpg" alt="visa" />
+                            <img src="../assets/images/mastercard.jpg" alt="mastercard" />
+                            <img src="../assets/images/paypal.jpg" alt="paypal" />
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6">
                     <div class="copyright">
                         <p>
-                            © Copyright 2023 MiniStore. Design by
-                            <a href="https://templatesjungle.com/">TemplatesJungle</a>
-                            Distribution by <a href="https://themewagon.com">ThemeWagon</a>
+                            © Copyright 2025 MiniStore.
                         </p>
                     </div>
                 </div>
@@ -1391,13 +1386,13 @@ if (!$product) {
         </div>
     </div>
 
-    <script src="./assets/js/jquery-1.11.0.min.js"></script>
+    <script src="../assets/js/jquery-1.11.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script
         type="text/javascript"
-        src="./assets/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="./assets/js/plugins.js"></script>
-    <script type="text/javascript" src="./assets/js/script.js"></script>
+        src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../assets/js/plugins.js"></script>
+    <script type="text/javascript" src="../assets/js/script.js"></script>
 </body>
 
 </html>
