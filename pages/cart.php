@@ -523,7 +523,7 @@ $cartCount = count($cartItems);
           </div>
 
           <!-- Checkout Button -->
-          <a href="./checkout.html"><button class="btn btn-dark w-100 checkout-btn">Proceed to Checkout</button></a>
+          <a href="./checkout.php"><button class="btn btn-dark w-100 checkout-btn">Proceed to Checkout</button></a>
 
           <a href="#" class="continue-shopping d-block text-center">
             <i class="fas fa-long-arrow-alt-left me-1"></i> Continue Shopping
