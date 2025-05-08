@@ -1,6 +1,8 @@
 <div class="product-card position-relative">
     <div class="image-holder">
-        <img src="../assets/images/product-item2.jpg" alt="product-item" class="img-fluid" />
+        <a href="<?php echo $productDetailsPage ?>">
+            <img src="../assets/images/product-item2.jpg" alt="product-item" class="img-fluid" />
+        </a>
     </div>
     <div class="cart-concern position-absolute">
         <div class="cart-button d-flex">

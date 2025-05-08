@@ -526,6 +526,10 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 $productName = $product['product_name'];
                 $productPrice = $product['price'];
                 $productDescription = $product['description'];
+                $productId = $product['product_id'];
+
+                $productDetailsPage = './includes/productDetails.php?product_id=' . $productId;
+
 
                 include 'includes/productCard.php'; ?>
               </div>
