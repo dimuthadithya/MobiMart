@@ -14,13 +14,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $createdAt = date('Y-m-d H:i:s');
     $updatedAt = $createdAt;
 
-    // Upload main image to the correct folder
+   
     $mainImageName = $_FILES['mainImage']['name'];
     $mainImageTmp  = $_FILES['mainImage']['tmp_name'];
     $mainImageUploadPath = '../../../assets/uploads/products/' . $mainImageName;
     move_uploaded_file($mainImageTmp, $mainImageUploadPath);
 
-    // Upload gallery images to the correct folder
     $galleryFilenames = [];
     if (!empty($_FILES['galleryImages']['name'][0])) {
         foreach ($_FILES['galleryImages']['tmp_name'] as $index => $tmpName) {

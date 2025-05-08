@@ -1,3 +1,19 @@
+<?php
+ session_start();
+include_once('../../config/db.php');
+
+$productSql = "SELECT * FROM products ORDER BY RAND()";
+$stmt = $conn->prepare($productSql);
+$stmt->execute();
+$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// var_dump($products); // Debugging line to check the fetched products
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -338,7 +354,7 @@
             </nav>
         </div>
         <div>
-            <a href="./product-add.html"><button class="btn dark-btn" id="addProductBtn"><i class="fas fa-plus me-2"></i>Add Product</button></a>
+            <a href="./product-add.php"><button class="btn dark-btn" id="addProductBtn"><i class="fas fa-plus me-2"></i>Add Product</button></a>
         </div>
     </div>
     
@@ -384,148 +400,43 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Newly Added Product (Highlighted) -->
-                        <tr class="table-light">
-                           
-                            <td>
-                                <img src="/api/placeholder/40/40" class="product-img" alt="iPhone 15 Pro">
-                            </td>
-                            <td>
-                                <div class="fw-bold">iPhone 15 Pro</div>
-                                <div class="small text-muted">SKU: IP15P-128-BLK</div>
-                            </td>
-                            <td>Smartphones</td>
-                            <td>
-                                <div class="fw-bold">$999.00</div>
-                                <div class="small text-success">10% off</div>
-                            </td>
-                            <td>
-                                <span class="badge bg-success">120</span>
-                            </td>
-                            <td>
-                                <span class="badge bg-success">Active</span>
-                            </td>
-                            <td>
-                                <div class="d-flex">
-                                    <button class="btn btn-sm btn-outline-primary me-1" title="Edit"><i class="fas fa-edit"></i></button>              
-                                    <button class="btn btn-sm btn-outline-danger" title="Delete"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        
-                        <!-- Other Products -->
-                        <tr>
-                           
-                            <td>
-                                <img src="/api/placeholder/40/40" class="product-img" alt="Samsung Galaxy S23">
-                            </td>
-                            <td>
-                                <div class="fw-bold">Samsung Galaxy S23</div>
-                                <div class="small text-muted">SKU: SGS23-256-GRN</div>
-                            </td>
-                            <td>Smartphones</td>
-                            <td>
-                                <div class="fw-bold">$899.00</div>
-                                <div class="small text-success">5% off</div>
-                            </td>
-                            <td>
-                                <span class="badge bg-success">85</span>
-                            </td>
-                            <td>
-                                <span class="badge bg-success">Active</span>
-                            </td>
-                            <td>
-                                <div class="d-flex">
-                                    <button class="btn btn-sm btn-outline-primary me-1" title="Edit"><i class="fas fa-edit"></i></button>
-                
-                                    <button class="btn btn-sm btn-outline-danger" title="Delete"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        
-                        <tr>
-                           
-                            <td>
-                                <img src="/api/placeholder/40/40" class="product-img" alt="Google Pixel 8">
-                            </td>
-                            <td>
-                                <div class="fw-bold">Google Pixel 8</div>
-                                <div class="small text-muted">SKU: GP8-128-BLK</div>
-                            </td>
-                            <td>Smartphones</td>
-                            <td>
-                                <div class="fw-bold">$799.00</div>
-                            </td>
-                            <td>
-                                <span class="badge bg-warning text-dark">12</span>
-                            </td>
-                            <td>
-                                <span class="badge bg-success">Active</span>
-                            </td>
-                            <td>
-                                <div class="d-flex">
-                                    <button class="btn btn-sm btn-outline-primary me-1" title="Edit"><i class="fas fa-edit"></i></button>
-                
-                                    <button class="btn btn-sm btn-outline-danger" title="Delete"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        
-                        <tr>
-                           
-                            <td>
-                                <img src="/api/placeholder/40/40" class="product-img" alt="iPad Air">
-                            </td>
-                            <td>
-                                <div class="fw-bold">iPad Air 5th Gen</div>
-                                <div class="small text-muted">SKU: IPA5-64-SLV</div>
-                            </td>
-                            <td>Tablets</td>
-                            <td>
-                                <div class="fw-bold">$599.00</div>
-                            </td>
-                            <td>
-                                <span class="badge bg-danger">0</span>
-                            </td>
-                            <td>
-                                <span class="badge bg-danger">Out of Stock</span>
-                            </td>
-                            <td>
-                                <div class="d-flex">
-                                    <button class="btn btn-sm btn-outline-primary me-1" title="Edit"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-sm btn-outline-danger" title="Delete"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        
-                        <tr>
-                           
-                            <td>
-                                <img src="/api/placeholder/40/40" class="product-img" alt="Apple Watch">
-                            </td>
-                            <td>
-                                <div class="fw-bold">Apple Watch Series 8</div>
-                                <div class="small text-muted">SKU: AWS8-44-BLK</div>
-                            </td>
-                            <td>Wearables</td>
-                            <td>
-                                <div class="fw-bold">$399.00</div>
-                                <div class="small text-success">15% off</div>
-                            </td>
-                            <td>
-                                <span class="badge bg-success">45</span>
-                            </td>
-                            <td>
-                                <span class="badge bg-secondary">Draft</span>
-                            </td>
-                            <td>
-                                <div class="d-flex">
-                                    <button class="btn btn-sm btn-outline-primary me-1" title="Edit"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-sm btn-outline-danger" title="Delete"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
+    <?php foreach ($products as $product): ?>
+        <tr class="table-light">
+            <td>
+                <img src="../../assets/uploads/products/<?= htmlspecialchars($product['image_url']) ?>" class="product-img" alt="<?= htmlspecialchars($product['product_name']) ?>" width="40" height="40">
+            </td>
+            <td>
+                <div class="fw-bold"><?= htmlspecialchars($product['product_name']) ?></div>
+                <div class="small text-muted">SKU: <?= htmlspecialchars($product['sku']) ?></div>
+            </td>
+            <td>
+                <?= htmlspecialchars($product['brand_id']) ?> <!-- Optional: replace with actual brand name if needed -->
+            </td>
+            <td>
+                <div class="fw-bold">$<?= htmlspecialchars($product['price']) ?></div>
+            </td>
+            <td>
+                <span class="badge bg-dark"><?= htmlspecialchars($product['quantity']) ?></span>
+            </td>
+            <td>
+                <span class="badge bg-<?= $product['status'] === 'available' ? 'success' : 'secondary' ?>">
+                    <?= ucfirst(htmlspecialchars($product['status'])) ?>
+                </span>
+            </td>
+            <td>
+                <div class="d-flex">
+                    <a href="#" class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="#" class="btn btn-sm btn-outline-danger" title="Delete" onclick="return confirm('Are you sure to delete this product?');">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</tbody>
+
                 </table>
             </div>
         </div>

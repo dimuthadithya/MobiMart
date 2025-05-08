@@ -293,31 +293,31 @@ $brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <div class="card-body">
                         <ul class="sidebar-menu">
                             <li>
-                                <a href="./dashboard.html">
+                                <a href="./dashboard.php">
                                     <i class="fas fa-th-large"></i>
                                     <span>Dashboard</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="./product.html" class="active">
+                                <a href="./product.php" class="active">
                                     <i class="fas fa-mobile-alt"></i>
                                     <span>Products</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="./brands.html">
+                                <a href="./brands.php">
                                     <i class="fas fa-users"></i>
                                     <span>Brands</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="./user.html">
+                                <a href="./user.php">
                                     <i class="fas fa-users"></i>
                                     <span>Customers</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="./orders.html">
+                                <a href="./orders.php">
                                     <i class="fas fa-shopping-cart"></i>
                                     <span>Orders</span>
                                 </a>
@@ -356,7 +356,7 @@ $brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </nav>
                     </div>
                     <div>
-                        <a href="./product.html" class="btn btn-outline-secondary"><i class="fas fa-arrow-left me-2"></i>Back to Products</a>
+                        <a href="./product.php" class="btn btn-outline-secondary"><i class="fas fa-arrow-left me-2"></i>Back to Products</a>
                     </div>
                 </div>
 
@@ -415,8 +415,8 @@ $brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <div class="mb-3">
                                         <label for="productStatus" class="form-label">Status</label>
                                         <select class="form-select w-25" id="productStatus" name="productStatus">
-                                            <option value="in_stock">In Stock</option>
-                                            <option value="out_stock">Out of Stock</option>
+                                            <option value="available">In Stock</option>
+                                            <option value="out_of_stock'">Out of Stock</option>
                                         </select>
                                     </div>
                                 </div>
