@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -47,25 +48,26 @@
     }
   </style>
 </head>
+
 <body>
 
   <div class="container-fluid login-container">
     <div class="row login-card">
 
-    
+
       <div class="col-lg-6 d-none d-lg-block">
-      <img src="./assets/images/login_banner.webp" alt="Mobile Shop" class="login-image">
+        <img src="../assets/images/login_banner.webp" alt="Mobile Shop" class="login-image">
       </div>
 
-   
+
       <div class="col-12 col-lg-6 login-form">
         <div class="login-title text-center d-flex justify-content-center align-items-center">
-          <a href="./index.html"><img src="./assets/images/main-logo.png" alt="" class="logo"></a> 
+          <a href="./index.html"><img src="./assets/images/main-logo.png" alt="" class="logo"></a>
         </div>
-        <form action="#" method="POST">
+        <form action="../controller/sign_in_process.php" method="POST">
           <div class="mb-3">
             <label for="username" class="form-label fw-bold">Email</label>
-            <input type="text" class="form-control" id="username" name="username" required placeholder="Enter your email"  autocomplete="off">
+            <input type="text" class="form-control" id="username" name="email" required placeholder="Enter your email" autocomplete="off">
           </div>
           <div class="mb-3">
             <label for="password" class="form-label fw-bold">Password</label>
@@ -73,7 +75,7 @@
           </div>
           <button type="submit" class="btn btn-dark w-100">Login</button>
           <div class="mt-3 text-center">
-            <span class="small text-muted">Don’t have an account? <a href="./sign_up.html" class="text-decoration-none text-dark">Register</a></span>
+            <span class="small text-muted">Don’t have an account? <a href="./sign_up.php" class="text-decoration-none text-dark">Register</a></span>
           </div>
         </form>
       </div>
@@ -83,4 +85,5 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

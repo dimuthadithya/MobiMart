@@ -4,7 +4,7 @@ USE ministore;
 -- Users Table
 CREATE TABLE users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) UNIQUE NOT NULL,
+    username VARCHAR(50) UNIQUE, -- nullable
     password VARCHAR(255) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     phone VARCHAR(20),
@@ -76,20 +76,11 @@ CREATE TABLE reviews (
     review_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     product_id INT,
-    rating INT, -- Use app logic to enforce range 1-5
+    rating INT, -- 1–5 (enforce in app logic)
     review_text TEXT,
     review_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (product_id) REFERENCES products(product_id)
-);
-
--- Loyalty Points
-CREATE TABLE loyalty_points (
-    loyalty_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
-    points_earned INT DEFAULT 0,
-    points_redeemed INT DEFAULT 0,
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
 -- Wishlists
@@ -109,4 +100,15 @@ CREATE TABLE deliveries (
     delivery_status ENUM('pending', 'shipped', 'delivered', 'failed') DEFAULT 'pending',
     delivery_address TEXT,
     FOREIGN KEY (order_id) REFERENCES orders(order_id)
+);
+
+-- Cart Table
+CREATE TABLE cart (
+    cart_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    product_id INT,
+    quantity INT DEFAULT 1,
+    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE
 );
