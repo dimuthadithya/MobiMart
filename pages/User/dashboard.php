@@ -1,6 +1,27 @@
 <?php
 session_start();
+include '../../config/db.php'; 
+
+
+$user_id = $_SESSION['user_id'] ?? null;
+
+$orders = [];
+
+if ($user_id) {
+ 
+    $orderStmt = $conn->prepare("SELECT * FROM orders WHERE user_id = :user_id");
+    $orderStmt->execute([':user_id' => $user_id]);
+    $orders = $orderStmt->fetchAll(PDO::FETCH_ASSOC);
+
+    
+    foreach ($orders as &$order) {
+        $itemStmt = $conn->prepare("SELECT oi.*, p.product_name FROM order_items oi JOIN products p ON oi.product_id = p.id WHERE oi.order_id = :order_id");
+        $itemStmt->execute([':order_id' => $order['id']]);
+        $order['items'] = $itemStmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -254,7 +275,7 @@ session_start();
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="../../index.php">
                 <img src="../../assets/images/main-logo.png" alt="Mobile Shop">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -263,7 +284,7 @@ session_start();
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto w-100 d-flex justify-content-end p-3">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">User Name</a>
+                        <a class="nav-link" href="#"><?php echo $_SESSION['email'] ?></a>
                     </li>
                 </ul>
                 <div class="d-flex align-items-center">
@@ -272,44 +293,31 @@ session_start();
             </div>
         </div>
     </nav>
+    </nav>
 
     <div class="container-fluid px-4 py-4">
         <div class="row">
             <!-- Sidebar -->
             <div class="col-lg-3 col-xl-2 d-none d-lg-block">
-                <div class="card h-50">
+                <div class="card">
                     <div class="card-body">
                         <ul class="sidebar-menu">
+
+
                             <li>
-                                <a href="./dashboard.html" class="active">
-                                    <i class="fas fa-th-large"></i>
-                                    <span>Dashboard</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="./product.html">
-                                    <i class="fas fa-mobile-alt"></i>
-                                    <span>Products</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="./brands.html">
-                                    <i class="fas fa-users"></i>
-                                    <span>Brands</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="./user.html">
-                                    <i class="fas fa-users"></i>
-                                    <span>Customers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="./orders.html">
+                                <a href="./orders.html" class="active">
                                     <i class="fas fa-shopping-cart"></i>
                                     <span>Orders</span>
                                 </a>
                             </li>
+
+                            <li>
+                                <a href="./dashboard.html">
+                                    <i class="fas fa-th-large"></i>
+                                    <span>Profile</span>
+                                </a>
+                            </li>
+
                             <li>
                                 <a href="../controller/user_logout_process.php">
                                     <i class="fas fa-cog"></i>
@@ -321,11 +329,11 @@ session_start();
                 </div>
 
                 <div class="card">
-                    <img src="../../assets/images/login_banner.webp" alt="" class="img-fluid">
+                    <img src="../../assets/images/user_dashbord01.webp" alt="" class="img-fluid">
                 </div>
 
                 <div class="card">
-                    <img src="../../assets/images/register_page_banner.webp" alt="" class="img-fluid">
+                    <img src="../../assets/images/user_dashbord02.webp" alt="" class="img-fluid">
                 </div>
             </div>
 
@@ -334,11 +342,11 @@ session_start();
                 <!-- Page Header -->
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <div>
-                        <h4 class="page-title">Dashboard</h4>
+                        <h4 class="page-title">Orders</h4>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard</li>
+                                <li class="breadcrumb-item active">Orders</li>
                             </ol>
                         </nav>
                     </div>
@@ -346,7 +354,44 @@ session_start();
                         <button class="btn dark-btn"><i class="fas fa-plus me-2"></i>Add Product</button>
                     </div>
                 </div>
-                <h1>asdas</h1>
+
+           <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <?php foreach ($orders as $order): ?>
+        <div class="col">
+            <div class="card h-100 border-0 shadow-lg rounded-4 bg-white">
+                <div class="card-body px-4 py-3">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="card-title mb-0">Order #<?= htmlspecialchars($order['id']) ?></h5>
+                        <span class="badge bg-<?= $order['status'] === 'Pending' ? 'warning text-dark' : 'success' ?> px-3 py-1 rounded-pill">
+                            <i class="fas fa-<?= $order['status'] === 'Pending' ? 'clock' : 'check-circle' ?> me-1"></i>
+                            <?= htmlspecialchars($order['status']) ?>
+                        </span>
+                    </div>
+
+                    <ul class="list-unstyled mb-3">
+                        <li><i class="fas fa-calendar-alt me-2 text-muted mt-2"></i><strong>Date:</strong> <?= htmlspecialchars(date('Y-m-d', strtotime($order['created_at']))) ?></li>
+                        <li><i class="fas fa-box-open me-2 text-muted mt-2"></i><strong>Items:</strong>
+                            <?= implode(', ', array_column($order['items'], 'product_name')) ?>
+                        </li>
+                        <li><i class="fas fa-dollar-sign me-2 text-muted mt-2"></i><strong>Total:</strong> $<?= htmlspecialchars($order['total']) ?></li>
+                    </ul>
+
+                    <div class="d-flex justify-content-end mt-4">
+                        <form action="cancel_order.php" method="POST" onsubmit="return confirm('Are you sure you want to cancel this order?');">
+                            <input type="hidden" name="order_id" value="<?= htmlspecialchars($order['id']) ?>">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">
+                                <i class="fas fa-times-circle me-1"></i> Cancel
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
+
+
+
             </div>
             <!-- end main  -->
 
