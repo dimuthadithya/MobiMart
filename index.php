@@ -359,7 +359,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                       </a>
                     </li>
                     <li>
-                      <a href="./cart.html">
+                      <a href="./pages/cart.php">
                         <svg class="cart">
                           <use xlink:href="#cart"></use>
                         </svg>

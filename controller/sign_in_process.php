@@ -13,6 +13,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if (count($result) > 0) {
     session_start();
     $_SESSION['email'] = $email;
+    $_SESSION['user_id'] = $result[0]['user_id'];
 
     header("location: ../index.php?login=success");
     exit();
