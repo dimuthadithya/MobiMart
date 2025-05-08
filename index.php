@@ -1,5 +1,5 @@
 <?php
- session_start();
+session_start();
 include_once('./config/db.php');
 
 $productSql = "SELECT * FROM products ORDER BY RAND() LIMIT 8;";
@@ -351,13 +351,14 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </svg>
                       </a>
                     </li>
-                    
+
                     <li class="pe-3">
                       <a href="<?php
+
                                 if (isset($_SESSION['user_type'])) {
-                                  echo $_SESSION['user_type'] === 'admin' ? './pages/Admin/dashboard.php' : './index.php';
+                                  echo $_SESSION['user_type'] === 'admin' ? './pages/Admin/dashboard.php' : './pages/profile.php';
                                 } else {
-                                  echo'./pages/sign_in.php';
+                                  echo './pages/sign_in.php';
                                 }
                                 ?>">
                         <svg class="user">

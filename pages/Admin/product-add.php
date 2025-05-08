@@ -323,7 +323,7 @@ $brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 </a>
                             </li>
                             <li>
-                                <a href="">
+                                <a href="../../controller/user_logout_process.php">
                                     <i class="fas fa-cog"></i>
                                     <span>LogOut</span>
                                 </a>
@@ -456,7 +456,7 @@ $brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         </div>
                                     </div>
 
-                                    
+
                                 </div>
 
                             </div>
