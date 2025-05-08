@@ -1,5 +1,31 @@
+<?php
+include_once '../config/db.php';
+session_start();
+
+
+// Check if user is logged in
+if (!isset($_SESSION['user_id'])) {
+  header("Location: ./sign_in.php?error=not_logged_in");
+  exit();
+}
+
+
+// Fetch cart items from the database
+$sql = "SELECT * FROM cart WHERE user_id = :user_id";
+$stmt = $conn->prepare($sql);
+$stmt->execute(['user_id' => $_SESSION['user_id']]);
+$cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+if (count($cartItems) == 0) {
+  header("Location: ./cart.php");
+  exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,22 +40,22 @@
       background-color: #f4f6f9;
       color: #333;
     }
-    
+
     .checkout-container {
       padding: 30px 0;
       min-height: 100vh;
     }
-    
+
     .checkout-header {
       margin-bottom: 30px;
     }
-    
+
     .checkout-steps {
       display: flex;
       justify-content: space-between;
       margin-bottom: 30px;
     }
-    
+
     .step {
       display: flex;
       flex-direction: column;
@@ -37,7 +63,7 @@
       position: relative;
       width: 33.33%;
     }
-    
+
     .step-circle {
       width: 40px;
       height: 40px;
@@ -50,22 +76,22 @@
       margin-bottom: 10px;
       z-index: 2;
     }
-    
+
     .step.active .step-circle {
       background-color: #212529;
       color: white;
     }
-    
+
     .step.completed .step-circle {
       background-color: #198754;
       color: white;
     }
-    
+
     .step-title {
       font-size: 14px;
       text-align: center;
     }
-    
+
     .step-line {
       position: absolute;
       top: 20px;
@@ -75,21 +101,21 @@
       left: 50%;
       z-index: 1;
     }
-    
+
     .step:first-child .step-line {
       width: 50%;
       left: 50%;
     }
-    
+
     .step:last-child .step-line {
       width: 50%;
       right: 50%;
     }
-    
+
     .step.completed .step-line {
       background-color: #198754;
     }
-    
+
     .checkout-section {
       background-color: #fff;
       border-radius: 10px;
@@ -97,19 +123,19 @@
       padding: 25px;
       margin-bottom: 20px;
     }
-    
+
     .section-title {
       font-weight: 600;
       margin-bottom: 20px;
       padding-bottom: 10px;
       border-bottom: 1px solid #eee;
     }
-    
+
     .form-label {
       font-weight: 500;
       font-size: 14px;
     }
-    
+
     .address-select {
       border: 1px solid #dee2e6;
       border-radius: 8px;
@@ -119,32 +145,32 @@
       position: relative;
       transition: all 0.2s;
     }
-    
+
     .address-select:hover {
       border-color: #adb5bd;
     }
-    
+
     .address-select.selected {
       border-color: #212529;
       background-color: #f8f9fa;
     }
-    
+
     .address-select .form-check-input {
       position: absolute;
       top: 15px;
       right: 15px;
     }
-    
+
     .address-select .address-title {
       font-weight: 600;
       margin-bottom: 5px;
     }
-    
+
     .address-select .address-details {
       font-size: 14px;
       color: #6c757d;
     }
-    
+
     .payment-option {
       border: 1px solid #dee2e6;
       border-radius: 8px;
@@ -153,38 +179,38 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-    
+
     .payment-option:hover {
       border-color: #adb5bd;
     }
-    
+
     .payment-option.selected {
       border-color: #212529;
       background-color: #f8f9fa;
     }
-    
+
     .payment-option .payment-title {
       font-weight: 600;
       display: flex;
       align-items: center;
     }
-    
+
     .payment-icon {
       margin-right: 10px;
       font-size: 24px;
     }
-    
+
     .payment-details {
       padding-top: 15px;
       margin-top: 15px;
       border-top: 1px solid #eee;
       display: none;
     }
-    
+
     .payment-option.selected .payment-details {
       display: block;
     }
-    
+
     .order-summary {
       background-color: #fff;
       border-radius: 10px;
@@ -193,21 +219,21 @@
       position: sticky;
       top: 20px;
     }
-    
+
     .summary-title {
       font-weight: 600;
       margin-bottom: 20px;
       padding-bottom: 10px;
       border-bottom: 1px solid #eee;
     }
-    
+
     .summary-item {
       display: flex;
       justify-content: space-between;
       margin-bottom: 10px;
       font-size: 14px;
     }
-    
+
     .summary-product {
       display: flex;
       align-items: center;
@@ -215,34 +241,34 @@
       padding-bottom: 10px;
       border-bottom: 1px solid #f0f0f0;
     }
-    
+
     .summary-product:last-child {
       border-bottom: none;
     }
-    
+
     .summary-product-image {
       width: 50px;
       height: 50px;
       object-fit: contain;
       margin-right: 10px;
     }
-    
+
     .summary-product-title {
       font-size: 14px;
       font-weight: 500;
     }
-    
+
     .summary-product-variant {
       font-size: 12px;
       color: #6c757d;
     }
-    
+
     .summary-product-price {
       font-weight: 600;
       margin-left: auto;
       padding-left: 10px;
     }
-    
+
     .summary-total {
       display: flex;
       justify-content: space-between;
@@ -252,29 +278,29 @@
       margin-top: 10px;
       border-top: 1px solid #eee;
     }
-    
+
     .checkout-btn {
       margin-top: 20px;
       font-weight: 600;
       padding: 12px;
     }
-    
+
     .promo-code {
       margin-top: 20px;
       padding-top: 15px;
       border-top: 1px solid #eee;
     }
-    
+
     .edit-link {
       font-size: 14px;
       color: #0d6efd;
       text-decoration: none;
     }
-    
+
     .edit-link:hover {
       text-decoration: underline;
     }
-    
+
     .delivery-method {
       border: 1px solid #dee2e6;
       border-radius: 8px;
@@ -286,63 +312,63 @@
       align-items: center;
       justify-content: space-between;
     }
-    
+
     .delivery-method:hover {
       border-color: #adb5bd;
     }
-    
+
     .delivery-method.selected {
       border-color: #212529;
       background-color: #f8f9fa;
     }
-    
+
     .delivery-method .method-details {
       display: flex;
       align-items: center;
     }
-    
+
     .delivery-method .method-icon {
       font-size: 24px;
       margin-right: 15px;
     }
-    
+
     .delivery-method .method-info {
       display: flex;
       flex-direction: column;
     }
-    
+
     .delivery-method .method-title {
       font-weight: 600;
     }
-    
+
     .delivery-method .method-description {
       font-size: 12px;
       color: #6c757d;
     }
-    
+
     .delivery-method .method-price {
       font-weight: 600;
     }
-    
+
     .navbar {
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
-    
+
     .navbar-brand img {
       height: 40px;
     }
-    
+
     .navbar-nav .nav-link {
       font-weight: 500;
     }
-    
+
     .nav-icon {
       font-size: 1.2rem;
       color: #333;
       margin-left: 15px;
       position: relative;
     }
-    
+
     .cart-count {
       position: absolute;
       top: -8px;
@@ -357,54 +383,54 @@
       align-items: center;
       justify-content: center;
     }
-    
+
     footer {
       background-color: #212529;
       color: white;
       padding: 40px 0 20px;
     }
-    
+
     .footer-title {
       font-weight: 600;
       margin-bottom: 20px;
     }
-    
+
     .footer-links {
       list-style: none;
       padding: 0;
       margin: 0;
     }
-    
+
     .footer-links li {
       margin-bottom: 10px;
     }
-    
+
     .footer-links a {
       color: #adb5bd;
       text-decoration: none;
       transition: all 0.2s;
     }
-    
+
     .footer-links a:hover {
       color: white;
     }
-    
+
     .social-icons {
       display: flex;
       gap: 15px;
       margin-top: 20px;
     }
-    
+
     .social-icon {
       color: white;
       font-size: 18px;
       transition: all 0.2s;
     }
-    
+
     .social-icon:hover {
       color: #adb5bd;
     }
-    
+
     .copyright {
       padding-top: 20px;
       margin-top: 30px;
@@ -413,24 +439,25 @@
       font-size: 14px;
       color: #adb5bd;
     }
-    
+
     @media (max-width: 767px) {
       .step-title {
         font-size: 12px;
       }
-      
+
       .step-circle {
         width: 30px;
         height: 30px;
         font-size: 14px;
       }
-      
+
       .step-line {
         top: 15px;
       }
     }
   </style>
 </head>
+
 <body>
 
   <!-- Navbar -->
@@ -480,7 +507,7 @@
   <div class="container checkout-container">
     <div class="checkout-header">
       <h1 class="fw-bold mb-4">Checkout</h1>
-      
+
       <!-- Checkout Progress Steps -->
       <div class="checkout-steps">
         <div class="step completed">
@@ -500,18 +527,18 @@
         </div>
       </div>
     </div>
-    
+
     <div class="row">
       <!-- Checkout Form Column -->
       <div class="col-lg-8 mb-4">
-        
+
         <!-- Shipping Address Section -->
         <div class="checkout-section">
           <div class="d-flex justify-content-between align-items-center">
             <h3 class="section-title">Shipping Address</h3>
             <a href="#" class="edit-link">+ Add New Address</a>
           </div>
-          
+
           <div class="address-select selected">
             <input class="form-check-input" type="radio" name="address" id="address1" checked>
             <div class="address-title">Home</div>
@@ -522,7 +549,7 @@
               <p class="mb-0">United States</p>
             </div>
           </div>
-          
+
           <div class="address-select">
             <input class="form-check-input" type="radio" name="address" id="address2">
             <div class="address-title">Office</div>
@@ -534,11 +561,11 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Delivery Method Section -->
         <div class="checkout-section">
           <h3 class="section-title">Delivery Method</h3>
-          
+
           <div class="delivery-method selected">
             <div class="method-details">
               <div class="method-icon">
@@ -551,7 +578,7 @@
             </div>
             <div class="method-price">Free</div>
           </div>
-          
+
           <div class="delivery-method">
             <div class="method-details">
               <div class="method-icon">
@@ -564,7 +591,7 @@
             </div>
             <div class="method-price">$12.99</div>
           </div>
-          
+
           <div class="delivery-method">
             <div class="method-details">
               <div class="method-icon">
@@ -578,11 +605,11 @@
             <div class="method-price">Free</div>
           </div>
         </div>
-        
+
         <!-- Payment Method Section -->
         <div class="checkout-section">
           <h3 class="section-title">Payment Method</h3>
-          
+
           <div class="payment-option selected">
             <div class="payment-title">
               <i class="fab fa-cc-visa payment-icon" style="color: #1a1f71;"></i>
@@ -609,7 +636,7 @@
               </div>
             </div>
           </div>
-          
+
           <div class="payment-option">
             <div class="payment-title">
               <i class="fab fa-paypal payment-icon" style="color: #003087;"></i>
@@ -619,7 +646,7 @@
               <p class="text-muted">You will be redirected to PayPal to complete your payment.</p>
             </div>
           </div>
-          
+
           <div class="payment-option">
             <div class="payment-title">
               <i class="fab fa-apple payment-icon"></i>
@@ -630,11 +657,11 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Billing Address -->
         <div class="checkout-section">
           <h3 class="section-title">Billing Address</h3>
-          
+
           <div class="form-check mb-3">
             <input class="form-check-input" type="checkbox" id="sameAsShipping" checked>
             <label class="form-check-label" for="sameAsShipping">
@@ -642,11 +669,11 @@
             </label>
           </div>
         </div>
-        
+
         <!-- Contact Information -->
         <div class="checkout-section">
           <h3 class="section-title">Contact Information</h3>
-          
+
           <div class="row g-3">
             <div class="col-md-6">
               <label for="emailAddress" class="form-label">Email Address</label>
@@ -658,63 +685,68 @@
             </div>
           </div>
         </div>
-        
+
       </div>
-      
+
       <!-- Order Summary Column -->
       <div class="col-lg-4">
         <div class="order-summary">
           <h3 class="summary-title">Order Summary <span class="text-muted fs-6">(3 items)</span></h3>
-          
+
           <!-- Order Items -->
           <div class="mb-4">
-            <div class="summary-product">
-              <img src="/api/placeholder/50/50" alt="iPhone 13 Pro" class="summary-product-image">
-              <div>
-                <div class="summary-product-title">iPhone 13 Pro</div>
-                <div class="summary-product-variant">Sierra Blue, 256GB</div>
-              </div>
-              <div class="summary-product-price">$999.00</div>
-            </div>
-            
-            <div class="summary-product">
-              <img src="/api/placeholder/50/50" alt="AirPods Pro" class="summary-product-image">
-              <div>
-                <div class="summary-product-title">AirPods Pro</div>
-                <div class="summary-product-variant">White, 2nd Generation</div>
-              </div>
-              <div class="summary-product-price">$249.00</div>
-            </div>
-            
-            <div class="summary-product">
-              <img src="/api/placeholder/50/50" alt="Silicone Case" class="summary-product-image">
-              <div>
-                <div class="summary-product-title">Silicone Case</div>
-                <div class="summary-product-variant">Midnight Blue, iPhone 13 Pro</div>
-              </div>
-              <div class="summary-product-price">$49.00</div>
-            </div>
+            <?php
+            $totalPrice = 0;
+
+            foreach ($cartItems as $item) {
+              $productId = $item['product_id'];
+
+              $productSql = "SELECT * FROM products WHERE product_id = :product_id";
+              $productStmt = $conn->prepare($productSql);
+              $productStmt->execute(['product_id' => $productId]);
+              $product = $productStmt->fetch(PDO::FETCH_ASSOC);
+
+              $productName = $product['product_name'];
+              $productPrice = $product['price'];
+              // $productImage = $product['image_url'];
+              $productSku = $product['sku'];
+              $productDetailsPage = "../includes/productDetails.php?product_id=" . $productId;
+
+              $brandSql = "SELECT * FROM brands WHERE brand_id = :brand_id";
+              $stmt = $conn->prepare($brandSql);
+              $stmt->bindParam(':brand_id', $product['brand_id']);
+              $stmt->execute();
+              $brand = $stmt->fetch(PDO::FETCH_ASSOC);
+
+              $brandName = $brand['brand_name'];
+
+              $totalPrice += $productPrice;
+
+              include '../includes/orderSummaryItem.php';
+            }
+            ?>
+
           </div>
-          
+
           <!-- Order Totals -->
           <div class="summary-item">
             <span>Subtotal</span>
-            <span>$1,297.00</span>
+            <span>LKR <?php echo $totalPrice ?></span>
           </div>
           <div class="summary-item">
             <span>Shipping</span>
-            <span>$0.00</span>
+            <span>LKR 0.00</span>
           </div>
           <div class="summary-item">
             <span>Tax</span>
-            <span>$103.76</span>
+            <span>LKR 0.00</span>
           </div>
-          
+
           <div class="summary-total">
             <span>Total</span>
-            <span>$1,400.76</span>
+            <span>LKR <?php echo $totalPrice ?>.00</span>
           </div>
-          
+
           <!-- Promo Code Section -->
           <div class="promo-code">
             <div class="input-group mb-3">
@@ -722,10 +754,12 @@
               <button class="btn btn-outline-dark" type="button">Apply</button>
             </div>
           </div>
-          
+
           <!-- Complete Order Button -->
-          <a href="./orderComplete.html"><button class="btn btn-dark w-100 checkout-btn">Complete Order</button></a>
-          
+          <form action="../controller/checkout_process.php" method="post">
+            <button class="btn btn-dark w-100 checkout-btn" type="submit">Complete Order</button>
+          </form>
+
           <!-- Secure Payment Info -->
           <div class="text-center mt-3">
             <div class="d-flex align-items-center justify-content-center">
@@ -804,7 +838,7 @@
           this.querySelector('input').checked = true;
         });
       });
-      
+
       // Delivery method selection
       const deliveryOptions = document.querySelectorAll('.delivery-method');
       deliveryOptions.forEach(option => {
@@ -813,7 +847,7 @@
           this.classList.add('selected');
         });
       });
-      
+
       // Payment method selection
       const paymentOptions = document.querySelectorAll('.payment-option');
       paymentOptions.forEach(option => {
@@ -825,4 +859,5 @@
     });
   </script>
 </body>
+
 </html>
