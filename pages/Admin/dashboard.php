@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+include_once('../../config/db.php');
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -257,7 +267,7 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto w-100 d-flex justify-content-end p-3">
               <li class="nav-item">
-                <a class="nav-link" href="#">User Name</a>
+                <a class="nav-link" href="#"><?php echo $_SESSION['email'] ?></a>
               </li>
             </ul>
             <div class="d-flex align-items-center">
@@ -281,25 +291,25 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./product.html">
+                                <a href="./product.php">
                                     <i class="fas fa-mobile-alt"></i>
                                     <span>Products</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="./brands.html">
+                                <a href="./brands.php">
                                     <i class="fas fa-users"></i>
                                     <span>Brands</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="./user.html">
+                                <a href="./user.php">
                                     <i class="fas fa-users"></i>
                                     <span>Customers</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="./orders.html">
+                                <a href="./orders.php">
                                     <i class="fas fa-shopping-cart"></i>
                                     <span>Orders</span>
                                 </a>
@@ -337,7 +347,7 @@
                         </nav>
                     </div>
                     <div>
-                        <button class="btn dark-btn"><i class="fas fa-plus me-2"></i>Add Product</button>
+                       <a href="./product-add.php"><button class="btn dark-btn"><i class="fas fa-plus me-2"></i>Add Product</button></a> 
                     </div>
                 </div>
                 
