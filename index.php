@@ -356,7 +356,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                       <a href="<?php
 
                                 if (isset($_SESSION['user_type'])) {
-                                  echo $_SESSION['user_type'] === 'admin' ? './pages/Admin/dashboard.php' : './pages/profile.php';
+                                  echo $_SESSION['user_type'] === 'admin' ? './pages/Admin/dashboard.php' : './pages/User/dashboard.php';
                                 } else {
                                   echo './pages/sign_in.php';
                                 }

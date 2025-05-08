@@ -1,6 +1,6 @@
 function addToCart(productId) {
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', '../../controller/cart_process.php', true);
+  xhr.open('POST', '../../../MobiMart/controller/cart_process.php', true);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.responseType = 'json';
 
