@@ -276,7 +276,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto w-100 d-flex justify-content-end p-3">
                     <li class="nav-item">
-                    <a class="nav-link" href="#"><?php echo $_SESSION['email'] ?></a>
+                        <a class="nav-link" href="#"><?php echo $_SESSION['email'] ?></a>
                     </li>
                 </ul>
                 <div class="d-flex align-items-center">
