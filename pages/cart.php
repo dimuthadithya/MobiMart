@@ -27,9 +27,9 @@ $cartCount = count($cartItems);
   <title>Mobile Shop - Shopping Cart</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="./assets/css/style.css">
-  <link rel="stylesheet" href="./assets/css/vendor.css">
-  <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/vendor.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 
   <style>
     body {
@@ -596,7 +596,7 @@ $cartCount = count($cartItems);
   </footer>
   <!-- end footer  -->
 
-
+  <script type="text/javascript" src="../assets/js/ajax.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
