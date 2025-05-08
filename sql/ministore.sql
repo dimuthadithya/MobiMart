@@ -15,13 +15,6 @@ CREATE TABLE users (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- Categories
-CREATE TABLE categories (
-    category_id INT AUTO_INCREMENT PRIMARY KEY,
-    category_name VARCHAR(100) NOT NULL,
-    description TEXT
-);
-
 -- Brands
 CREATE TABLE brands (
     brand_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -32,7 +25,6 @@ CREATE TABLE brands (
 CREATE TABLE products (
     product_id INT AUTO_INCREMENT PRIMARY KEY,
     product_name VARCHAR(100) NOT NULL,
-    category_id INT,
     brand_id INT,
     description TEXT,
     price DECIMAL(10,2) NOT NULL,
@@ -42,7 +34,6 @@ CREATE TABLE products (
     image_url VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (category_id) REFERENCES categories(category_id),
     FOREIGN KEY (brand_id) REFERENCES brands(brand_id)
 );
 
