@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,112 +17,118 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
         body {
             background-color: #f5f7fa;
         }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
+
         .navbar {
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-        
+
         .navbar-brand img {
-        height: 40px;
+            height: 40px;
         }
-        
+
         .navbar-nav .nav-link {
-        font-weight: 500;
+            font-weight: 500;
         }
-        
+
         .nav-icon {
-        font-size: 1.2rem;
-        color: #333;
-        margin-left: 15px;
-        position: relative;
+            font-size: 1.2rem;
+            color: #333;
+            margin-left: 15px;
+            position: relative;
         }
-        
+
         .cart-count {
-        position: absolute;
-        top: -8px;
-        right: -8px;
-        background-color: #dc3545;
-        color: white;
-        font-size: 10px;
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #dc3545;
+            color: white;
+            font-size: 10px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        
+
         footer {
-        background-color: #212529;
-        color: white;
-        padding: 40px 0 20px;
+            background-color: #212529;
+            color: white;
+            padding: 40px 0 20px;
         }
-        
+
         .footer-title {
-        font-weight: 600;
-        margin-bottom: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
         }
-        
+
         .footer-links {
-        list-style: none;
-        padding: 0;
-        margin: 0;
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
-        
+
         .footer-links li {
-        margin-bottom: 10px;
+            margin-bottom: 10px;
         }
-        
+
         .footer-links a {
-        color: #adb5bd;
-        text-decoration: none;
-        transition: all 0.2s;
+            color: #adb5bd;
+            text-decoration: none;
+            transition: all 0.2s;
         }
-        
+
         .footer-links a:hover {
-        color: white;
+            color: white;
         }
-        
+
         .social-icons {
-        display: flex;
-        gap: 15px;
-        margin-top: 20px;
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
         }
-        
+
         .social-icon {
-        color: white;
-        font-size: 18px;
-        transition: all 0.2s;
+            color: white;
+            font-size: 18px;
+            transition: all 0.2s;
         }
-        
+
         .social-icon:hover {
-        color: #adb5bd;
+            color: #adb5bd;
         }
-        
+
         .copyright {
-        padding-top: 20px;
-        margin-top: 30px;
-        border-top: 1px solid #495057;
-        text-align: center;
-        font-size: 14px;
-        color: #adb5bd;
+            padding-top: 20px;
+            margin-top: 30px;
+            border-top: 1px solid #495057;
+            text-align: center;
+            font-size: 14px;
+            color: #adb5bd;
         }
+
         main {
             padding: 40px 0;
         }
+
         .progress-container {
             display: flex;
             justify-content: space-between;
             margin-bottom: 40px;
             position: relative;
         }
+
         .progress-bar {
             position: absolute;
             top: 15px;
@@ -131,6 +138,7 @@
             background-color: #e0e0e0;
             z-index: 1;
         }
+
         .progress-completed {
             position: absolute;
             top: 15px;
@@ -140,6 +148,7 @@
             background-color: #4caf50;
             z-index: 2;
         }
+
         .progress-step {
             display: flex;
             flex-direction: column;
@@ -147,6 +156,7 @@
             position: relative;
             z-index: 3;
         }
+
         .step-circle {
             width: 30px;
             height: 30px;
@@ -158,33 +168,39 @@
             justify-content: center;
             margin-bottom: 10px;
         }
+
         .step-completed .step-circle {
             background-color: #4caf50;
             border-color: #4caf50;
             color: white;
         }
+
         .step-active .step-circle {
             background-color: white;
             border-color: #4caf50;
             color: #4caf50;
         }
+
         .step-label {
             font-size: 14px;
             color: #757575;
         }
+
         .step-completed .step-label,
         .step-active .step-label {
             color: #333;
             font-weight: 500;
         }
+
         .order-success {
             background-color: white;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             padding: 30px;
             margin-bottom: 30px;
             text-align: center;
         }
+
         .success-icon {
             width: 80px;
             height: 80px;
@@ -195,58 +211,69 @@
             justify-content: center;
             margin: 0 auto 20px;
         }
+
         .success-icon svg {
             width: 40px;
             height: 40px;
             color: #4caf50;
         }
+
         .order-details {
             background-color: white;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             padding: 30px;
             margin-bottom: 30px;
         }
+
         .section-title {
             font-size: 18px;
             font-weight: 600;
             margin-bottom: 20px;
             color: #333;
         }
+
         .order-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 30px;
         }
+
         .order-info-item {
             margin-bottom: 15px;
         }
+
         .info-label {
             font-size: 14px;
             color: #757575;
             margin-bottom: 5px;
         }
+
         .info-value {
             font-size: 16px;
             color: #333;
         }
+
         .divider {
             height: 1px;
             background-color: #e0e0e0;
             margin: 20px 0;
         }
+
         .order-summary {
             background-color: white;
             border-radius: 8px;
-            box-shadow: la 2px 10px rgba(0,0,0,0.05);
+            box-shadow: la 2px 10px rgba(0, 0, 0, 0.05);
             padding: 30px;
         }
+
         .summary-item {
             display: flex;
             align-items: center;
             padding: 15px 0;
             border-bottom: 1px solid #f0f0f0;
         }
+
         .item-image {
             width: 60px;
             height: 60px;
@@ -257,34 +284,43 @@
             align-items: center;
             justify-content: center;
         }
+
         .item-details {
             flex-grow: 1;
         }
+
         .item-name {
             font-weight: 500;
             margin-bottom: 5px;
         }
+
         .item-variant {
             font-size: 14px;
             color: #757575;
         }
+
         .item-price {
             font-weight: 500;
         }
+
         .summary-totals {
             padding-top: 15px;
         }
+
         .total-row {
             display: flex;
             justify-content: space-between;
             margin-bottom: 10px;
         }
+
         .total-label {
             color: #757575;
         }
+
         .total-value {
             font-weight: 500;
         }
+
         .grand-total {
             font-size: 18px;
             font-weight: 600;
@@ -292,12 +328,14 @@
             padding-top: 15px;
             border-top: 1px solid #e0e0e0;
         }
+
         .actions {
             display: flex;
             gap: 15px;
             margin-top: 30px;
             justify-content: center;
         }
+
         .btn {
             padding: 12px 25px;
             border-radius: 6px;
@@ -306,17 +344,19 @@
             display: inline-block;
             cursor: pointer;
         }
+
         .btn-primary {
             background-color: #4caf50;
             color: white;
             border: none;
         }
+
         .btn-outline {
             background-color: white;
             color: #333;
             border: 1px solid #e0e0e0;
         }
-       
+
         .order-number {
             background-color: #f5f7fa;
             padding: 8px 15px;
@@ -325,6 +365,7 @@
             display: inline-block;
             margin-top: 10px;
         }
+
         .delivery-info {
             display: flex;
             align-items: center;
@@ -333,26 +374,27 @@
             border-radius: 8px;
             margin: 20px 0;
         }
+
         .delivery-icon {
             margin-right: 15px;
             color: #4caf50;
         }
 
         .checkout-steps {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 30px;
-            }
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
 
-          .step {
+        .step {
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
             width: 33.33%;
-            }
-            
-            .step-circle {
+        }
+
+        .step-circle {
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -363,24 +405,24 @@
             font-weight: 600;
             margin-bottom: 10px;
             z-index: 2;
-            }
-            
-            .step.active .step-circle {
+        }
+
+        .step.active .step-circle {
             background-color: #212529;
             color: white;
-            }
-            
-            .step.completed .step-circle {
+        }
+
+        .step.completed .step-circle {
             background-color: #198754;
             color: white;
-            }
-            
-            .step-title {
+        }
+
+        .step-title {
             font-size: 14px;
             text-align: center;
-            }
-            
-            .step-line {
+        }
+
+        .step-line {
             position: absolute;
             top: 20px;
             height: 2px;
@@ -388,23 +430,24 @@
             width: 100%;
             left: 50%;
             z-index: 1;
-            }
-            
-            .step:first-child .step-line {
+        }
+
+        .step:first-child .step-line {
             width: 50%;
             left: 50%;
-            }
-            
-            .step:last-child .step-line {
+        }
+
+        .step:last-child .step-line {
             width: 50%;
             right: 50%;
-            }
-            
-            .step.completed .step-line {
+        }
+
+        .step.completed .step-line {
             background-color: #198754;
-            }
+        }
     </style>
 </head>
+
 <body>
     <!-- <header>
         <div class="container">
@@ -431,78 +474,86 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
         <div class="container">
-          <a class="navbar-brand" href="#">
-            <img src="./assets/images/main-logo.png" alt="Mobile Shop">
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto w-100 d-flex justify-content-end p-3">
-              <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Shop</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Deals</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Support</a>
-              </li>
-            </ul>
-            <div class="d-flex align-items-center">
-              <a href="#" class="nav-icon">
-                <i class="fas fa-search"></i>
-              </a>
-              <a href="#" class="nav-icon">
-                <i class="fas fa-user"></i>
-              </a>
-              <a href="#" class="nav-icon">
-                <i class="fas fa-heart"></i>
-              </a>
-              <a href="#" class="nav-icon">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="cart-count">3</span>
-              </a>
+            <a class="navbar-brand" href="../index.php">
+                <img src="./assets/images/main-logo.png" alt="Mobile Shop">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto w-100 d-flex justify-content-end p-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.php">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Deals</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Support</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <a href="#" class="nav-icon">
+                        <i class="fas fa-search"></i>
+                    </a>
+                    <a href="#" class="nav-icon">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="#" class="nav-icon">
+                        <i class="fas fa-heart"></i>
+                    </a>
+                    <a href="./cart.php" class="nav-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">3</span>
+                    </a>
+                </div>
             </div>
-          </div>
         </div>
-      </nav>
+    </nav>
 
     <main class="container p-3">
         <h1>Order Complete</h1>
-        
+
         <div class="checkout-steps mt-5">
             <div class="step completed">
-              <div class="step-circle"><i class="fas fa-check"></i></div>
-              <div class="step-title">Shopping Cart</div>
-              <div class="step-line"></div>
+                <div class="step-circle"><i class="fas fa-check"></i></div>
+                <div class="step-title">Shopping Cart</div>
+                <div class="step-line"></div>
             </div>
             <div class="step completed">
-              <div class="step-circle">2</div>
-              <div class="step-title">Checkout</div>
-              <!-- <div class="step-line"></div> -->
+                <div class="step-circle">2</div>
+                <div class="step-title">Checkout</div>
+                <!-- <div class="step-line"></div> -->
             </div>
             <div class="step active">
-              <div class="step-circle">3</div>
-              <div class="step-title">Order Complete</div>
-              <div class="step-line"></div>
+                <div class="step-circle">3</div>
+                <div class="step-title">Order Complete</div>
+                <div class="step-line"></div>
             </div>
-          </div>
+        </div>
 
         <div class="order-success">
             <div class="success-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
             </div>
             <h2>Thank You For Your Order!</h2>
             <p>Your order has been placed and is being processed. You will receive an email confirmation shortly.</p>
             <div class="order-number">Order #MNS-78912345</div>
-            
+
             <div class="delivery-info">
                 <div class="delivery-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="1" y="3" width="15" height="13"></rect>
+                        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                        <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                        <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                    </svg>
                 </div>
                 <div>
                     <p><strong>Estimated delivery:</strong> May 12-15, 2025</p>
@@ -514,26 +565,26 @@
         <div class="order-grid">
             <div class="order-details">
                 <h3 class="section-title">Order Information</h3>
-                
+
                 <div class="order-info-item">
                     <div class="info-label">Order Date</div>
                     <div class="info-value">May 8, 2025</div>
                 </div>
-                
+
                 <div class="order-info-item">
                     <div class="info-label">Order Number</div>
                     <div class="info-value">MNS-78912345</div>
                 </div>
-                
+
                 <div class="order-info-item">
                     <div class="info-label">Payment Method</div>
                     <div class="info-value">Credit Card (ending in 3456)</div>
                 </div>
-                
+
                 <div class="divider"></div>
-                
+
                 <h3 class="section-title">Shipping Information</h3>
-                
+
                 <div class="order-info-item">
                     <div class="info-label">Shipping Address</div>
                     <div class="info-value">
@@ -543,33 +594,37 @@
                         United States
                     </div>
                 </div>
-                
+
                 <div class="order-info-item">
                     <div class="info-label">Shipping Method</div>
                     <div class="info-value">Standard Delivery (3-5 business days)</div>
                 </div>
-                
+
                 <div class="divider"></div>
-                
+
                 <h3 class="section-title">Contact Information</h3>
-                
+
                 <div class="order-info-item">
                     <div class="info-label">Email</div>
                     <div class="info-value">your@email.com</div>
                 </div>
-                
+
                 <div class="order-info-item">
                     <div class="info-label">Phone</div>
                     <div class="info-value">(123) 456-7890</div>
                 </div>
             </div>
-            
+
             <div class="order-summary">
                 <h3 class="section-title">Order Summary (3 items)</h3>
-                
+
                 <div class="summary-item">
                     <div class="item-image">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
                     </div>
                     <div class="item-details">
                         <div class="item-name">iPhone 13 Pro</div>
@@ -577,10 +632,14 @@
                     </div>
                     <div class="item-price">$999.00</div>
                 </div>
-                
+
                 <div class="summary-item">
                     <div class="item-image">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 12h1a4 4 0 0 1 4-4h9.5a4 4 0 0 1 0 8H7a4 4 0 0 1-4-4H2z"></path><circle cx="9" cy="12" r="1"></circle></svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                            <path d="M2 12h1a4 4 0 0 1 4-4h9.5a4 4 0 0 1 0 8H7a4 4 0 0 1-4-4H2z"></path>
+                            <circle cx="9" cy="12" r="1"></circle>
+                        </svg>
                     </div>
                     <div class="item-details">
                         <div class="item-name">AirPods Pro</div>
@@ -588,10 +647,13 @@
                     </div>
                     <div class="item-price">$249.00</div>
                 </div>
-                
+
                 <div class="summary-item">
                     <div class="item-image">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><rect x="6" y="8" width="12" height="8" rx="1"></rect></svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                            <rect x="6" y="8" width="12" height="8" rx="1"></rect>
+                        </svg>
                     </div>
                     <div class="item-details">
                         <div class="item-name">Silicone Case</div>
@@ -599,23 +661,23 @@
                     </div>
                     <div class="item-price">$49.00</div>
                 </div>
-                
+
                 <div class="summary-totals">
                     <div class="total-row">
                         <div class="total-label">Subtotal</div>
                         <div class="total-value">$1,297.00</div>
                     </div>
-                    
+
                     <div class="total-row">
                         <div class="total-label">Shipping</div>
                         <div class="total-value">$0.00</div>
                     </div>
-                    
+
                     <div class="total-row">
                         <div class="total-label">Tax</div>
                         <div class="total-value">$103.76</div>
                     </div>
-                    
+
                     <div class="total-row grand-total">
                         <div class="total-label">Total</div>
                         <div class="total-value">$1,400.76</div>
@@ -623,7 +685,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="actions">
             <a href="#" class="btn btn-outline">View Order History</a>
             <a href="#" class="btn btn-primary">Continue Shopping</a>
@@ -688,49 +750,50 @@
     </footer> -->
     <footer>
         <div class="container">
-          <div class="row">
-            <div class="col-md-3 mb-4 mb-md-0">
-              <h5 class="footer-title">Mobile Shop</h5>
-              <p class="text-muted">The best place to buy the latest smartphones and accessories at competitive prices.</p>
-              <div class="social-icons">
-                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
-              </div>
+            <div class="row">
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <h5 class="footer-title">Mobile Shop</h5>
+                    <p class="text-muted">The best place to buy the latest smartphones and accessories at competitive prices.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <h5 class="footer-title">Customer Service</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                        <li><a href="#">Order Tracking</a></li>
+                        <li><a href="#">Warranty & Support</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="footer-title">Contact Info</h5>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt me-2"></i> 123 Tech Street, City, Country</li>
+                        <li><i class="fas fa-phone-alt me-2"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope me-2"></i> support@mobileshop.com</li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-md-3 mb-4 mb-md-0">
-              <h5 class="footer-title">Quick Links</h5>
-              <ul class="footer-links">
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">FAQs</a></li>
-              </ul>
+            <div class="copyright">
+                <p>&copy; 2025 Mobile Shop. All Rights Reserved.</p>
             </div>
-            <div class="col-md-3 mb-4 mb-md-0">
-              <h5 class="footer-title">Customer Service</h5>
-              <ul class="footer-links">
-                <li><a href="#">Shipping Policy</a></li>
-                <li><a href="#">Returns & Refunds</a></li>
-                <li><a href="#">Order Tracking</a></li>
-                <li><a href="#">Warranty & Support</a></li>
-              </ul>
-            </div>
-            <div class="col-md-3">
-              <h5 class="footer-title">Contact Info</h5>
-              <ul class="footer-links">
-                <li><i class="fas fa-map-marker-alt me-2"></i> 123 Tech Street, City, Country</li>
-                <li><i class="fas fa-phone-alt me-2"></i> +1 (555) 123-4567</li>
-                <li><i class="fas fa-envelope me-2"></i> support@mobileshop.com</li>
-              </ul>
-            </div>
-          </div>
-          <div class="copyright">
-            <p>&copy; 2025 Mobile Shop. All Rights Reserved.</p>
-          </div>
         </div>
-      </footer>
+    </footer>
 
 </body>
+
 </html>

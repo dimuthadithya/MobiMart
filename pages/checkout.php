@@ -463,7 +463,7 @@ if (count($cartItems) == 0) {
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
     <div class="container">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="../index.php">
         <img src="./assets/images/main-logo.png" alt="Mobile Shop">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -472,7 +472,7 @@ if (count($cartItems) == 0) {
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto w-100 d-flex justify-content-end p-3">
           <li class="nav-item">
-            <a class="nav-link" href="#">Home</a>
+            <a class="nav-link" href="../index.php">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Shop</a>
@@ -494,7 +494,7 @@ if (count($cartItems) == 0) {
           <a href="#" class="nav-icon">
             <i class="fas fa-heart"></i>
           </a>
-          <a href="#" class="nav-icon">
+          <a href="./cart.php" class="nav-icon">
             <i class="fas fa-shopping-cart"></i>
             <span class="cart-count">3</span>
           </a>
