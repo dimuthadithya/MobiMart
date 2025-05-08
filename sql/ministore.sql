@@ -97,7 +97,7 @@ CREATE TABLE deliveries (
     delivery_id INT AUTO_INCREMENT PRIMARY KEY,
     order_id INT,
     delivery_date DATETIME,
-    delivery_status ENUM('pending', 'shipped', 'delivered', 'failed') DEFAULT 'pending',
+    delivery_status ENUM('pending', 'processing', 'completed', 'cancelled') DEFAULT 'pending',
     delivery_address TEXT,
     FOREIGN KEY (order_id) REFERENCES orders(order_id)
 );

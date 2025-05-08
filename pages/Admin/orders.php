@@ -1,6 +1,13 @@
 <?php
- session_start();
+session_start();
 include_once('../../config/db.php');
+
+$orderSql = "SELECT * FROM orders";
+$stmt = $conn->prepare($orderSql);
+$stmt->execute();
+$orderCount = $stmt->rowCount();
+$orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
 ?>
 
@@ -273,7 +280,7 @@ include_once('../../config/db.php');
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto w-100 d-flex justify-content-end p-3">
                     <li class="nav-item">
-                    <a class="nav-link" href="#"><?php echo $_SESSION['email'] ?></a>
+                        <a class="nav-link" href="#"><?php echo $_SESSION['email'] ?></a>
                     </li>
                 </ul>
                 <div class="d-flex align-items-center">
@@ -372,42 +379,27 @@ include_once('../../config/db.php');
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- Example Row -->
-                                    <tr>
-                                        <td>#ORD001</td>
-                                        <td>customer1@example.com</td>
-                                        <td>2025-04-10</td>
-                                        <td>12,500.00</td>
-                                        <td>
-                                            <select class="form-select form-select-sm" aria-label="Delivery status">
-                                                <option value="Pending" selected>Pending</option>
-                                                <option value="Shipped">Shipped</option>
-                                                <option value="Delivered">Delivered</option>
-                                                <option value="Cancelled">Cancelled</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-sm btn-dark">Update</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>#ORD002</td>
-                                        <td>customer2@example.com</td>
-                                        <td>2025-04-12</td>
-                                        <td>8,750.00</td>
-                                        <td>
-                                            <select class="form-select form-select-sm" aria-label="Delivery status">
-                                                <option value="Pending">Pending</option>
-                                                <option value="Shipped" selected>Shipped</option>
-                                                <option value="Delivered">Delivered</option>
-                                                <option value="Cancelled">Cancelled</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-sm btn-dark">Update</button>
-                                        </td>
-                                    </tr>
-                                    <!-- Add dynamic rows here -->
+                                    <?php
+                                    foreach ($orders as $order) {
+                                        $orderId = $order['order_id'];
+
+                                        $findUserSql = "SELECT * FROM users WHERE user_id = :user_id";
+                                        $stmt = $conn->prepare($findUserSql);
+                                        $stmt->execute(['user_id' => $order['user_id']]);
+                                        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                                        $customerEmail = $user['email'];
+
+                                        $orderDate = $order['order_date'];
+                                        $totalAmount = $order['total_amount'];
+                                        $deliveryStatus = $order['status'];
+
+
+                                        include '../../includes/orderRow.php';
+                                    }
+                                    ?>
+
+
                                 </tbody>
                             </table>
                         </div>
