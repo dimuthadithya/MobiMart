@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../../config/db.php'; 
+include '../../config/db.php';
 
 
 $user_id = $_SESSION['user_id'] ?? null;
@@ -8,15 +8,20 @@ $user_id = $_SESSION['user_id'] ?? null;
 $orders = [];
 
 if ($user_id) {
- 
+
     $orderStmt = $conn->prepare("SELECT * FROM orders WHERE user_id = :user_id");
     $orderStmt->execute([':user_id' => $user_id]);
     $orders = $orderStmt->fetchAll(PDO::FETCH_ASSOC);
 
-    
+
     foreach ($orders as &$order) {
-        $itemStmt = $conn->prepare("SELECT oi.*, p.product_name FROM order_items oi JOIN products p ON oi.product_id = p.id WHERE oi.order_id = :order_id");
-        $itemStmt->execute([':order_id' => $order['id']]);
+        $itemStmt = $conn->prepare("
+    SELECT oi.*, p.product_name 
+    FROM order_items oi 
+    JOIN products p ON oi.product_id = p.product_id 
+    WHERE oi.order_id = :order_id
+");
+        $itemStmt->execute([':order_id' => $order['order_id']]);
         $order['items'] = $itemStmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
@@ -355,40 +360,40 @@ if ($user_id) {
                     </div>
                 </div>
 
-           <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-    <?php foreach ($orders as $order): ?>
-        <div class="col">
-            <div class="card h-100 border-0 shadow-lg rounded-4 bg-white">
-                <div class="card-body px-4 py-3">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="card-title mb-0">Order #<?= htmlspecialchars($order['id']) ?></h5>
-                        <span class="badge bg-<?= $order['status'] === 'Pending' ? 'warning text-dark' : 'success' ?> px-3 py-1 rounded-pill">
-                            <i class="fas fa-<?= $order['status'] === 'Pending' ? 'clock' : 'check-circle' ?> me-1"></i>
-                            <?= htmlspecialchars($order['status']) ?>
-                        </span>
-                    </div>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    <?php foreach ($orders as $order): ?>
+                        <div class="col">
+                            <div class="card h-100 border-0 shadow-lg rounded-4 bg-white">
+                                <div class="card-body px-4 py-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h5 class="card-title mb-0">Order #<?= htmlspecialchars($order['order_id']) ?></h5>
+                                        <span class="badge bg-<?= $order['status'] === 'Pending' ? 'warning text-dark' : 'success' ?> px-3 py-1 rounded-pill">
+                                            <i class="fas fa-<?= $order['status'] === 'Pending' ? 'clock' : 'check-circle' ?> me-1"></i>
+                                            <?= htmlspecialchars($order['status']) ?>
+                                        </span>
+                                    </div>
 
-                    <ul class="list-unstyled mb-3">
-                        <li><i class="fas fa-calendar-alt me-2 text-muted mt-2"></i><strong>Date:</strong> <?= htmlspecialchars(date('Y-m-d', strtotime($order['created_at']))) ?></li>
-                        <li><i class="fas fa-box-open me-2 text-muted mt-2"></i><strong>Items:</strong>
-                            <?= implode(', ', array_column($order['items'], 'product_name')) ?>
-                        </li>
-                        <li><i class="fas fa-dollar-sign me-2 text-muted mt-2"></i><strong>Total:</strong> $<?= htmlspecialchars($order['total']) ?></li>
-                    </ul>
+                                    <ul class="list-unstyled mb-3">
+                                        <li><i class="fas fa-calendar-alt me-2 text-muted mt-2"></i><strong>Date:</strong> <?= htmlspecialchars(date('Y-m-d', strtotime($order['order_date']))) ?></li>
+                                        <li><i class="fas fa-box-open me-2 text-muted mt-2"></i><strong>Items:</strong>
+                                            <?= implode(', ', array_column($order['items'], 'product_name')) ?>
+                                        </li>
+                                        <li><i class="fas fa-dollar-sign me-2 text-muted mt-2"></i><strong>Total:</strong> $<?= htmlspecialchars($order['total_amount']) ?></li>
+                                    </ul>
 
-                    <div class="d-flex justify-content-end mt-4">
-                        <form action="cancel_order.php" method="POST" onsubmit="return confirm('Are you sure you want to cancel this order?');">
-                            <input type="hidden" name="order_id" value="<?= htmlspecialchars($order['id']) ?>">
-                            <button type="submit" class="btn btn-sm btn-outline-danger">
-                                <i class="fas fa-times-circle me-1"></i> Cancel
-                            </button>
-                        </form>
-                    </div>
+                                    <div class="d-flex justify-content-end mt-4">
+                                        <form action="cancel_order.php" method="POST" onsubmit="return confirm('Are you sure you want to cancel this order?');">
+                                            <input type="hidden" name="order_id" value="<?= htmlspecialchars($order['order_id']) ?>">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                <i class="fas fa-times-circle me-1"></i> Cancel
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
-            </div>
-        </div>
-    <?php endforeach; ?>
-</div>
 
 
 
