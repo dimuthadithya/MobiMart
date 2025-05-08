@@ -363,10 +363,12 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </div>
 
                 <!-- Alert for successful product addition -->
+                <?php if (isset($_GET['success'])): ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Success!</strong> Product has been added successfully.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                 <strong>Success!</strong> Product has been added successfully.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
+                 <?php endif; ?>
 
                 <!-- Filter and Search -->
                 <div class="card mb-4">

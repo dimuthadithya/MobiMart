@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':updated_at'     => $updatedAt
         ]);
 
-        echo "<script>alert('Product added successfully'); window.location.href = '../product.php';</script>";
+        header("Location: ../product.php?success=1");
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
