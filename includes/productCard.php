@@ -6,11 +6,11 @@
     </div>
     <div class="cart-concern position-absolute">
         <div class="cart-button d-flex">
-            <a href="#" class="btn btn-medium btn-black">
+            <p class="btn btn-medium btn-black" onclick="addToCart(<?php echo $productId ?>)">
                 Add to Cart<svg class="cart-outline">
                     <use xlink:href="#cart-outline"></use>
                 </svg>
-            </a>
+            </p>
         </div>
     </div>
     <div class="card-detail pt-3">

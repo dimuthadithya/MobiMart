@@ -1034,6 +1034,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     src="./assets/js/bootstrap.bundle.min.js"></script>
   <script type="text/javascript" src="./assets/js/plugins.js"></script>
   <script type="text/javascript" src="./assets/js/script.js"></script>
+  <script src="./assets/js/ajax.js"></script>
 </body>
 
 </html>
