@@ -27,9 +27,9 @@ $cartCount = count($cartItems);
   <title>Mobile Shop - Shopping Cart</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="./assets/css/style.css">
-  <link rel="stylesheet" href="./assets/css/vendor.css">
-  <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/vendor.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 
   <style>
     body {
@@ -339,8 +339,8 @@ $cartCount = count($cartItems);
 
   <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
     <div class="container">
-      <a class="navbar-brand" href="#">
-        <img src="./assets/images/main-logo.png" alt="Mobile Shop">
+      <a class="navbar-brand" href="../index.php">
+        <img src="../assets/images/main-logo.png" alt="Mobile Shop">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
@@ -348,7 +348,7 @@ $cartCount = count($cartItems);
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto w-100 d-flex justify-content-end p-3">
           <li class="nav-item">
-            <a class="nav-link" href="#">Home</a>
+            <a class="nav-link" href="../index.php">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Shop</a>
@@ -596,7 +596,7 @@ $cartCount = count($cartItems);
   </footer>
   <!-- end footer  -->
 
-
+  <script type="text/javascript" src="../assets/js/ajax.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

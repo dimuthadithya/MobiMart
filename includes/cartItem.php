@@ -18,7 +18,7 @@
                    <p class="item-price mb-0">LKR <?php echo $productPrice ?></p>
                </div>
                <div class="col-md-2 col-4 text-md-end">
-                   <button class="remove-btn"><i class="fas fa-trash-alt me-1"></i> Remove</button>
+                   <button class="remove-btn" onclick="removeFromCart(<?php echo $productId ?>)"><i class="fas fa-trash-alt me-1"></i> Remove</button>
                </div>
            </div>
        </div>
