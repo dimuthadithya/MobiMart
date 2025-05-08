@@ -1,6 +1,14 @@
 <?php
- session_start();
+session_start();
 include_once('../../config/db.php');
+
+$userSql = "SELECT * FROM users ORDER BY RAND();";
+$stmt = $conn->prepare($userSql);
+$stmt->execute();
+$users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// var_dump($products); // Debugging line to check the fetched products
+
 
 ?>
 
@@ -371,19 +379,14 @@ include_once('../../config/db.php');
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- Example Row -->
+                                    <?php foreach ($users as $user): ?>
                                     <tr>
-                                        <td>2</td>
-                                        <td>user1@example.com</td>
-                                        <td>Admin</td>
-                                        <td>2024-11-05</td>
+                                        <td><?= htmlspecialchars($user['user_id']) ?></td>
+                                        <td><?= htmlspecialchars($user['email']) ?></td>
+                                        <td><?= htmlspecialchars($user['role']) ?></td>
+                                        <td><?= htmlspecialchars($user['updated_at']) ?></td>
                                     </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>user2@example.com</td>
-                                        <td>Customer</td>
-                                        <td>2024-12-15</td>
-                                    </tr>
+                                    <?php endforeach; ?>
                                     <!-- Add dynamic rows here -->
                                 </tbody>
                             </table>

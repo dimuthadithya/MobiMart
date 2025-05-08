@@ -350,12 +350,12 @@
                 <!-- Add Brand Form -->
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <form id="addBrandForm">
+                    <form id="addBrandForm" action="./controller/brand_add.php" method="POST">
                             <div class="row justify-content-center">
                                 <div class="col-md-6">
                                     <div class="mb-4">
                                         <label for="brandName" class="form-label fw-semibold">Brand Name*</label>
-                                        <input type="text" class="form-control" id="brandName" placeholder="Enter brand name" required>
+                                        <input type="text" class="form-control" id="brandName" name="brandName" placeholder="Enter brand name" required>
                                     </div>
 
                                     <div class="d-flex justify-content-end">
