@@ -871,11 +871,11 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <h5 class="widget-title text-uppercase pb-2">Contact Us</h5>
                 <p>
                   Do you have any queries or suggestions?
-                  <a href="mailto:">yourinfo@gmail.com</a>
+                  <a href="mailto:">mobimart@info.com</a>
                 </p>
                 <p>
                   If you need support? Just give us a call.
-                  <a href="">+55 111 222 333 44</a>
+                  <a href="">+94 77177111</a>
                 </p>
               </div>
             </div>
@@ -910,9 +910,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="col-md-4 col-sm-6">
           <div class="copyright">
             <p>
-              © Copyright 2023 MiniStore. Design by
-              <a href="https://templatesjungle.com/">TemplatesJungle</a>
-              Distribution by <a href="https://themewagon.com">ThemeWagon</a>
+              © Copyright 2023 MiniStore.
             </p>
           </div>
         </div>

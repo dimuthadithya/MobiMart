@@ -813,9 +813,9 @@ if (count($cartItems) == 0) {
         <div class="col-md-3">
           <h5 class="footer-title">Contact Info</h5>
           <ul class="footer-links">
-            <li><i class="fas fa-map-marker-alt me-2"></i> 123 Tech Street, City, Country</li>
-            <li><i class="fas fa-phone-alt me-2"></i> +1 (555) 123-4567</li>
-            <li><i class="fas fa-envelope me-2"></i> support@mobileshop.com</li>
+            <li><i class="fas fa-map-marker-alt me-2"></i> 123 Tech Street, Kegalle, Sri Lanka</li>
+            <li><i class="fas fa-phone-alt me-2"></i> +94 77177111</li>
+            <li><i class="fas fa-envelope me-2"></i> mobimart@info.com</li>
           </ul>
         </div>
       </div>

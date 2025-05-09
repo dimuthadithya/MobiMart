@@ -1338,11 +1338,11 @@ if (!$product) {
                                 <h5 class="widget-title text-uppercase pb-2">Contact Us</h5>
                                 <p>
                                     Do you have any queries or suggestions?
-                                    <a href="mailto:">yourinfo@gmail.com</a>
+                                    <a href="mailto:">mobimart@info.com</a>
                                 </p>
                                 <p>
                                     If you need support? Just give us a call.
-                                    <a href="">+55 111 222 333 44</a>
+                                    <a href="">+94 77177111</a>
                                 </p>
                             </div>
                         </div>
