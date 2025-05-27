@@ -501,7 +501,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 $productDetailsPage = './includes/productDetails.php?product_id=' . $productId;
 
 
-                include 'includes/productCard.php'; ?>
+                include 'includes/productCardNew.php'; ?>
               </div>
             <?php } ?>
           </div>
