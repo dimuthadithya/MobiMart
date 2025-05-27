@@ -9,39 +9,86 @@ if (isset($_GET['product_id'])) {
     exit();
 }
 
-$productSql = "SELECT * FROM products WHERE product_id = $productId";
+// Get product details
+$productSql = "SELECT p.*, b.brand_name 
+            FROM products p 
+            LEFT JOIN brands b ON p.brand_id = b.brand_id 
+            WHERE p.product_id = :product_id";
 $stmt = $conn->prepare($productSql);
+$stmt->bindParam(':product_id', $productId, PDO::PARAM_INT);
 $stmt->execute();
 $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$product) {
     header("Location: index.php");
     exit();
-} else {
-    $productName = $product['product_name'];
-    $productPrice = $product['price'];
-    $productDescription = $product['description'];
-    $productSku = $product['sku'];
-    $productStock = $product['quantity'];
-    $productImage = $product['image_url'];
-    $productBrandId = $product['brand_id'];
 }
 
+// Get product images
+$imagesSql = "SELECT image_url FROM product_images WHERE product_id = :product_id ORDER BY created_at";
+$stmt = $conn->prepare($imagesSql);
+$stmt->bindParam(':product_id', $productId, PDO::PARAM_INT);
+$stmt->execute();
+$productImages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Set up variables
+$productName = $product['product_name'];
+$productPrice = $product['price'];
+$productDescription = $product['description'];
+$productSku = $product['sku'];
+$productStock = $product['quantity'];
+$productImage = $product['image_url'];
+$productBrandId = $product['brand_id'];
+$brandName = $product['brand_name'];
+
+// Format price and discount
+$discountPercent = 6; // This could come from the database in the future
+$originalPrice = $productPrice + ($productPrice * ($discountPercent / 100));
+
+// Create description points from product description
+$descriptionPoints = array_filter(array_map('trim', explode('.', $productDescription)));
 ?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>MobiMart</title>
+    <title><?php echo htmlspecialchars($productName); ?> - MobiMart</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="author" content="" />
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
+    <meta name="keywords" content="<?php echo htmlspecialchars($productName) . ',' . htmlspecialchars($brandName); ?>" />
+    <meta name="description" content="<?php echo htmlspecialchars(substr($productDescription, 0, 160)); ?>" />
+
+    <!-- Structured Data for Product -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org/",
+            "@type": "Product",
+            "name": "<?php echo htmlspecialchars($productName); ?>",
+            "image": "<?php echo '../assets/uploads/products/' . htmlspecialchars($productImage); ?>",
+            "description": "<?php echo htmlspecialchars($productDescription); ?>",
+            "brand": {
+                "@type": "Brand",
+                "name": "<?php echo htmlspecialchars($brandName); ?>"
+            },
+            "sku": "<?php echo htmlspecialchars($productSku); ?>",
+            "offers": {
+                "@type": "Offer",
+                "url": "<?php echo "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>",
+                "priceCurrency": "LKR",
+                "price": "<?php echo number_format($productPrice, 2); ?>",
+                "availability": "<?php echo ($productStock > 0) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock'; ?>",
+                "seller": {
+                    "@type": "Organization",
+                    "name": "MobiMart"
+                }
+            }
+        }
+    </script>
     <link
         rel="stylesheet"
         type="text/css"
@@ -231,21 +278,21 @@ if (!$product) {
             id="star-fill"
             viewBox="0 0 16 16">
             <path
-                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327l4.898.696c.441.062.612.636.282.95l-3.522 3.356l.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
         </symbol>
         <symbol
             xmlns="http://www.w3.org/2000/svg"
             id="star-empty"
             viewBox="0 0 16 16">
             <path
-                d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
+                d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256l4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73l3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356l-.83 4.73zm4.905-2.767l-3.686 1.894l.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575l-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957l-3.686-1.894a.503.503 0 0 0-.461 0z" />
         </symbol>
         <symbol
             xmlns="http://www.w3.org/2000/svg"
             id="star-half"
             viewBox="0 0 16 16">
             <path
-                d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z" />
+                d="M5.354 5.119L7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327l4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356l.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894l-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77l-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z" />
         </symbol>
         <symbol xmlns="http://www.w3.org/2000/svg" id="quote" viewBox="0 0 24 24">
             <path
@@ -484,7 +531,7 @@ if (!$product) {
     <div class="container py-4">
         <!-- Product Header - Mobile -->
         <div class="d-block d-md-none mb-3">
-            <h1 class="h3">Xiaomi Redmi 14C Smartphone</h1>
+            <h1 class="h3"><?php echo htmlspecialchars($productName); ?></h1>
             <div class="d-flex align-items-center mb-2">
                 <div class="rating-stars">
                     <i class="bi bi-star-fill"></i>
@@ -496,10 +543,14 @@ if (!$product) {
                 <span class="ms-2 text-muted">(4 reviews)</span>
             </div>
             <div class="mb-2">
-                <span class="price-text">Rs 45,999.00</span>
-                <span class="original-price ms-2">Rs 48,999.00</span>
-                <span class="badge bg-danger ms-2">6% OFF</span>
+                <span class="price-text">Rs <?php echo number_format($productPrice, 2); ?></span>
+                <span class="original-price ms-2">Rs <?php echo number_format($originalPrice, 2); ?></span>
+                <span class="badge bg-danger ms-2"><?php echo $discountPercent; ?>% OFF</span>
             </div>
+            <p class="text-<?php echo ($productStock > 0) ? 'success' : 'danger'; ?>">
+                <i class="bi bi-<?php echo ($productStock > 0) ? 'check-circle-fill' : 'x-circle-fill'; ?>"></i>
+                <?php echo ($productStock > 0) ? 'In stock (' . $productStock . ')' : 'Out of stock'; ?>
+            </p>
         </div>
 
         <div class="row">
@@ -508,38 +559,30 @@ if (!$product) {
                 <div class="row">
                     <div class="col-2 order-md-1 order-2">
                         <div class="d-flex flex-md-column gap-2 mb-3">
+                            <!-- Main product image thumbnail -->
                             <img
-                                src="/api/placeholder/80/80"
+                                src="../assets/uploads/products/<?php echo htmlspecialchars($productImage); ?>"
                                 class="thumbnail-img active"
-                                alt="Redmi 14C Front" />
-                            <img
-                                src="/api/placeholder/80/80"
-                                class="thumbnail-img"
-                                alt="Redmi 14C Back" />
-                            <img
-                                src="/api/placeholder/80/80"
-                                class="thumbnail-img"
-                                alt="Redmi 14C Side" />
-                            <img
-                                src="/api/placeholder/80/80"
-                                class="thumbnail-img"
-                                alt="Redmi 14C Camera" />
-                            <img
-                                src="/api/placeholder/80/80"
-                                class="thumbnail-img"
-                                alt="Redmi 14C Display" />
-                            <img
-                                src="/api/placeholder/80/80"
-                                class="thumbnail-img"
-                                alt="Redmi 14C Package" />
+                                data-full="../assets/uploads/products/<?php echo htmlspecialchars($productImage); ?>"
+                                alt="<?php echo htmlspecialchars($productName); ?>" />
+
+                            <!-- Gallery images thumbnails -->
+                            <?php foreach ($productImages as $image): ?>
+                                <img
+                                    src="../assets/uploads/products/<?php echo htmlspecialchars($image['image_url']); ?>"
+                                    class="thumbnail-img"
+                                    data-full="../assets/uploads/products/<?php echo htmlspecialchars($image['image_url']); ?>"
+                                    alt="<?php echo htmlspecialchars($productName); ?>" />
+                            <?php endforeach; ?>
                         </div>
                     </div>
                     <div class="col-10 order-md-2 order-1">
                         <div class="bg-light p-2 text-center mb-3">
                             <img
-                                src="/api/placeholder/400/400"
+                                src="../assets/uploads/products/<?php echo htmlspecialchars($productImage); ?>"
                                 class="main-img"
-                                alt="Xiaomi Redmi 14C" />
+                                alt="<?php echo htmlspecialchars($productName); ?>"
+                                id="mainProductImage" />
                         </div>
                     </div>
                 </div>
@@ -549,7 +592,9 @@ if (!$product) {
                     <div class="col-12">
                         <div class="card mb-3">
                             <div class="card-body text-center text-muted">
-                                <i class="bi bi-truck"></i> 100% Authentic
+                                <i class="bi bi-truck"></i> 100% Authentic |
+                                <i class="bi bi-clock"></i> 24/7 Support |
+                                <i class="bi bi-shield-check"></i> Warranty
                             </div>
                         </div>
                         <div class="card">
@@ -595,27 +640,11 @@ if (!$product) {
                     <!-- productDescription -->
                     <div class="card-body">
                         <ul class="list-unstyled mb-0">
-                            <li class="mb-2">
-                                <i class="bi bi-check-circle-fill text-success me-2"></i>Immersive 6.88" display
-                            </li>
-                            <li class="mb-2">
-                                <i class="bi bi-check-circle-fill text-success me-2"></i>50MP
-                                high-resolution lens
-                            </li>
-                            <li class="mb-2">
-                                <i class="bi bi-check-circle-fill text-success me-2"></i>AI-powered photography features
-                            </li>
-                            <li class="mb-2">
-                                <i class="bi bi-check-circle-fill text-success me-2"></i>5000+
-                                mAh mega storage
-                            </li>
-                            <li class="mb-2">
-                                <i class="bi bi-check-circle-fill text-success me-2"></i>Powerful AI dual-camera system
-                            </li>
-                            <li>
-                                <i class="bi bi-check-circle-fill text-success me-2"></i>Helio
-                                G85 octa-core processor
-                            </li>
+                            <?php foreach ($descriptionPoints as $point): ?>
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i><?php echo $point ?>
+                                </li>
+                            <?php endforeach; ?>
                         </ul>
                         <p class="text-muted mt-3 small">
                             Actual product colors may vary slightly from the images shown on
@@ -650,22 +679,28 @@ if (!$product) {
                             </button>
                         </div>
                     </div>
-                </div>
-
-                <!-- Quantity -->
+                </div> <!-- Quantity -->
                 <div class="mb-4">
                     <label class="form-label">Quantity</label>
                     <div class="input-group" style="max-width: 150px">
                         <button class="btn btn-outline-secondary" type="button">-</button>
-                        <input type="text" class="form-control text-center" value="1" />
+                        <input type="text" class="form-control text-center" value="1"
+                            data-max-stock="<?php echo $productStock; ?>" />
                         <button class="btn btn-outline-secondary" type="button">+</button>
                     </div>
+                    <small class="text-muted">Available stock: <?php echo $productStock; ?></small>
+                </div><!-- Add to Cart Button -->
+                <div class="d-grid mb-4">
+                    <button class="btn btn-primary py-2" id="addToCartBtn"
+                        data-product-id="<?php echo $productId; ?>"
+                        data-product-name="<?php echo htmlspecialchars($productName); ?>"
+                        data-product-price="<?php echo $productPrice; ?>">
+                        Add to cart
+                    </button>
                 </div>
 
-                <!-- Add to Cart Button -->
-                <div class="d-grid mb-4">
-                    <button class="btn btn-primary py-2">Add to cart</button>
-                </div>
+                <!-- Cart Status Message -->
+                <div id="cartMessage" class="alert d-none"></div>
 
                 <!-- Payment Info -->
                 <div class="card mb-4">
@@ -1385,7 +1420,6 @@ if (!$product) {
             </div>
         </div>
     </div>
-
     <script src="../assets/js/jquery-1.11.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script
@@ -1393,6 +1427,94 @@ if (!$product) {
         src="../assets/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="../assets/js/plugins.js"></script>
     <script type="text/javascript" src="../assets/js/script.js"></script>
+    <!-- Product Details Specific Script -->
+    <script type="text/javascript" src="../assets/js/product-details.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gallery Image Handling
+            const thumbnails = document.querySelectorAll('.thumbnail-img');
+            const mainImage = document.querySelector('.main-img');
+
+            thumbnails.forEach(thumb => {
+                thumb.addEventListener('click', function() {
+                    mainImage.src = this.dataset.full;
+                    mainImage.alt = this.alt;
+                    thumbnails.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Quantity Controls
+            const quantityInput = document.querySelector('input[type="text"].form-control');
+            const decrementBtn = quantityInput.previousElementSibling;
+            const incrementBtn = quantityInput.nextElementSibling;
+            const maxStock = <?php echo $productStock; ?>;
+
+            function updateQuantity(newValue) {
+                newValue = Math.max(1, Math.min(newValue, maxStock));
+                quantityInput.value = newValue;
+            }
+
+            decrementBtn.addEventListener('click', () => {
+                updateQuantity(parseInt(quantityInput.value) - 1);
+            });
+
+            incrementBtn.addEventListener('click', () => {
+                updateQuantity(parseInt(quantityInput.value) + 1);
+            });
+
+            // Add to Cart
+            const addToCartBtn = document.getElementById('addToCartBtn');
+            const cartMessage = document.getElementById('cartMessage');
+
+            addToCartBtn.addEventListener('click', function() {
+                const productId = this.getAttribute('data-product-id');
+                const productName = this.getAttribute('data-product-name');
+                const productPrice = this.getAttribute('data-product-price');
+                const quantity = quantityInput.value;
+
+                // AJAX request to add the product to the cart
+                fetch('../api/add_to_cart.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            product_id: productId,
+                            product_name: productName,
+                            product_price: productPrice,
+                            quantity: quantity
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            cartMessage.classList.remove('d-none', 'alert-danger');
+                            cartMessage.classList.add('alert-success');
+                            cartMessage.innerHTML = 'Product added to cart successfully!';
+                        } else {
+                            cartMessage.classList.remove('d-none', 'alert-success');
+                            cartMessage.classList.add('alert-danger');
+                            cartMessage.innerHTML = 'Failed to add product to cart. Please try again.';
+                        }
+
+                        // Optionally, update the cart icon/badge here
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        cartMessage.classList.remove('d-none', 'alert-success');
+                        cartMessage.classList.add('alert-danger');
+                        cartMessage.innerHTML = 'An error occurred. Please try again.';
+                    });
+            });
+
+            // Initialize Bootstrap tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
 </body>
 
 </html>

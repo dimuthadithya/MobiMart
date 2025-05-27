@@ -291,86 +291,11 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </button>
                 </div>
             </div>
-        </div>
-
-        <!-- Products Grid -->
-        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3">
-            <?php foreach ($products as $product): ?>
-                <div class="col">
-                    <div class="card h-100 product-card border-0">
-                        <!-- Status Badge -->
-                        <?php if ($product['status'] === 'out_of_stock'): ?>
-                            <div class="badge bg-secondary product-badge">Out of Stock</div>
-                        <?php endif; ?>
-
-                        <!-- Product Image -->
-                        <div class="position-relative">
-                            <img src="<?php echo !empty($product['image_url']) ? $product['image_url'] : '../assets/images/product-item1.jpg'; ?>"
-                                class="card-img-top product-image"
-                                alt="<?php echo htmlspecialchars($product['product_name']); ?>">
-                            <!-- Quick Actions -->
-                            <div class="quick-actions">
-                                <button class="btn btn-light btn-sm rounded-circle" title="Add to Wishlist">
-                                    <i class="fas fa-heart"></i>
-                                </button>
-                                <button class="btn btn-light btn-sm rounded-circle"
-                                    title="Quick View"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#quickViewModal"
-                                    data-product-id="<?php echo $product['product_id']; ?>">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Product Info -->
-                        <div class="card-body p-3">
-                            <!-- Brand Name -->
-                            <small class="text-muted text-uppercase">
-                                <?php echo htmlspecialchars($product['brand_name'] ?? 'Unknown Brand'); ?>
-                            </small>
-
-                            <!-- Product Name -->
-                            <h6 class="card-title mb-2 product-title">
-                                <?php echo htmlspecialchars($product['product_name']); ?>
-                            </h6>
-
-                            <!-- SKU -->
-                            <small class="text-muted d-block mb-2">SKU: <?php echo htmlspecialchars($product['sku']); ?></small>
-
-                            <!-- Price and Stock -->
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <div class="price-wrapper">
-                                    <span class="fw-bold">$<?php echo number_format($product['price'], 2); ?></span>
-                                </div>
-                                <?php if ($product['quantity'] > 0): ?>
-                                    <span class="badge bg-success">
-                                        In Stock (<?php echo $product['quantity']; ?>)
-                                    </span>
-                                <?php else: ?>
-                                    <span class="badge bg-secondary">Out of Stock</span>
-                                <?php endif; ?>
-                            </div>
-
-                            <!-- Action Buttons -->
-                            <div class="d-grid gap-2">
-                                <a href="product-details.php?id=<?php echo $product['product_id']; ?>"
-                                    class="btn btn-outline-primary btn-sm">
-                                    View Details
-                                </a>
-                                <?php if ($product['quantity'] > 0): ?>
-                                    <button class="btn btn-primary btn-sm add-to-cart"
-                                        data-product-id="<?php echo $product['product_id']; ?>"
-                                        data-product-name="<?php echo htmlspecialchars($product['product_name']); ?>"
-                                        data-product-price="<?php echo $product['price']; ?>">
-                                        <i class="fas fa-shopping-cart me-1"></i>Add to Cart
-                                    </button>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php endforeach; ?>
+        </div> <!-- Products Grid -->
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 mb-4">
+            <?php foreach ($products as $product):
+                include '../includes/productCardNew.php';
+            endforeach; ?>
         </div>
 
         <!-- Quick View Modal -->
