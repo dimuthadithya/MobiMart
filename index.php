@@ -290,6 +290,9 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <a class="nav-link me-4 active" href="./index.php">Home</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link me-4 active" href="./pages/phones.php">Phones</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link me-4" href="#company-services">Services</a>
               </li>
               <li class="nav-item">
