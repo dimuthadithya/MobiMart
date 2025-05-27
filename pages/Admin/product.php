@@ -364,11 +364,11 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 <!-- Alert for successful product addition -->
                 <?php if (isset($_GET['success'])): ?>
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                 <strong>Success!</strong> Product has been added successfully.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                 <?php endif; ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Success!</strong> Product has been added successfully.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif; ?>
 
                 <!-- Filter and Search -->
                 <div class="card mb-4">
@@ -431,77 +431,243 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                             </td>
                                             <td>
                                                 <div class="d-flex">
-                                                    <a href="#" class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                                                    <button class="btn btn-sm btn-outline-primary me-1"
+                                                        title="Edit"
+                                                        onclick="editProduct(<?= htmlspecialchars(json_encode($product)) ?>)">
                                                         <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    <a href="#" class="btn btn-sm btn-outline-danger" title="Delete" onclick="return confirm('Are you sure to delete this product?');">
-                                                        <i class="fas fa-trash"></i>
-                                                    </a>
+                                                    </button>
+                                                    <form action="./controller/product_delete.php" method="POST" style="display: inline;"
+                                                        onsubmit="return confirm('Are you sure you want to delete this product? This action cannot be undone.');">
+                                                        <input type="hidden" name="product_id" value="<?= htmlspecialchars($product['product_id']) ?>">
+                                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
-
                             </table>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Edit Product Modal -->
+    <div class="modal fade" id="editProductModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Product</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="editProductForm" action="./controller/product_update.php" method="POST" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="hidden" id="edit_product_id" name="product_id">
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Product Name*</label>
+                                <input type="text" class="form-control" id="edit_product_name" name="product_name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Brand*</label>
+                                <select class="form-select" id="edit_brand_id" name="brand_id" required>
+                                    <?php
+                                    $brandsSql = "SELECT * FROM brands ORDER BY brand_name";
+                                    $stmt = $conn->prepare($brandsSql);
+                                    $stmt->execute();
+                                    $brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                                    foreach ($brands as $brand): ?>
+                                        <option value="<?= $brand['brand_id'] ?>"><?= htmlspecialchars($brand['brand_name']) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Description*</label>
+                            <textarea class="form-control" id="edit_description" name="description" rows="3" required></textarea>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Price*</label>
+                                <input type="number" class="form-control" id="edit_price" name="price" step="0.01" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">SKU*</label>
+                                <input type="text" class="form-control" id="edit_sku" name="sku" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Quantity*</label>
+                                <input type="number" class="form-control" id="edit_quantity" name="quantity" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Status</label>
+                                <select class="form-select" id="edit_status" name="status">
+                                    <option value="available">Available</option>
+                                    <option value="out_of_stock">Out of Stock</option>
+                                    <option value="discontinued">Discontinued</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Main Product Image</label>
+                                <input type="file" class="form-control" id="edit_image" name="image" accept="image/*" onchange="previewMainImage(this)">
+                            </div>
+                        </div>
+
+                        <!-- Main Image Preview -->
+                        <div id="currentImagePreview" class="text-center mb-3">
+                            <h6 class="mb-2">Current Main Image</h6>
+                            <img src="" alt="Current Product Image" style="max-height: 200px;">
+                        </div>
+
+                        <!-- Gallery Images Section -->
+                        <div class="mb-4">
+                            <h6 class="mb-3">Gallery Images</h6>
+                            <input type="file" class="form-control mb-2" id="gallery_images" name="gallery_images[]" accept="image/*" multiple onchange="previewGalleryImages(this)">
+                            <div id="galleryPreview" class="row g-2 mt-2">
+                                <!-- Gallery images will be previewed here -->
+                            </div>
+                            <div id="existingGallery" class="row g-2 mt-2">
+                                <!-- Existing gallery images will be shown here -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Show bulk action bar when checkboxes are selected
-        const checkboxes = document.querySelectorAll('.form-check-input');
-        const selectAllCheckbox = document.getElementById('selectAll');
-        const bulkActionBar = document.getElementById('bulkActionBar');
-        const cancelBulkSelect = document.getElementById('cancelBulkSelect');
+        // Initialize edit modal
+        const editModal = new bootstrap.Modal(document.getElementById('editProductModal'));
 
-        function updateBulkActionBar() {
-            let checkedCount = 0;
-            checkboxes.forEach(checkbox => {
-                if (checkbox !== selectAllCheckbox && checkbox.checked) {
-                    checkedCount++;
+        function editProduct(product) {
+            // Populate form fields
+            document.getElementById('edit_product_id').value = product.product_id;
+            document.getElementById('edit_product_name').value = product.product_name;
+            document.getElementById('edit_brand_id').value = product.brand_id;
+            document.getElementById('edit_description').value = product.description;
+            document.getElementById('edit_price').value = product.price;
+            document.getElementById('edit_sku').value = product.sku;
+            document.getElementById('edit_quantity').value = product.quantity;
+            document.getElementById('edit_status').value = product.status;
+
+            // Show current image
+            const imagePreview = document.querySelector('#currentImagePreview img');
+            imagePreview.src = '../../assets/uploads/products/' + product.image_url;
+
+            // Show modal
+            editModal.show();
+        }
+
+        // Preview main image before upload
+        function previewMainImage(input) {
+            const preview = document.querySelector('#currentImagePreview img');
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
                 }
-            });
-
-            if (checkedCount > 0) {
-                bulkActionBar.style.display = 'block';
-                bulkActionBar.querySelector('.fw-bold').textContent = `${checkedCount} products selected`;
-            } else {
-                bulkActionBar.style.display = 'none';
+                reader.readAsDataURL(input.files[0]);
             }
         }
 
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', updateBulkActionBar);
-        });
+        function previewGalleryImages(input) {
+            const preview = document.getElementById('galleryPreview');
+            preview.innerHTML = '';
 
-        selectAllCheckbox.addEventListener('change', function() {
-            checkboxes.forEach(checkbox => {
-                if (checkbox !== selectAllCheckbox) {
-                    checkbox.checked = selectAllCheckbox.checked;
-                }
-            });
-            updateBulkActionBar();
-        });
+            if (input.files && input.files.length > 0) {
+                Array.from(input.files).forEach((file, index) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        preview.insertAdjacentHTML('beforeend', `
+                            <div class="col-md-3 col-6 mb-2">
+                                <div class="position-relative border rounded p-1">
+                                    <img src="${e.target.result}" class="img-fluid" style="height: 100px; object-fit: cover;">
+                                </div>
+                            </div>
+                        `);
+                    }
+                    reader.readAsDataURL(file);
+                });
+            }
+        }
 
-        cancelBulkSelect.addEventListener('click', function() {
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = false;
-            });
-            updateBulkActionBar();
-        });
+        // Function to delete a gallery image
+        function deleteGalleryImage(imageId, element) {
+            if (confirm('Are you sure you want to delete this image?')) {
+                fetch(`./controller/delete_gallery_image.php?image_id=${imageId}`, {
+                        method: 'DELETE'
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            element.remove();
+                        } else {
+                            alert(data.error || 'Failed to delete image');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Failed to delete image');
+                    });
+            }
+        }
 
-        // Auto-dismiss the success alert after 5 seconds
+        // Update the loadProductData function to include gallery images
+        function loadProductData(productId) {
+            // ... existing code for loading basic product data ...
+
+            // Clear existing previews
+            document.getElementById('galleryPreview').innerHTML = '';
+            document.getElementById('existingGallery').innerHTML = '';
+
+            // Load gallery images
+            fetch(`./controller/get_gallery_images.php?product_id=${productId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const existingGallery = document.getElementById('existingGallery');
+                    if (Array.isArray(data)) {
+                        data.forEach(image => {
+                            existingGallery.insertAdjacentHTML('beforeend', `
+                                <div class="col-md-3 col-6 mb-2">
+                                    <div class="position-relative border rounded p-1">
+                                        <img src="${image.image_url}" class="img-fluid" style="height: 100px; object-fit: cover;">
+                                        <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0 m-1" 
+                                                onclick="deleteGalleryImage(${image.id}, this.parentElement.parentElement)">×</button>
+                                    </div>
+                                </div>
+                            `);
+                        });
+                    } else if (data.error) {
+                        console.error('Error loading gallery images:', data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        // Auto-dismiss success alert
         setTimeout(() => {
             const successAlert = document.querySelector('.alert-success');
             if (successAlert) {
-                const bsAlert = new bootstrap.Alert(successAlert);
-                bsAlert.close();
+                successAlert.remove();
             }
         }, 5000);
     </script>
