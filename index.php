@@ -39,8 +39,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <link
     href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Lato:wght@300;400;700&display=swap"
     rel="stylesheet" />
-  <!-- script
-    ================================================== -->
+
   <script src="js/modernizr.js"></script>
 </head>
 
@@ -348,24 +347,41 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <section
     id="billboard"
     class="position-relative overflow-hidden bg-light-blue">
-    <div class="swiper main-swiper">
+    <div class="swiper main-swiper mt-5">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
           <div class="container">
             <div class="row d-flex align-items-center">
-              <div class="col-md-6">
+              <div class="col-md-7">
                 <div class="banner-content">
-                  <h1 class="display-2 text-uppercase text-dark pb-5">
-                    Your Products Are Great.
+                  <span class="banner-subtitle text-primary mb-2">Welcome to MobiMart</span>
+                  <h1 class="banner-title display-2 text-uppercase text-dark pb-3">
+                    Discover the Latest in Mobile Technology
                   </h1>
-                  <a
-                    href="shop.html"
-                    class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop Product</a>
+                  <p class="banner-text mb-4">
+                    Explore our wide selection of premium smartphones, accessories, and smart devices.
+                    Get the best deals with our exclusive offers.
+                  </p>
+                  <div class="banner-buttons">
+                    <a href="pages/phones.php" class="btn btn-primary btn-lg me-3">Shop Now</a>
+                    <a href="#featured-products" class="btn btn-outline-dark btn-lg">View Deals</a>
+                  </div>
                 </div>
               </div>
               <div class="col-md-5">
-                <div class="image-holder">
-                  <img src="./assets/images/banner-image.png" alt="banner" />
+                <div class="banner-feature-list">
+                  <div class="feature-item">
+                    <i class="fas fa-shipping-fast text-primary"></i>
+                    <span>Free Shipping</span>
+                  </div>
+                  <div class="feature-item">
+                    <i class="fas fa-shield-alt text-primary"></i>
+                    <span>100% Genuine Products</span>
+                  </div>
+                  <div class="feature-item">
+                    <i class="fas fa-headset text-primary"></i>
+                    <span>24/7 Support</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -373,36 +389,43 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <div class="swiper-slide">
           <div class="container">
-            <div class="row d-flex flex-wrap align-items-center">
-              <div class="col-md-6">
+            <div class="row d-flex align-items-center">
+              <div class="col-md-7">
                 <div class="banner-content">
-                  <h1 class="display-2 text-uppercase text-dark pb-5">
-                    Technology Hack You Won't Get
+                  <span class="banner-subtitle text-primary mb-2">Special Offers</span>
+                  <h1 class="banner-title display-2 text-uppercase text-dark pb-3">
+                    Latest Smartphones at Great Prices
                   </h1>
-                  <a
-                    href="shop.html"
-                    class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop Product</a>
+                  <p class="banner-text mb-4">
+                    Upgrade your mobile experience with our premium selection.
+                    Find the perfect device that matches your style.
+                  </p>
+                  <div class="banner-buttons">
+                    <a href="pages/phones.php" class="btn btn-primary btn-lg me-3">View Collections</a>
+                    <a href="#featured-products" class="btn btn-outline-dark btn-lg">Special Deals</a>
+                  </div>
                 </div>
               </div>
               <div class="col-md-5">
-                <div class="image-holder">
-                  <img src="./assets/images/banner-image.png" alt="banner" />
+                <div class="banner-feature-list">
+                  <div class="feature-item">
+                    <i class="fas fa-award text-primary"></i>
+                    <span>Premium Quality</span>
+                  </div>
+                  <div class="feature-item">
+                    <i class="fas fa-undo text-primary"></i>
+                    <span>Easy Returns</span>
+                  </div>
+                  <div class="feature-item">
+                    <i class="fas fa-credit-card text-primary"></i>
+                    <span>Secure Payments</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="swiper-icon swiper-arrow swiper-arrow-prev">
-      <svg class="chevron-left">
-        <use xlink:href="#chevron-left" />
-      </svg>
-    </div>
-    <div class="swiper-icon swiper-arrow swiper-arrow-next">
-      <svg class="chevron-right">
-        <use xlink:href="#chevron-right" />
-      </svg>
     </div>
   </section>
 
@@ -888,6 +911,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
     <hr />
   </footer>
+
   <div id="footer-bottom">
     <div class="container">
       <div class="row d-flex flex-wrap justify-content-between">

@@ -294,6 +294,13 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div> <!-- Products Grid -->
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 mb-4">
             <?php foreach ($products as $product):
+                $productName = $product['product_name'];
+                $productPrice = $product['price'];
+                $productDescription = $product['description'];
+                $productId = $product['product_id'];
+
+                $productDetailsPage = '../includes/productDetails.php?product_id=' . $productId;
+
                 include '../includes/productCardNew.php';
             endforeach; ?>
         </div>

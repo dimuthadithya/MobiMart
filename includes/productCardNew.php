@@ -178,12 +178,11 @@ $sku = htmlspecialchars($product['sku']);
                     <i class="fas fa-eye"></i>
                 </button>
                 <?php if ($quantity > 0): ?>
-                    <button type="button"
-                        class="btn btn-sm rounded-circle add-to-cart"
-                        data-product-id="<?= $product['product_id'] ?>"
-                        title="Add to Cart">
+                    <a href="../pages/product-details.php?id=<?= $product['product_id'] ?>"
+                        class="btn btn-sm rounded-circle"
+                        title="View Product Details">
                         <i class="fas fa-shopping-cart"></i>
-                    </button>
+                    </a>
                 <?php endif; ?>
             </div>
 
@@ -200,11 +199,9 @@ $sku = htmlspecialchars($product['sku']);
         </div> <!-- Card Body -->
         <div class="p-3">
             <!-- Brand -->
-            <div class="text-muted text-uppercase small mb-1"><?= $brand_name ?></div>
-
-            <!-- Product Name -->
+            <div class="text-muted text-uppercase small mb-1"><?= $brand_name ?></div> <!-- Product Name -->
             <h3 class="product-title mb-2">
-                <a href="./product-details.php?id=<?= $product['product_id'] ?>">
+                <a href="<?php echo $productDetailsPage ?>">
                     <?= $product_name ?>
                 </a>
             </h3>

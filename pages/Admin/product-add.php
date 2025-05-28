@@ -275,7 +275,7 @@ $brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto w-100 d-flex justify-content-end p-3">
                     <li class="nav-item">
-                    <a class="nav-link" href="#"><?php echo $_SESSION['email'] ?></a>
+                        <a class="nav-link" href="#"><?php echo $_SESSION['email'] ?></a>
                     </li>
                 </ul>
                 <div class="d-flex align-items-center">
@@ -486,15 +486,17 @@ $brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 const reader = new FileReader();
                 reader.onload = function(event) {
                     const imgPreview = document.getElementById('mainImagePreview');
-                    imgPreview.innerHTML = `<img src="${event.target.result}" alt="Product Image" style="max-width: 100%; max-height: 250px; object-fit: contain; display: block; margin: 0 auto;">`;
+                    imgPreview.innerHTML = `<img src="${event.target.result}" alt="Product Preview" style="max-width: 100%; max-height: 250px; object-fit: contain;">`;
                 }
                 reader.readAsDataURL(file);
             }
         });
 
+        // Gallery images preview
         document.getElementById('galleryImages').addEventListener('change', function(e) {
             const files = e.target.files;
             const galleryPreviews = document.getElementById('galleryPreviews');
+            galleryPreviews.innerHTML = ''; // Clear existing previews
 
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
@@ -505,7 +507,7 @@ $brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     col.className = 'col-4 mb-2';
                     col.innerHTML = `
                         <div class="position-relative">
-                            <img src="${event.target.result}" class="img-thumbnail img-fluid" alt="Gallery Image" style="width:250px;">
+                            <img src="${event.target.result}" class="img-thumbnail" alt="Gallery Preview" style="width:100%; height:150px; object-fit:cover;">
                             <button type="button" class="btn-close position-absolute top-0 end-0 bg-white rounded-circle m-1" aria-label="Remove"></button>
                         </div>
                     `;
@@ -516,51 +518,76 @@ $brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         col.remove();
                     });
                 }
-
                 reader.readAsDataURL(file);
             }
         });
 
-        // Specifications functionality
-        let specCounter = 1;
-
-        document.getElementById('addSpecBtn').addEventListener('click', function() {
-            specCounter++;
-            const specItem = document.createElement('div');
-            specItem.className = 'spec-item';
-            specItem.innerHTML = `
-                <div class="d-flex justify-content-between mb-2">
-                    <h6 class="mb-0">Specification #${specCounter}</h6>
-                    <button type="button" class="remove-spec"><i class="fas fa-times"></i></button>
-                </div>
-                <div class="row">
-                    <div class="col-md-5 mb-2">
-                        <input type="text" class="form-control" placeholder="Name (e.g. CPU)" name="spec_name[]">
-                    </div>
-                    <div class="col-md-7 mb-2">
-                        <input type="text" class="form-control" placeholder="Value (e.g. Snapdragon 8 Gen 2)" name="spec_value[]">
-                    </div>
-                </div>
-            `;
-
-            document.getElementById('specsList').appendChild(specItem);
-
-            // Add remove functionality
-            specItem.querySelector('.remove-spec').addEventListener('click', function() {
-                specItem.remove();
-            });
-        });
-
-        // Add remove functionality to initial spec
-        document.querySelector('.remove-spec').addEventListener('click', function() {
-            this.closest('.spec-item').remove();
-        });
-
-        // Form submission
+        // Form validation
         document.getElementById('addProductForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Here you would handle the form submission, validation, and API calls
-            alert('Product saved successfully!');
+            const requiredFields = [
+                'productName',
+                'productBrand',
+                'productDescription',
+                'productPrice',
+                'productSKU',
+                'productStock',
+                'mainImage'
+            ];
+
+            let isValid = true;
+            let firstInvalidField = null;
+
+            // Reset validation states
+            requiredFields.forEach(field => {
+                const element = document.getElementById(field);
+                if (element) {
+                    element.classList.remove('is-invalid');
+                }
+            });
+
+            // Validate each field
+            requiredFields.forEach(field => {
+                const element = document.getElementById(field);
+                if (!element) return;
+
+                let fieldValid = true;
+                if (element.type === 'file') {
+                    fieldValid = element.files.length > 0;
+                } else if (element.type === 'number') {
+                    fieldValid = element.value > 0;
+                } else {
+                    fieldValid = element.value.trim() !== '';
+                }
+
+                if (!fieldValid) {
+                    isValid = false;
+                    element.classList.add('is-invalid');
+                    if (!firstInvalidField) {
+                        firstInvalidField = element;
+                    }
+                }
+            });
+
+            // Show error and prevent submission if validation fails
+            if (!isValid) {
+                e.preventDefault();
+                if (firstInvalidField) {
+                    firstInvalidField.focus();
+                }
+                // Show error message
+                const alertDiv = document.createElement('div');
+                alertDiv.className = 'alert alert-danger alert-dismissible fade show mt-3';
+                alertDiv.innerHTML = `
+                    <strong>Error!</strong> Please fill in all required fields marked with *.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                `;
+                this.insertAdjacentElement('afterend', alertDiv);
+
+                // Remove alert after 5 seconds
+                setTimeout(() => {
+                    alertDiv.remove();
+                }, 5000);
+            }
         });
     </script>
 </body>
