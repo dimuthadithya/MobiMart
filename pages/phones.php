@@ -195,7 +195,6 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         .product-title {
             display: -webkit-box;
-            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
             height: 2.5rem;
