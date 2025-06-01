@@ -530,173 +530,89 @@ if (count($cartItems) == 0) {
 
     <div class="row">
       <!-- Checkout Form Column -->
-      <div class="col-lg-8 mb-4">
+      <div class="col-lg-8 mb-4"> <!-- Delivery Address Section -->
+        <form action="../controller/address_process.php" method="POST">
+          <div class="checkout-section">
+            <h3 class="section-title">Delivery Address</h3>
 
-        <!-- Shipping Address Section -->
-        <div class="checkout-section">
-          <div class="d-flex justify-content-between align-items-center">
-            <h3 class="section-title">Shipping Address</h3>
-            <a href="#" class="edit-link">+ Add New Address</a>
-          </div>
-
-          <div class="address-select selected">
-            <input class="form-check-input" type="radio" name="address" id="address1" checked>
-            <div class="address-title">Home</div>
-            <div class="address-details">
-              <p class="mb-1">John Doe</p>
-              <p class="mb-1">123 Main Street, Apt 4B</p>
-              <p class="mb-1">New York, NY 10001</p>
-              <p class="mb-0">United States</p>
-            </div>
-          </div>
-
-          <div class="address-select">
-            <input class="form-check-input" type="radio" name="address" id="address2">
-            <div class="address-title">Office</div>
-            <div class="address-details">
-              <p class="mb-1">John Doe</p>
-              <p class="mb-1">456 Business Ave, Suite 200</p>
-              <p class="mb-1">New York, NY 10002</p>
-              <p class="mb-0">United States</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Delivery Method Section -->
-        <div class="checkout-section">
-          <h3 class="section-title">Delivery Method</h3>
-
-          <div class="delivery-method selected">
-            <div class="method-details">
-              <div class="method-icon">
-                <i class="fas fa-truck"></i>
+            <div class="row g-3">
+              <div class="col-12">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" name="fullName" required>
               </div>
-              <div class="method-info">
-                <div class="method-title">Standard Delivery</div>
-                <div class="method-description">Delivery within 3-5 business days</div>
+              <div class="col-12">
+                <label class="form-label">Street Address</label>
+                <input type="text" class="form-control" name="streetAddress" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">City</label>
+                <input type="text" class="form-control" name="city" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">District</label>
+                <input type="text" class="form-control" name="district" required>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" name="phone" required>
               </div>
             </div>
-            <div class="method-price">Free</div>
           </div>
-
-          <div class="delivery-method">
-            <div class="method-details">
-              <div class="method-icon">
-                <i class="fas fa-shipping-fast"></i>
-              </div>
-              <div class="method-info">
-                <div class="method-title">Express Delivery</div>
-                <div class="method-description">Delivery within 1-2 business days</div>
-              </div>
-            </div>
-            <div class="method-price">$12.99</div>
-          </div>
-
-          <div class="delivery-method">
-            <div class="method-details">
-              <div class="method-icon">
-                <i class="fas fa-store-alt"></i>
-              </div>
-              <div class="method-info">
-                <div class="method-title">Store Pickup</div>
-                <div class="method-description">Pickup from our nearest store</div>
-              </div>
-            </div>
-            <div class="method-price">Free</div>
-          </div>
-        </div>
-
+        </form>
         <!-- Payment Method Section -->
         <div class="checkout-section">
           <h3 class="section-title">Payment Method</h3>
 
-          <div class="payment-option selected">
-            <div class="payment-title">
-              <i class="fab fa-cc-visa payment-icon" style="color: #1a1f71;"></i>
-              Credit/Debit Card
+          <div class="mb-4">
+            <div class="form-check mb-3">
+              <input class="form-check-input" type="radio" name="paymentMethod" id="cashOnDelivery" checked>
+              <label class="form-check-label" for="cashOnDelivery">
+                <i class="fas fa-money-bill-wave me-2"></i>Cash on Delivery
+              </label>
             </div>
-            <div class="payment-details">
-              <div class="row g-3">
-                <div class="col-12">
-                  <label for="cardName" class="form-label">Name on Card</label>
-                  <input type="text" class="form-control" id="cardName" placeholder="John Doe">
-                </div>
-                <div class="col-12">
-                  <label for="cardNumber" class="form-label">Card Number</label>
-                  <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456">
-                </div>
-                <div class="col-md-6">
-                  <label for="cardExpiry" class="form-label">Expiration Date</label>
-                  <input type="text" class="form-control" id="cardExpiry" placeholder="MM/YY">
-                </div>
-                <div class="col-md-6">
-                  <label for="cardCvv" class="form-label">CVV</label>
-                  <input type="text" class="form-control" id="cardCvv" placeholder="123">
-                </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="paymentMethod" id="cardPayment">
+              <label class="form-check-label" for="cardPayment">
+                <i class="fas fa-credit-card me-2"></i>Credit/Debit Card
+              </label>
+            </div>
+          </div>
+
+          <!-- Card Payment Details (Hidden by default) -->
+          <div id="cardDetails" style="display: none;">
+            <div class="row g-3">
+              <div class="col-12">
+                <label class="form-label">Name on Card</label>
+                <input type="text" class="form-control" placeholder="John Doe">
+              </div>
+              <div class="col-12">
+                <label class="form-label">Card Number</label>
+                <input type="text" class="form-control" placeholder="1234 5678 9012 3456">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Expiration Date</label>
+                <input type="text" class="form-control" placeholder="MM/YY">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">CVV</label>
+                <input type="text" class="form-control" placeholder="123">
               </div>
             </div>
           </div>
-
-          <div class="payment-option">
-            <div class="payment-title">
-              <i class="fab fa-paypal payment-icon" style="color: #003087;"></i>
-              PayPal
-            </div>
-            <div class="payment-details">
-              <p class="text-muted">You will be redirected to PayPal to complete your payment.</p>
-            </div>
-          </div>
-
-          <div class="payment-option">
-            <div class="payment-title">
-              <i class="fab fa-apple payment-icon"></i>
-              Apple Pay
-            </div>
-            <div class="payment-details">
-              <p class="text-muted">Pay securely using Apple Pay.</p>
-            </div>
-          </div>
         </div>
-
-        <!-- Billing Address -->
-        <div class="checkout-section">
-          <h3 class="section-title">Billing Address</h3>
-
-          <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" id="sameAsShipping" checked>
-            <label class="form-check-label" for="sameAsShipping">
-              Same as shipping address
-            </label>
-          </div>
-        </div>
-
-        <!-- Contact Information -->
-        <div class="checkout-section">
-          <h3 class="section-title">Contact Information</h3>
-
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label for="emailAddress" class="form-label">Email Address</label>
-              <input type="email" class="form-control" id="emailAddress" placeholder="your@email.com">
-            </div>
-            <div class="col-md-6">
-              <label for="phoneNumber" class="form-label">Phone Number</label>
-              <input type="tel" class="form-control" id="phoneNumber" placeholder="(123) 456-7890">
-            </div>
-          </div>
-        </div>
-
       </div>
 
       <!-- Order Summary Column -->
       <div class="col-lg-4">
         <div class="order-summary">
-          <h3 class="summary-title">Order Summary <span class="text-muted fs-6">(3 items)</span></h3>
+          <h3 class="summary-title">Order Summary <span class="text-muted fs-6"></span></h3>
 
           <!-- Order Items -->
           <div class="mb-4">
             <?php
             $totalPrice = 0;
+            $qty = 0;
 
             foreach ($cartItems as $item) {
               $productId = $item['product_id'];
@@ -705,9 +621,11 @@ if (count($cartItems) == 0) {
               $productStmt = $conn->prepare($productSql);
               $productStmt->execute(['product_id' => $productId]);
               $product = $productStmt->fetch(PDO::FETCH_ASSOC);
+              $qty += $item['quantity'];
 
               $productName = $product['product_name'];
               $productPrice = $product['price'];
+              $productImage = $product['image_url'] ? "../assets/uploads/products/" . htmlspecialchars($product['image_url']) : "../assets/images/product-item1.jpg";
               // $productImage = $product['image_url'];
               $productSku = $product['sku'];
               $productDetailsPage = "../includes/productDetails.php?product_id=" . $productId;
@@ -728,31 +646,10 @@ if (count($cartItems) == 0) {
 
           </div>
 
-          <!-- Order Totals -->
-          <div class="summary-item">
-            <span>Subtotal</span>
-            <span>LKR <?php echo $totalPrice ?></span>
-          </div>
-          <div class="summary-item">
-            <span>Shipping</span>
-            <span>LKR 0.00</span>
-          </div>
-          <div class="summary-item">
-            <span>Tax</span>
-            <span>LKR 0.00</span>
-          </div>
-
+          <!-- Order Total -->
           <div class="summary-total">
             <span>Total</span>
-            <span>LKR <?php echo $totalPrice ?>.00</span>
-          </div>
-
-          <!-- Promo Code Section -->
-          <div class="promo-code">
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="Promo code">
-              <button class="btn btn-outline-dark" type="button">Apply</button>
-            </div>
+            <span>LKR <?php echo $totalPrice * $qty; ?>.00</span>
           </div>
 
           <!-- Complete Order Button -->
@@ -769,65 +666,14 @@ if (count($cartItems) == 0) {
             <div class="mt-3">
               <i class="fab fa-cc-visa fa-2x me-2" style="color: #1a1f71;"></i>
               <i class="fab fa-cc-mastercard fa-2x me-2" style="color: #eb001b;"></i>
-              <i class="fab fa-cc-amex fa-2x me-2" style="color: #006fcf;"></i>
-              <i class="fab fa-cc-paypal fa-2x" style="color: #003087;"></i>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3 mb-4 mb-md-0">
-          <h5 class="footer-title">Mobile Shop</h5>
-          <p class="text-muted">The best place to buy the latest smartphones and accessories at competitive prices.</p>
-          <div class="social-icons">
-            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
-          </div>
-        </div>
-        <div class="col-md-3 mb-4 mb-md-0">
-          <h5 class="footer-title">Quick Links</h5>
-          <ul class="footer-links">
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact Us</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">FAQs</a></li>
-          </ul>
-        </div>
-        <div class="col-md-3 mb-4 mb-md-0">
-          <h5 class="footer-title">Customer Service</h5>
-          <ul class="footer-links">
-            <li><a href="#">Shipping Policy</a></li>
-            <li><a href="#">Returns & Refunds</a></li>
-            <li><a href="#">Order Tracking</a></li>
-            <li><a href="#">Warranty & Support</a></li>
-          </ul>
-        </div>
-        <div class="col-md-3">
-          <h5 class="footer-title">Contact Info</h5>
-          <ul class="footer-links">
-            <li><i class="fas fa-map-marker-alt me-2"></i> 123 Tech Street, Kegalle, Sri Lanka</li>
-            <li><i class="fas fa-phone-alt me-2"></i> +94 77177111</li>
-            <li><i class="fas fa-envelope me-2"></i> mobimart@info.com</li>
-          </ul>
-        </div>
-      </div>
-      <div class="copyright">
-        <p>&copy; 2025 Mobile Shop. All Rights Reserved.</p>
-      </div>
-    </div>
-  </footer>
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Simple script to handle interactions - in a real application, this would be more comprehensive
     document.addEventListener('DOMContentLoaded', function() {
       // Address selection
       const addressOptions = document.querySelectorAll('.address-select');
@@ -839,23 +685,16 @@ if (count($cartItems) == 0) {
         });
       });
 
-      // Delivery method selection
-      const deliveryOptions = document.querySelectorAll('.delivery-method');
-      deliveryOptions.forEach(option => {
-        option.addEventListener('click', function() {
-          deliveryOptions.forEach(opt => opt.classList.remove('selected'));
-          this.classList.add('selected');
-        });
-      });
+      // Payment method toggle
+      const cardPayment = document.getElementById('cardPayment');
+      const cardDetails = document.getElementById('cardDetails');
 
-      // Payment method selection
-      const paymentOptions = document.querySelectorAll('.payment-option');
-      paymentOptions.forEach(option => {
-        option.addEventListener('click', function() {
-          paymentOptions.forEach(opt => opt.classList.remove('selected'));
-          this.classList.add('selected');
-        });
-      });
+      function toggleCardDetails() {
+        cardDetails.style.display = cardPayment.checked ? 'block' : 'none';
+      }
+
+      cardPayment.addEventListener('change', toggleCardDetails);
+      document.getElementById('cashOnDelivery').addEventListener('change', toggleCardDetails);
     });
   </script>
 </body>
