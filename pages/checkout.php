@@ -528,10 +528,10 @@ if (count($cartItems) == 0) {
       </div>
     </div>
 
-    <div class="row">
-      <!-- Checkout Form Column -->
-      <div class="col-lg-8 mb-4"> <!-- Delivery Address Section -->
-        <form action="../controller/address_process.php" method="POST">
+    <div class="row">      <!-- Checkout Form Column -->
+      <div class="col-lg-8 mb-4">
+        <form action="../controller/checkout_process.php" method="post" id="checkoutForm">
+          <!-- Delivery Address Section -->
           <div class="checkout-section">
             <h3 class="section-title">Delivery Address</h3>
 
@@ -558,21 +558,18 @@ if (count($cartItems) == 0) {
               </div>
             </div>
           </div>
-        </form>
         <!-- Payment Method Section -->
         <div class="checkout-section">
-          <h3 class="section-title">Payment Method</h3>
-
-          <div class="mb-4">
+          <h3 class="section-title">Payment Method</h3>          <div class="mb-4">
             <div class="form-check mb-3">
-              <input class="form-check-input" type="radio" name="paymentMethod" id="cashOnDelivery" checked>
+              <input class="form-check-input" type="radio" name="paymentMethod" id="cashOnDelivery" value="cash" checked>
               <label class="form-check-label" for="cashOnDelivery">
                 <i class="fas fa-money-bill-wave me-2"></i>Cash on Delivery
               </label>
             </div>
 
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="paymentMethod" id="cardPayment">
+              <input class="form-check-input" type="radio" name="paymentMethod" id="cardPayment" value="card">
               <label class="form-check-label" for="cardPayment">
                 <i class="fas fa-credit-card me-2"></i>Credit/Debit Card
               </label>
@@ -650,12 +647,8 @@ if (count($cartItems) == 0) {
           <div class="summary-total">
             <span>Total</span>
             <span>LKR <?php echo $totalPrice * $qty; ?>.00</span>
-          </div>
-
-          <!-- Complete Order Button -->
-          <form action="../controller/checkout_process.php" method="post">
-            <button class="btn btn-dark w-100 checkout-btn" type="submit">Complete Order</button>
-          </form>
+          </div>          <!-- Complete Order Button -->
+          <button class="btn btn-dark w-100 checkout-btn" type="submit" form="checkoutForm">Complete Order</button>
 
           <!-- Secure Payment Info -->
           <div class="text-center mt-3">

@@ -355,9 +355,6 @@ if ($user_id) {
                             </ol>
                         </nav>
                     </div>
-                    <div>
-                        <button class="btn dark-btn"><i class="fas fa-plus me-2"></i>Add Product</button>
-                    </div>
                 </div>
 
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
@@ -378,15 +375,12 @@ if ($user_id) {
                                         <li><i class="fas fa-box-open me-2 text-muted mt-2"></i><strong>Items:</strong>
                                             <?= implode(', ', array_column($order['items'], 'product_name')) ?>
                                         </li>
-                                        <li><i class="fas fa-dollar-sign me-2 text-muted mt-2"></i><strong>Total:</strong> $<?= htmlspecialchars($order['total_amount']) ?></li>
+                                        <li><i class="fas fa-dollar-sign me-2 text-muted mt-2"></i><strong>Total:</strong> LKR <?= htmlspecialchars($order['total_amount']) ?></li>
                                     </ul>
 
                                     <div class="d-flex justify-content-end mt-4">
                                         <form action="cancel_order.php" method="POST" onsubmit="return confirm('Are you sure you want to cancel this order?');">
                                             <input type="hidden" name="order_id" value="<?= htmlspecialchars($order['order_id']) ?>">
-                                            <button type="submit" class="btn btn-sm btn-outline-danger">
-                                                <i class="fas fa-times-circle me-1"></i> Cancel
-                                            </button>
                                         </form>
                                     </div>
                                 </div>

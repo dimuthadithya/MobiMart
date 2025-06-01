@@ -297,9 +297,21 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
               <li class="nav-item">
                 <a class="nav-link me-4" href="#mobile-products">Products</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link me-4" href="#yearly-sale">Sale</a>
-              </li>
+              <?php
+              if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'admin') {
+                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href="./pages/Admin/dashboard.php">Dashboard</a>
+                                  </li>';
+              } elseif (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'user') {
+                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href="./pages/User/dashboard.php">Dashboard</a>
+                                  </li>';
+              } else {
+                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href="./pages/sign_in.php">Sign In</a>
+                                  </li>';
+              }
+              ?>
 
               <li class="nav-item">
                 <div class="user-items ps-5">

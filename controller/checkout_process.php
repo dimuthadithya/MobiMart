@@ -6,10 +6,19 @@ session_start();
 $userId = $_SESSION['user_id'] ?? null;
 
 if (!$userId) {
-    header("Location: ./sign_in.php");
+    header("Location: ../pages/sign_in.php");
     exit();
 }
 
+// Validate required fields
+if (!isset($_POST['fullName']) || !isset($_POST['streetAddress']) || 
+    !isset($_POST['city']) || !isset($_POST['district']) || 
+    !isset($_POST['phone']) || !isset($_POST['paymentMethod'])) {
+    header("Location: ../pages/checkout.php?error=missing_fields");
+    exit();
+}
+
+// Get cart items
 $cartItemsSql = "SELECT c.*, p.price FROM cart c 
                 JOIN products p ON c.product_id = p.product_id 
                 WHERE c.user_id = :user_id";
@@ -29,10 +38,60 @@ foreach ($cartItems as $item) {
     $totalPrice += $item['price'] * $item['quantity'];
 }
 
+// Validate POST data
+if (!isset($_POST['fullName']) || !isset($_POST['streetAddress']) || !isset($_POST['city']) || 
+    !isset($_POST['district']) || !isset($_POST['phone']) || !isset($_POST['paymentMethod'])) {
+    header("Location: ../pages/checkout.php?error=missing_fields");
+    exit();
+}
+
+// Get and sanitize form data
+$fullName = trim($_POST['fullName']);
+$streetAddress = trim($_POST['streetAddress']);
+$city = trim($_POST['city']);
+$district = trim($_POST['district']);
+$phone = trim($_POST['phone']);
+$paymentMethod = $_POST['paymentMethod'];
+
+// Validate payment method
+if (!in_array($paymentMethod, ['cash', 'card'])) {
+    header("Location: ../pages/checkout.php?error=invalid_payment_method");
+    exit();
+}
+
+// Basic validation
+if (empty($fullName) || empty($streetAddress) || empty($city) || empty($district) || empty($phone)) {
+    header("Location: ../pages/checkout.php?error=empty_fields");
+    exit();
+}
+
+// Format shipping address
+$shippingAddress = json_encode([
+    'full_name' => $fullName,
+    'street_address' => $streetAddress,
+    'city' => $city,
+    'district' => $district,
+    'phone' => $phone
+]);
+
 try {
     // Begin transaction
     $conn->beginTransaction();
 
+    // Save address if it's new
+    $addressSql = "INSERT INTO addresses (user_id, full_name, street_address, city, district, phone) 
+                  VALUES (:user_id, :full_name, :street_address, :city, :district, :phone)";
+    $stmt = $conn->prepare($addressSql);
+    $stmt->execute([
+        'user_id' => $userId,
+        'full_name' => $fullName,
+        'street_address' => $streetAddress,
+        'city' => $city,
+        'district' => $district,
+        'phone' => $phone
+    ]);
+
+    // Create the order
     $orderSql = "INSERT INTO orders (user_id, total_amount, status, payment_method, shipping_address) 
                 VALUES (:user_id, :total_amount, :status, :payment_method, :shipping_address)";
     $stmt = $conn->prepare($orderSql);
@@ -40,8 +99,8 @@ try {
         'user_id' => $userId,
         'total_amount' => $totalPrice,
         'status' => 'pending',
-        'payment_method' => 'online',
-        'shipping_address' => 'abc'
+        'payment_method' => $paymentMethod,
+        'shipping_address' => $shippingAddress
     ]);
 
     $orderId = $conn->lastInsertId();
