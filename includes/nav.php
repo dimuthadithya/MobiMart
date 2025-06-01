@@ -81,8 +81,8 @@
                                     </li>
 
                                     <li>
-                                        <a href="./pages/cart.php">
-                                            <svg class="cart">
+                                        <a href="../pages/cart.php">
+                                            <svg class=" cart">
                                                 <use xlink:href="#cart"></use>
                                             </svg>
                                         </a>

@@ -16,6 +16,22 @@ $stmt->execute(['user_id' => $userId]);
 $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $cartCount = count($cartItems);
+
+$sql = "SELECT * FROM cart WHERE user_id = :user_id";
+$stmt = $conn->prepare($sql);
+$stmt->execute(['user_id' => $userId]);
+$carts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$totalPrice = 0;
+foreach ($carts as $cart) {
+  $productsql = "SELECT * FROM products WHERE product_id = :product_id";
+  $stmt = $conn->prepare($productsql);
+  $stmt->execute(['product_id' => $cart['product_id']]);
+  $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  $totalPrice += $product['price'] * $cart['quantity'];
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -393,7 +409,6 @@ $cartCount = count($cartItems);
       <!-- Cart Items Column -->
       <div class="col-lg-8 mb-4">
         <?php
-        $toatlPrice = 0;
         foreach ($cartItems as $item) {
 
           $productId = $item['product_id'];
@@ -418,52 +433,15 @@ $cartCount = count($cartItems);
 
           $brandName = $brand['brand_name'];
 
-          $toatlPrice += $productPrice;
+          $qty = $item['quantity'];
+
 
           include "../includes/cartItem.php";
         }
         ?>
 
 
-        <!-- Recently Viewed / Recommended Items -->
-        <div class="recommendations">
-          <h3 class="recommendation-title">You May Also Like</h3>
-          <div class="row">
-            <div class="col-6 col-md-3 mb-3">
-              <div class="recommended-item position-relative">
-                <span class="badge-sale">Sale!</span>
-                <img src="/api/placeholder/120/120" alt="Wireless Charger" class="recommended-image">
-                <h4 class="fs-6">Wireless Charger</h4>
-                <p class="fw-bold mb-1">$39.99 <small class="text-decoration-line-through text-muted">$49.99</small></p>
-                <button class="btn btn-outline-dark btn-sm add-to-cart-btn">Add to Cart</button>
-              </div>
-            </div>
-            <div class="col-6 col-md-3 mb-3">
-              <div class="recommended-item">
-                <img src="/api/placeholder/120/120" alt="Screen Protector" class="recommended-image">
-                <h4 class="fs-6">Screen Protector</h4>
-                <p class="fw-bold mb-1">$19.99</p>
-                <button class="btn btn-outline-dark btn-sm add-to-cart-btn">Add to Cart</button>
-              </div>
-            </div>
-            <div class="col-6 col-md-3 mb-3">
-              <div class="recommended-item">
-                <img src="/api/placeholder/120/120" alt="Power Bank" class="recommended-image">
-                <h4 class="fs-6">Power Bank 10000mAh</h4>
-                <p class="fw-bold mb-1">$59.99</p>
-                <button class="btn btn-outline-dark btn-sm add-to-cart-btn">Add to Cart</button>
-              </div>
-            </div>
-            <div class="col-6 col-md-3 mb-3">
-              <div class="recommended-item">
-                <img src="/api/placeholder/120/120" alt="USB-C Cable" class="recommended-image">
-                <h4 class="fs-6">USB-C Cable (3m)</h4>
-                <p class="fw-bold mb-1">$14.99</p>
-                <button class="btn btn-outline-dark btn-sm add-to-cart-btn">Add to Cart</button>
-              </div>
-            </div>
-          </div>
-        </div>
+
 
       </div>
 
@@ -474,57 +452,15 @@ $cartCount = count($cartItems);
 
           <div class="summary-item">
             <span>Subtotal</span>
-            <span>LKR <?php echo $toatlPrice ?>.00</span>
+            <span>LKR <?php echo $totalPrice ?>.00</span>
           </div>
-          <div class="summary-item">
-            <span>Shipping</span>
-            <span>LKR 0.00</span>
-          </div>
-          <div class="summary-item">
-            <span>Tax</span>
-            <span>LKR 0</span>
-          </div>
-
           <div class="summary-total">
             <span>Total</span>
-            <span>LKR <?php echo $toatlPrice ?>.00</span>
-          </div>
-
-          <!-- Promo Code Section -->
-          <div class="promo-code">
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="Promo code">
-              <button class="btn btn-outline-dark" type="button">Apply</button>
-            </div>
-          </div>
-
-          <!-- Payment Methods -->
-          <div class="mb-4">
-            <ul class="nav nav-pills nav-fill mb-3" id="payment-tab" role="tablist">
-              <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="card-tab" data-bs-toggle="pill" data-bs-target="#card-pane" type="button" role="tab">Card</button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="paypal-tab" data-bs-toggle="pill" data-bs-target="#paypal-pane" type="button" role="tab">PayPal</button>
-              </li>
-            </ul>
-
-            <div class="card bg-light p-3 mb-3">
-              <div class="d-flex justify-content-between mb-2">
-                <span>We Accept:</span>
-              </div>
-              <div>
-                <i class="fab fa-cc-visa fa-2x me-2" style="color: #1a1f71;"></i>
-                <i class="fab fa-cc-mastercard fa-2x me-2" style="color: #eb001b;"></i>
-                <i class="fab fa-cc-amex fa-2x me-2" style="color: #006fcf;"></i>
-                <i class="fab fa-cc-paypal fa-2x" style="color: #003087;"></i>
-              </div>
-            </div>
+            <span>LKR <?php echo $totalPrice ?>.00</span>
           </div>
 
           <!-- Checkout Button -->
           <a href="./checkout.php"><button class="btn btn-dark w-100 checkout-btn">Proceed to Checkout</button></a>
-
           <a href="#" class="continue-shopping d-block text-center">
             <i class="fas fa-long-arrow-alt-left me-1"></i> Continue Shopping
           </a>

@@ -653,50 +653,25 @@ $descriptionPoints = array_filter(array_map('trim', explode('.', $productDescrip
                     </div>
                 </div>
 
-                <!-- Color Options -->
-                <div class="mb-4">
-                    <label class="form-label">Color</label>
-                    <div>
-                        <span class="color-option blue active" data-color="Blue"></span>
-                        <span class="color-option black" data-color="Black"></span>
-                        <span class="color-option green" data-color="Green"></span>
-                        <span class="color-option purple" data-color="Purple"></span>
-                    </div>
-                </div>
 
-                <!-- Storage Options -->
-                <div class="mb-4">
-                    <label class="form-label">Memory 6GB RAM +128GB ROM</label>
-                    <div class="row g-2">
-                        <div class="col-6">
-                            <button class="btn btn-outline-secondary w-100 active">
-                                6GB RAM + 64GB ROM
-                            </button>
-                        </div>
-                        <div class="col-6">
-                            <button class="btn btn-outline-secondary w-100">
-                                6GB RAM + 128GB ROM
-                            </button>
-                        </div>
-                    </div>
-                </div> <!-- Quantity -->
+                <!-- Quantity -->
                 <div class="mb-4">
                     <label class="form-label">Quantity</label>
-                    <div class="input-group" style="max-width: 150px">
-                        <button class="btn btn-outline-secondary" type="button">-</button>
-                        <input type="text" class="form-control text-center" value="1"
-                            data-max-stock="<?php echo $productStock; ?>" />
-                        <button class="btn btn-outline-secondary" type="button">+</button>
-                    </div>
-                    <small class="text-muted">Available stock: <?php echo $productStock; ?></small>
+                    <form action="../controller/cart_process.php" method="post">
+                        <div class="input-group" style="max-width: 150px">
+                            <button class="btn btn-outline-secondary" type="button">-</button>
+                            <input type="text" class="form-control text-center" name="quantity" value="1"
+                                data-max-stock="<?php echo $productStock; ?>" />
+                            <button class="btn btn-outline-secondary" type="button">+</button>
+                        </div>
+                        <small class="text-muted">Available stock: <?php echo $productStock; ?></small>
                 </div><!-- Add to Cart Button -->
                 <div class="d-grid mb-4">
-                    <button class="btn btn-primary py-2" id="addToCartBtn"
-                        data-product-id="<?php echo $productId; ?>"
-                        data-product-name="<?php echo htmlspecialchars($productName); ?>"
-                        data-product-price="<?php echo $productPrice; ?>">
-                        Add to cart
+                    <input type="hidden" name="product_id" value="<?php echo $productId; ?>" />
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        Add to Cart
                     </button>
+                    </form>
                 </div>
 
                 <!-- Cart Status Message -->
@@ -1273,153 +1248,10 @@ $descriptionPoints = array_filter(array_map('trim', explode('.', $productDescrip
         </div>
     </section>
 
-    <footer id="footer" class="overflow-hidden">
-        <div class="container">
-            <div class="row">
-                <div class="footer-top-area">
-                    <div class="row d-flex flex-wrap justify-content-between">
-                        <div class="col-lg-3 col-sm-6 pb-3">
-                            <div class="footer-menu">
-                                <img src="../assets/images/main-logo.png" alt="logo" />
-                                <p>
-                                    Nisi, purus vitae, ultrices nunc. Sit ac sit suscipit
-                                    hendrerit. Gravida massa volutpat aenean odio erat nullam
-                                    fringilla.
-                                </p>
-                                <div class="social-links">
-                                    <ul class="d-flex list-unstyled">
-                                        <li>
-                                            <a href="#">
-                                                <svg class="facebook">
-                                                    <use xlink:href="#facebook" />
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <svg class="instagram">
-                                                    <use xlink:href="#instagram" />
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <svg class="twitter">
-                                                    <use xlink:href="#twitter" />
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <svg class="linkedin">
-                                                    <use xlink:href="#linkedin" />
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <svg class="youtube">
-                                                    <use xlink:href="#youtube" />
-                                                </svg>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-sm-6 pb-3">
-                            <div class="footer-menu text-uppercase">
-                                <h5 class="widget-title pb-2">Quick Links</h5>
-                                <ul class="menu-list list-unstyled text-uppercase">
-                                    <li class="menu-item pb-2">
-                                        <a href="../index.php">Home</a>
-                                    </li>
-                                    <li class="menu-item pb-2">
-                                        <a href="#">About</a>
-                                    </li>
-                                    <li class="menu-item pb-2">
-                                        <a href="#">Shop</a>
-                                    </li>
-                                    <li class="menu-item pb-2">
-                                        <a href="#">Contact</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 pb-3">
-                            <div class="footer-menu text-uppercase">
-                                <h5 class="widget-title pb-2">Help & Info Help</h5>
-                                <ul class="menu-list list-unstyled">
-                                    <li class="menu-item pb-2">
-                                        <a href="#">Track Your Order</a>
-                                    </li>
-                                    <li class="menu-item pb-2">
-                                        <a href="#">Returns Policies</a>
-                                    </li>
-                                    <li class="menu-item pb-2">
-                                        <a href="#">Shipping + Delivery</a>
-                                    </li>
-                                    <li class="menu-item pb-2">
-                                        <a href="#">Contact Us</a>
-                                    </li>
-                                    <li class="menu-item pb-2">
-                                        <a href="#">Faqs</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 pb-3">
-                            <div class="footer-menu contact-item">
-                                <h5 class="widget-title text-uppercase pb-2">Contact Us</h5>
-                                <p>
-                                    Do you have any queries or suggestions?
-                                    <a href="mailto:">mobimart@info.com</a>
-                                </p>
-                                <p>
-                                    If you need support? Just give us a call.
-                                    <a href="">+94 77177111</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr />
-    </footer>
+    <?php
+    include '../includes/footer.php'
+    ?>
 
-    <div id="footer-bottom">
-        <div class="container">
-            <div class="row d-flex flex-wrap justify-content-between">
-                <div class="col-md-4 col-sm-6">
-                    <div class="Shipping d-flex">
-                        <p>We ship with:</p>
-                        <div class="card-wrap ps-2">
-                            <img src="../assets/images/dhl.png" alt="visa" />
-                            <img src="../assets/images/shippingcard.png" alt="mastercard" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="payment-method d-flex">
-                        <p>Payment options:</p>
-                        <div class="card-wrap ps-2">
-                            <img src="../assets/images/visa.jpg" alt="visa" />
-                            <img src="../assets/images/mastercard.jpg" alt="mastercard" />
-                            <img src="../assets/images/paypal.jpg" alt="paypal" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="copyright">
-                        <p>
-                            © Copyright 2025 MiniStore.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <script src="../assets/js/jquery-1.11.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script
