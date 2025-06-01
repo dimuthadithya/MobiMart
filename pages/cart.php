@@ -289,112 +289,116 @@ foreach ($carts as $cart) {
       align-items: center;
       justify-content: center;
     }
-
-    footer {
-      background-color: #212529;
-      color: white;
-      padding: 40px 0 20px;
-    }
-
-    .footer-title {
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-
-    .footer-links {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .footer-links li {
-      margin-bottom: 10px;
-    }
-
-    .footer-links a {
-      color: #adb5bd;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-
-    .footer-links a:hover {
-      color: white;
-    }
-
-    .social-icons {
-      display: flex;
-      gap: 15px;
-      margin-top: 20px;
-    }
-
-    .social-icon {
-      color: white;
-      font-size: 18px;
-      transition: all 0.2s;
-    }
-
-    .social-icon:hover {
-      color: #adb5bd;
-    }
-
-    .copyright {
-      padding-top: 20px;
-      margin-top: 30px;
-      border-top: 1px solid #495057;
-      text-align: center;
-      font-size: 14px;
-      color: #adb5bd;
-    }
   </style>
 </head>
 
 <body>
 
+  <!-- navbar -->
+  <header
+    id="header"
+    class="site-header header-scrolled position-fixed text-black bg-light">
+    <nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">
+          <img src="../assets/images/main-logo.png" class="logo" />
+        </a>
+        <button
+          class="navbar-toggler d-flex d-lg-none order-3 p-2"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#bdNavbar"
+          aria-controls="bdNavbar"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+          <svg class="navbar-icon">
+            <use xlink:href="#navbar-icon"></use>
+          </svg>
+        </button>
+        <div
+          class="offcanvas offcanvas-end"
+          tabindex="-1"
+          id="bdNavbar"
+          aria-labelledby="bdNavbarOffcanvasLabel">
+          <div class="offcanvas-header px-4 pb-0">
+            <a class="navbar-brand" href="index.html">
+              <img src="../assets/images/main-logo.png" class="logo" />
+            </a>
+            <button
+              type="button"
+              class="btn-close btn-close-black"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+              data-bs-target="#bdNavbar"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul
+              id="navbar"
+              class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link me-4 active" href="../index.php">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link me-4 active" href="../pages/phones.php">Phones</a>
+              </li>
+              <?php
+              if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'admin') {
+                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href="../pages/Admin/dashboard.php">Dashboard</a>
+                                  </li>';
+              } elseif (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'user') {
+                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href="../pages/User/dashboard.php">Dashboard</a>
+                                  </li>';
+              } else {
+                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href="../pages/sign_in.php">Sign In</a>
+                                  </li>';
+              }
+              ?>
 
-  <!-- Navbar -->
+              <li class="nav-item">
+                <div class="user-items ps-5">
+                  <ul class="d-flex justify-content-end list-unstyled">
+                    <li class="search-item pe-3">
+                      <a href="#" class="search-button">
+                        <svg class="search">
+                          <use xlink:href="#search"></use>
+                        </svg>
+                      </a>
+                    </li>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
-    <div class="container">
-      <a class="navbar-brand" href="../index.php">
-        <img src="../assets/images/main-logo.png" alt="Mobile Shop">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto w-100 d-flex justify-content-end p-3">
-          <li class="nav-item">
-            <a class="nav-link" href="../index.php">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Shop</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Deals</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Support</a>
-          </li>
-        </ul>
-        <div class="d-flex align-items-center">
-          <a href="#" class="nav-icon">
-            <i class="fas fa-search"></i>
-          </a>
-          <a href="#" class="nav-icon">
-            <i class="fas fa-user"></i>
-          </a>
-          <a href="#" class="nav-icon">
-            <i class="fas fa-heart"></i>
-          </a>
-          <a href="#" class="nav-icon">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="cart-count">3</span>
+                    <li class="pe-3">
+                      <a href="<?php
 
-          </a>
+                                if (isset($_SESSION['user_type'])) {
+                                  echo $_SESSION['user_type'] === 'admin' ? '../pages/Admin/dashboard.php' : './pages/User/dashboard.php';
+                                } else {
+                                  echo '../pages/sign_in.php';
+                                }
+                                ?>">
+                        <svg class="user">
+                          <use xlink:href="#user"></use>
+                        </svg>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="../pages/cart.php">
+                        <svg class="cart">
+                          <use xlink:href="#cart"></use>
+                        </svg>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </header>
 
   <!-- end nav  -->
 
@@ -484,52 +488,113 @@ foreach ($carts as $cart) {
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer>
+  <!-- footer -->
+  <footer id="footer" class="overflow-hidden">
     <div class="container">
       <div class="row">
-        <div class="col-md-3 mb-4 mb-md-0">
-          <h5 class="footer-title">Mobile Shop</h5>
-          <p class="text-muted">The best place to buy the latest smartphones and accessories at competitive prices.</p>
-          <div class="social-icons">
-            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+        <div class="footer-top-area">
+          <div class="row d-flex flex-wrap justify-content-between">
+            <div class="col-lg-3 col-sm-6 pb-3">
+              <div class="footer-menu">
+                <img src="../assets/images/main-logo.png" alt="logo" />
+                <p>
+                  "Find the latest smartphones, accessories, and great deals all in one place. Quality phones with reliable service just for you!"
+                </p>
+                <div class="social-links">
+                  <ul class="d-flex list-unstyled">
+                    <li>
+                      <a href="#">
+                        <svg class="facebook">
+                          <use xlink:href="#facebook" />
+                        </svg>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <svg class="instagram">
+                          <use xlink:href="#instagram" />
+                        </svg>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <svg class="twitter">
+                          <use xlink:href="#twitter" />
+                        </svg>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <svg class="linkedin">
+                          <use xlink:href="#linkedin" />
+                        </svg>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <svg class="youtube">
+                          <use xlink:href="#youtube" />
+                        </svg>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 col-sm-6 pb-3 text-decoration-none">
+              <div class="footer-menu text-uppercase">
+                <h5 class="widget-title pb-2">Quick Links</h5>
+                <ul class="menu-list list-unstyled text-uppercase">
+                  <li class="menu-item pb-2">
+                    <a href="../index.php">Home</a>
+                  </li>
+                  <li class="menu-item pb-2">
+                    <a href="../pages/phones.php">Phones</a>
+                  </li>
+                  <li class="menu-item pb-2">
+                    <a href="../pages/phones.php">Shop</a>
+                  </li>
+                  <li class="menu-item pb-2">
+                    <a href="../pages/sign_in.php">SignIn</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 pb-3">
+              <div class="footer-menu contact-item">
+                <h5 class="widget-title text-uppercase pb-2">Contact Us</h5>
+                <p>
+                  Do you have any queries or suggestions?
+                  <a href="mailto:">mobimart@info.com</a>
+                </p>
+                <p>
+                  If you need support? Just give us a call.
+                  <a href="">+94 77177111</a>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="col-md-3 mb-4 mb-md-0">
-          <h5 class="footer-title">Quick Links</h5>
-          <ul class="footer-links">
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact Us</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">FAQs</a></li>
-          </ul>
-        </div>
-        <div class="col-md-3 mb-4 mb-md-0">
-          <h5 class="footer-title">Customer Service</h5>
-          <ul class="footer-links">
-            <li><a href="#">Shipping Policy</a></li>
-            <li><a href="#">Returns & Refunds</a></li>
-            <li><a href="#">Order Tracking</a></li>
-            <li><a href="#">Warranty & Support</a></li>
-          </ul>
-        </div>
-        <div class="col-md-3">
-          <h5 class="footer-title">Contact Info</h5>
-          <ul class="footer-links">
-            <li><i class="fas fa-map-marker-alt me-2"></i> 123 Tech Street, Kegalle, Sri Lanka</li>
-            <li><i class="fas fa-phone-alt me-2"></i> +94 77177111</li>
-            <li><i class="fas fa-envelope me-2"></i> mobimart@info.com</li>
-          </ul>
-        </div>
-      </div>
-      <div class="copyright">
-        <p>&copy; 2025 Mobile Shop. All Rights Reserved.</p>
       </div>
     </div>
+    <hr />
   </footer>
+
+  <div id="footer-bottom">
+    <div class="container">
+      <div class="row d-flex flex-wrap justify-content-between">
+
+        <div>
+          <div class="copyright">
+            <p class="justify-content-center text-center">
+              © Copyright 2023 MobiMart.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- end footer  -->
 
   <script type="text/javascript" src="../assets/js/ajax.js"></script>

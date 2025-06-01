@@ -28,7 +28,7 @@
             padding: 0 20px;
         }
 
-        .navbar {
+        /* .navbar {
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
@@ -116,7 +116,7 @@
             text-align: center;
             font-size: 14px;
             color: #adb5bd;
-        }
+        } */
 
         main {
             padding: 40px 0;
@@ -449,70 +449,112 @@
 </head>
 
 <body>
-    <!-- <header>
-        <div class="container">
-            <div class="header-content">
-                <a href="#" class="logo">MiniStore</a>
-                <div class="nav-links">
-                    <a href="#">Home</a>
-                    <a href="#">Shop</a>
-                    <a href="#">Deals</a>
-                    <a href="#">Support</a>
-                </div>
-                <div class="header-icons">
-                    <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></a>
-                    <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></a>
-                    <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></a>
-                    <a href="#" class="cart-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                        <span class="cart-count">3</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header> -->
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="../index.php">
-                <img src="../assets/images/main-logo.png" alt="Mobile Shop">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto w-100 d-flex justify-content-end p-3">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.php">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Shop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Deals</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Support</a>
-                    </li>
-                </ul>
-                <div class="d-flex align-items-center">
-                    <a href="#" class="nav-icon">
-                        <i class="fas fa-search"></i>
-                    </a>
-                    <a href="#" class="nav-icon">
-                        <i class="fas fa-user"></i>
-                    </a>
-                    <a href="#" class="nav-icon">
-                        <i class="fas fa-heart"></i>
-                    </a>
-                    <a href="../cart.php" class="nav-icon">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count">3</span>
-                    </a>
+    <!-- nav -->
+    <header
+        id="header"
+        class="site-header header-scrolled position-fixed text-black bg-light">
+        <nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img src="../assets/images/main-logo.png" class="logo" />
+                </a>
+                <button
+                    class="navbar-toggler d-flex d-lg-none order-3 p-2"
+                    type="button"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#bdNavbar"
+                    aria-controls="bdNavbar"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <svg class="navbar-icon">
+                        <use xlink:href="#navbar-icon"></use>
+                    </svg>
+                </button>
+                <div
+                    class="offcanvas offcanvas-end"
+                    tabindex="-1"
+                    id="bdNavbar"
+                    aria-labelledby="bdNavbarOffcanvasLabel">
+                    <div class="offcanvas-header px-4 pb-0">
+                        <a class="navbar-brand" href="index.html">
+                            <img src="../assets/images/main-logo.png" class="logo" />
+                        </a>
+                        <button
+                            type="button"
+                            class="btn-close btn-close-black"
+                            data-bs-dismiss="offcanvas"
+                            aria-label="Close"
+                            data-bs-target="#bdNavbar"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul
+                            id="navbar"
+                            class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link me-4 active" href="../index.php">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link me-4 active" href="../pages/phones.php">Phones</a>
+                            </li>
+                            <?php
+                            if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'admin') {
+                                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href="../pages/Admin/dashboard.php">Dashboard</a>
+                                  </li>';
+                            } elseif (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'user') {
+                                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href="../pages/User/dashboard.php">Dashboard</a>
+                                  </li>';
+                            } else {
+                                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href="../pages/sign_in.php">Sign In</a>
+                                  </li>';
+                            }
+                            ?>
+
+                            <li class="nav-item">
+                                <div class="user-items ps-5">
+                                    <ul class="d-flex justify-content-end list-unstyled">
+                                        <li class="search-item pe-3">
+                                            <a href="#" class="search-button">
+                                                <svg class="search">
+                                                    <use xlink:href="#search"></use>
+                                                </svg>
+                                            </a>
+                                        </li>
+
+                                        <li class="pe-3">
+                                            <a href="<?php
+
+                                                        if (isset($_SESSION['user_type'])) {
+                                                            echo $_SESSION['user_type'] === 'admin' ? '../pages/Admin/dashboard.php' : './pages/User/dashboard.php';
+                                                        } else {
+                                                            echo '../pages/sign_in.php';
+                                                        }
+                                                        ?>">
+                                                <svg class="user">
+                                                    <use xlink:href="#user"></use>
+                                                </svg>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="../pages/cart.php">
+                                                <svg class="cart">
+                                                    <use xlink:href="#cart"></use>
+                                                </svg>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
     <main class="container p-3">
         <h1>Order Complete</h1>
@@ -692,106 +734,97 @@
         </div>
     </main>
 
-    <!-- <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Mobile Shop</h3>
-                    <p>The best place to buy the latest smartphones and accessories at competitive prices.</p>
-                    <div class="social-links">
-                        <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-                        <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
-                        <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-                        <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg></a>
-                    </div>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">FAQs</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Customer Service</h3>
-                    <ul>
-                        <li><a href="#">Shipping Policy</a></li>
-                        <li><a href="#">Returns & Refunds</a></li>
-                        <li><a href="#">Order Tracking</a></li>
-                        <li><a href="#">Warranty & Support</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Contact Info</h3>
-                    <p>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 5px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                        123 Tech Street, City, Country
-                    </p>
-                    <p>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 5px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                        +1 (555) 123 4567
-                    </p>
-                    <p>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 5px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                        support@mobileshop.com
-                    </p>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                © 2025 Mobile Shop. All Rights Reserved.
-            </div>
-        </div>
-    </footer> -->
-    <footer>
+    <!-- footer -->
+    <footer id="footer" class="overflow-hidden">
         <div class="container">
             <div class="row">
-                <div class="col-md-3 mb-4 mb-md-0">
-                    <h5 class="footer-title">Mobile Shop</h5>
-                    <p class="text-muted">The best place to buy the latest smartphones and accessories at competitive prices.</p>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                <div class="footer-top-area">
+                    <div class="row d-flex flex-wrap justify-content-between">
+                        <div class="col-lg-3 col-sm-6 pb-3">
+                            <div class="footer-menu">
+                                <img src="../assets/images/main-logo.png" alt="logo" />
+                                <p>
+                                    "Find the latest smartphones, accessories, and great deals all in one place. Quality phones with reliable service just for you!"
+                                </p>
+                                <div class="social-links">
+                                    <ul class="d-flex list-unstyled">
+                                        <li>
+                                            <a href="#">
+                                                <svg class="facebook">
+                                                    <use xlink:href="#facebook" />
+                                                </svg>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <svg class="instagram">
+                                                    <use xlink:href="#instagram" />
+                                                </svg>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <svg class="twitter">
+                                                    <use xlink:href="#twitter" />
+                                                </svg>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <svg class="linkedin">
+                                                    <use xlink:href="#linkedin" />
+                                                </svg>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <svg class="youtube">
+                                                    <use xlink:href="#youtube" />
+                                                </svg>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-sm-6 pb-3 text-decoration-none">
+                            <div class="footer-menu text-uppercase">
+                                <h5 class="widget-title pb-2">Quick Links</h5>
+                                <ul class="menu-list list-unstyled text-uppercase">
+                                    <li class="menu-item pb-2">
+                                        <a href="../index.php">Home</a>
+                                    </li>
+                                    <li class="menu-item pb-2">
+                                        <a href="../pages/phones.php">Phones</a>
+                                    </li>
+                                    <li class="menu-item pb-2">
+                                        <a href="../pages/phones.php">Shop</a>
+                                    </li>
+                                    <li class="menu-item pb-2">
+                                        <a href="../pages/sign_in.php">SignIn</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-sm-6 pb-3">
+                            <div class="footer-menu contact-item">
+                                <h5 class="widget-title text-uppercase pb-2">Contact Us</h5>
+                                <p>
+                                    Do you have any queries or suggestions?
+                                    <a href="mailto:">mobimart@info.com</a>
+                                </p>
+                                <p>
+                                    If you need support? Just give us a call.
+                                    <a href="">+94 77177111</a>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-3 mb-4 mb-md-0">
-                    <h5 class="footer-title">Quick Links</h5>
-                    <ul class="footer-links">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">FAQs</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 mb-4 mb-md-0">
-                    <h5 class="footer-title">Customer Service</h5>
-                    <ul class="footer-links">
-                        <li><a href="#">Shipping Policy</a></li>
-                        <li><a href="#">Returns & Refunds</a></li>
-                        <li><a href="#">Order Tracking</a></li>
-                        <li><a href="#">Warranty & Support</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h5 class="footer-title">Contact Info</h5>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt me-2"></i> 123 Tech Street, Kegalle, Sri Lanka</li>
-                        <li><i class="fas fa-phone-alt me-2"></i> +94 77177111</li>
-                        <li><i class="fas fa-envelope me-2"></i> mobimart@info.com</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Mobile Shop. All Rights Reserved.</p>
             </div>
         </div>
+        <hr />
     </footer>
 
 </body>

@@ -67,13 +67,8 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <path
         d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
     </symbol>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      id="chevron-left"
-      viewBox="0 0 16 16">
-      <path
-        fill-rule="evenodd"
-        d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+    <svg xmlns="http://www.w3.org/2000/svg" id="chevron-left" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
     </svg>
     <symbol
       xmlns="http://www.w3.org/2000/svg"
@@ -219,29 +214,6 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
           </svg>
         </button>
       </form>
-
-      <h5 class="cat-list-title">Browse Categories</h5>
-
-      <ul class="cat-list">
-        <li class="cat-list-item">
-          <a href="#" title="Mobile Phones">Mobile Phones</a>
-        </li>
-        <li class="cat-list-item">
-          <a href="#" title="Headphones">Headphones</a>
-        </li>
-        <li class="cat-list-item">
-          <a href="#" title="Accessories">Accessories</a>
-        </li>
-        <li class="cat-list-item">
-          <a href="#" title="Monitors">Monitors</a>
-        </li>
-        <li class="cat-list-item">
-          <a href="#" title="Speakers">Speakers</a>
-        </li>
-        <li class="cat-list-item">
-          <a href="#" title="Memory Cards">Memory Cards</a>
-        </li>
-      </ul>
     </div>
   </div>
 
@@ -290,12 +262,6 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
               </li>
               <li class="nav-item">
                 <a class="nav-link me-4 active" href="./pages/phones.php">Phones</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link me-4" href="#company-services">Services</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link me-4" href="#mobile-products">Products</a>
               </li>
               <?php
               if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'admin') {
@@ -375,26 +341,13 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     Get the best deals with our exclusive offers.
                   </p>
                   <div class="banner-buttons">
-                    <a href="pages/phones.php" class="btn btn-primary btn-lg me-3">Shop Now</a>
-                    <a href="#featured-products" class="btn btn-outline-dark btn-lg">View Deals</a>
+                    <a href="./pages/phones.php" class="btn btn-primary btn-lg me-3">Shop Now</a>
+                    <a href="./pages/phones.php" class="btn btn-outline-dark btn-lg">View Deals</a>
                   </div>
                 </div>
               </div>
               <div class="col-md-5">
-                <div class="banner-feature-list">
-                  <div class="feature-item">
-                    <i class="fas fa-shipping-fast text-primary"></i>
-                    <span>Free Shipping</span>
-                  </div>
-                  <div class="feature-item">
-                    <i class="fas fa-shield-alt text-primary"></i>
-                    <span>100% Genuine Products</span>
-                  </div>
-                  <div class="feature-item">
-                    <i class="fas fa-headset text-primary"></i>
-                    <span>24/7 Support</span>
-                  </div>
-                </div>
+                <img width="100%" height="100%" src="./assets/images/bgbanner.jpg" alt="">
               </div>
             </div>
           </div>
@@ -413,26 +366,13 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     Find the perfect device that matches your style.
                   </p>
                   <div class="banner-buttons">
-                    <a href="pages/phones.php" class="btn btn-primary btn-lg me-3">View Collections</a>
-                    <a href="#featured-products" class="btn btn-outline-dark btn-lg">Special Deals</a>
+                    <a href="./pages/phones.php" class="btn btn-primary btn-lg me-3">View Collections</a>
+                    <a href="./pages/phones.php" class="btn btn-outline-dark btn-lg">Special Deals</a>
                   </div>
                 </div>
               </div>
               <div class="col-md-5">
-                <div class="banner-feature-list">
-                  <div class="feature-item">
-                    <i class="fas fa-award text-primary"></i>
-                    <span>Premium Quality</span>
-                  </div>
-                  <div class="feature-item">
-                    <i class="fas fa-undo text-primary"></i>
-                    <span>Easy Returns</span>
-                  </div>
-                  <div class="feature-item">
-                    <i class="fas fa-credit-card text-primary"></i>
-                    <span>Secure Payments</span>
-                  </div>
-                </div>
+                <img width="450px" height="300px" src="./assets/images/insta-item1.jpg" alt="">
               </div>
             </div>
           </div>
@@ -455,7 +395,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
               <h3 class="card-title text-uppercase text-dark">
                 Free delivery
               </h3>
-              <p>Consectetur adipi elit lorem ipsum dolor sit amet.</p>
+              <p>"Free Delivery on Phones!"</p>
             </div>
           </div>
         </div>
@@ -470,7 +410,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
               <h3 class="card-title text-uppercase text-dark">
                 Quality guarantee
               </h3>
-              <p>Dolor sit amet orem ipsu mcons ectetur adipi elit.</p>
+              <p>"Top-Quality Phones, Guaranteed!"</p>
             </div>
           </div>
         </div>
@@ -485,7 +425,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
               <h3 class="card-title text-uppercase text-dark">
                 Daily offers
               </h3>
-              <p>Amet consectetur adipi elit loreme ipsum dolor sit.</p>
+              <p>"Guaranteed Quality, Trusted Phones!"</p>
             </div>
           </div>
         </div>
@@ -500,7 +440,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
               <h3 class="card-title text-uppercase text-dark">
                 100% secure payment
               </h3>
-              <p>Rem Lopsum dolor sit amet, consectetur adipi elit.</p>
+              <p>"100% Secure Payments for Every Phone!"</p>
             </div>
           </div>
         </div>
@@ -517,8 +457,8 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <h2 class="display-7 text-dark text-uppercase">Mobile Products</h2>
           <div class="btn-right">
             <a
-              href="shop.html"
-              class="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
+              href="./pages/phones.php"
+              class="btn btn-medium btn-normal text-uppercase text-decoration-none">Go to Shop</a>
           </div>
         </div>
         <div class="swiper product-swiper">
@@ -560,43 +500,32 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="text-content offset-4 padding-medium">
           <h3>10% off</h3>
           <h2 class="display-2 pb-5 text-uppercase text-dark">
-            New year sale
+            sale
           </h2>
           <a
-            href="shop.html"
+            href="./pages/phones.php"
             class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop Sale</a>
         </div>
       </div>
       <div class="col-md-6 col-sm-12"></div>
     </div>
   </section>
-
+  <br>
+  <br>
   <section id="testimonials" class="position-relative">
     <div class="container">
       <div class="row">
         <div class="review-content position-relative">
-          <div
-            class="swiper-icon swiper-arrow swiper-arrow-prev position-absolute d-flex align-items-center">
-            <svg class="chevron-left">
-              <use xlink:href="#chevron-left" />
-            </svg>
-          </div>
+
           <div class="swiper testimonial-swiper">
-            <div class="quotation text-center">
-              <svg class="quote">
-                <use xlink:href="#quote" />
-              </svg>
-            </div>
+
             <div class="swiper-wrapper">
               <div
                 class="swiper-slide text-center d-flex justify-content-center">
                 <div class="review-item col-md-10">
                   <i class="icon icon-review"></i>
                   <blockquote>
-                    “Tempus oncu enim pellen tesque este pretium in neque,
-                    elit morbi sagittis lorem habi mattis Pellen tesque
-                    pretium feugiat vel morbi suspen dise sagittis lorem habi
-                    tasse morbi.”
+                    "Find the latest smartphones, accessories, and great deals all in one place. Quality phones with reliable service just for you!"
                   </blockquote>
                   <div class="rating">
                     <svg class="star star-fill">
@@ -617,101 +546,22 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                   </div>
                   <div class="author-detail">
                     <div class="name text-dark text-uppercase pt-2">
-                      Emma Chamberlin
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="swiper-slide text-center d-flex justify-content-center">
-                <div class="review-item col-md-10">
-                  <i class="icon icon-review"></i>
-                  <blockquote>
-                    “A blog is a digital publication that can complement a
-                    website or exist independently. A blog may include
-                    articles, short posts, listicles, infographics, videos,
-                    and other digital content.”
-                  </blockquote>
-                  <div class="rating">
-                    <svg class="star star-fill">
-                      <use xlink:href="#star-fill"></use>
-                    </svg>
-                    <svg class="star star-fill">
-                      <use xlink:href="#star-fill"></use>
-                    </svg>
-                    <svg class="star star-fill">
-                      <use xlink:href="#star-fill"></use>
-                    </svg>
-                    <svg class="star star-half">
-                      <use xlink:href="#star-half"></use>
-                    </svg>
-                    <svg class="star star-empty">
-                      <use xlink:href="#star-empty"></use>
-                    </svg>
-                  </div>
-                  <div class="author-detail">
-                    <div class="name text-dark text-uppercase pt-2">
-                      Jennie Rose
+                      <p class="h3">MobiMart</p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <div
-            class="swiper-icon swiper-arrow swiper-arrow-next position-absolute d-flex align-items-center">
-            <svg class="chevron-right">
-              <use xlink:href="#chevron-right" />
-            </svg>
-          </div>
         </div>
       </div>
+    </div>
     </div>
     <div class="swiper-pagination"></div>
   </section>
 
-  <section
-    id="subscribe"
-    class="container-grid padding-large position-relative overflow-hidden">
-    <div class="container">
-      <div class="row">
-        <div
-          class="subscribe-content bg-dark d-flex flex-wrap justify-content-center align-items-center padding-medium">
-          <div class="col-md-6 col-sm-12">
-            <div class="display-header pe-3">
-              <h2 class="display-7 text-uppercase text-light">
-                Subscribe Us Now
-              </h2>
-              <p>
-                Get latest news, updates and deals directly mailed to your
-                inbox.
-              </p>
-            </div>
-          </div>
-          <div class="col-md-5 col-sm-12">
-            <form class="subscription-form validate">
-              <div class="input-group flex-wrap">
-                <input
-                  class="form-control btn-rounded-none"
-                  type="email"
-                  name="EMAIL"
-                  placeholder="Your email address here"
-                  required="" />
-                <button
-                  class="btn btn-medium btn-primary text-uppercase btn-rounded-none"
-                  type="submit"
-                  name="subscribe">
-                  Subscribe
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  <br>
+  <br>
   <section
     id="instagram"
     class="padding-large overflow-hidden no-padding-top">
@@ -723,7 +573,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="d-flex flex-wrap">
           <figure class="instagram-item pe-2">
             <a
-              href="https://templatesjungle.com/"
+              href=""
               class="image-link position-relative">
               <img
                 src="./assets/images/insta-item1.jpg"
@@ -739,7 +589,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
           </figure>
           <figure class="instagram-item pe-2">
             <a
-              href="https://templatesjungle.com/"
+              href=""
               class="image-link position-relative">
               <img
                 src="./assets/images/insta-item2.jpg"
@@ -755,7 +605,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
           </figure>
           <figure class="instagram-item pe-2">
             <a
-              href="https://templatesjungle.com/"
+              href=""
               class="image-link position-relative">
               <img
                 src="./assets/images/insta-item3.jpg"
@@ -771,7 +621,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
           </figure>
           <figure class="instagram-item pe-2">
             <a
-              href="https://templatesjungle.com/"
+              href=""
               class="image-link position-relative">
               <img
                 src="./assets/images/insta-item4.jpg"
@@ -787,7 +637,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
           </figure>
           <figure class="instagram-item pe-2">
             <a
-              href="https://templatesjungle.com/"
+              href=""
               class="image-link position-relative">
               <img
                 src="./assets/images/insta-item5.jpg"
@@ -815,9 +665,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
               <div class="footer-menu">
                 <img src="./assets/images/main-logo.png" alt="logo" />
                 <p>
-                  Nisi, purus vitae, ultrices nunc. Sit ac sit suscipit
-                  hendrerit. Gravida massa volutpat aenean odio erat nullam
-                  fringilla.
+                  "Find the latest smartphones, accessories, and great deals all in one place. Quality phones with reliable service just for you!"
                 </p>
                 <div class="social-links">
                   <ul class="d-flex list-unstyled">
@@ -868,42 +716,18 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <a href="./index.php">Home</a>
                   </li>
                   <li class="menu-item pb-2">
-                    <a href="#">About</a>
+                    <a href="./pages/phones.php">Phones</a>
                   </li>
                   <li class="menu-item pb-2">
-                    <a href="#">Shop</a>
+                    <a href="./pages/phones.php">Shop</a>
                   </li>
                   <li class="menu-item pb-2">
-                    <a href="#">Blogs</a>
-                  </li>
-                  <li class="menu-item pb-2">
-                    <a href="#">Contact</a>
+                    <a href="./pages/sign_in.php">SignIn</a>
                   </li>
                 </ul>
               </div>
             </div>
-            <div class="col-lg-3 col-sm-6 pb-3">
-              <div class="footer-menu text-uppercase">
-                <h5 class="widget-title pb-2">Help & Info Help</h5>
-                <ul class="menu-list list-unstyled">
-                  <li class="menu-item pb-2">
-                    <a href="#">Track Your Order</a>
-                  </li>
-                  <li class="menu-item pb-2">
-                    <a href="#">Returns Policies</a>
-                  </li>
-                  <li class="menu-item pb-2">
-                    <a href="#">Shipping + Delivery</a>
-                  </li>
-                  <li class="menu-item pb-2">
-                    <a href="#">Contact Us</a>
-                  </li>
-                  <li class="menu-item pb-2">
-                    <a href="#">Faqs</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
+
             <div class="col-lg-3 col-sm-6 pb-3">
               <div class="footer-menu contact-item">
                 <h5 class="widget-title text-uppercase pb-2">Contact Us</h5>
@@ -927,29 +751,11 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <div id="footer-bottom">
     <div class="container">
       <div class="row d-flex flex-wrap justify-content-between">
-        <div class="col-md-4 col-sm-6">
-          <div class="Shipping d-flex">
-            <p>We ship with:</p>
-            <div class="card-wrap ps-2">
-              <img src="./assets/images/dhl.png" alt="visa" />
-              <img src="./assets/images/shippingcard.png" alt="mastercard" />
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <div class="payment-method d-flex">
-            <p>Payment options:</p>
-            <div class="card-wrap ps-2">
-              <img src="./assets/images/visa.jpg" alt="visa" />
-              <img src="./assets/images/mastercard.jpg" alt="mastercard" />
-              <img src="./assets/images/paypal.jpg" alt="paypal" />
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
+
+        <div>
           <div class="copyright">
-            <p>
-              © Copyright 2023 MiniStore.
+            <p class="justify-content-center text-center">
+              © Copyright 2023 MobiMart.
             </p>
           </div>
         </div>
