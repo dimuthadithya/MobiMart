@@ -361,13 +361,14 @@ $descriptionPoints = array_filter(array_map('trim', explode('.', $productDescrip
 
 
     <!-- Navbar -->
+
     <header
         id="header"
         class="site-header header-scrolled text-black bg-light">
         <nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.html">
-                    <img src="../assets/images/main-logo.png" class="logo" />
+                    <img src="../assets/images/download.png" class="logo" width="80px" height="80px" />
                 </a>
                 <button
                     class="navbar-toggler d-flex d-lg-none order-3 p-2"
@@ -467,129 +468,7 @@ $descriptionPoints = array_filter(array_map('trim', explode('.', $productDescrip
     </header>
 
 
-    <!-- <header id="header" class="site-header header-scrolled text-black bg-light">
-        <nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.html">
-                    <img src="../assets/images/main-logo.png" class="logo" />
-                </a>
-                <button
-                    class="navbar-toggler d-flex d-lg-none order-3 p-2"
-                    type="button"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#bdNavbar"
-                    aria-controls="bdNavbar"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <svg class="navbar-icon">
-                        <use xlink:href="#navbar-icon"></use>
-                    </svg>
-                </button>
-                <div
-                    class="offcanvas offcanvas-end"
-                    tabindex="-1"
-                    id="bdNavbar"
-                    aria-labelledby="bdNavbarOffcanvasLabel">
-                    <div class="offcanvas-header px-4 pb-0">
-                        <a class="navbar-brand" href="index.html">
-                            <img src="../assets/images/main-logo.png" class="logo" />
-                        </a>
-                        <button
-                            type="button"
-                            class="btn-close btn-close-black"
-                            data-bs-dismiss="offcanvas"
-                            aria-label="Close"
-                            data-bs-target="#bdNavbar"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <ul
-                            id="navbar"
-                            class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
-                            <li class="nav-item">
-                                <a class="nav-link me-4 active" href="../index.php">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link me-4" href="#company-services">Services</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link me-4" href="#mobile-products">Products</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link me-4" href="#smart-watches">Watches</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link me-4" href="#yearly-sale">Sale</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link me-4" href="#latest-blog">Blog</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a
-                                    class="nav-link me-4 dropdown-toggle link-dark"
-                                    data-bs-toggle="dropdown"
-                                    href="#"
-                                    role="button"
-                                    aria-expanded="false">Pages</a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="about.html" class="dropdown-item">About</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog.html" class="dropdown-item">Blog</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop.html" class="dropdown-item">Shop</a>
-                                    </li>
-                                    <li>
-                                        <a href="cart.html" class="dropdown-item">Cart</a>
-                                    </li>
-                                    <li>
-                                        <a href="checkout.html" class="dropdown-item">Checkout</a>
-                                    </li>
-                                    <li>
-                                        <a href="single-post.html" class="dropdown-item">Single Post</a>
-                                    </li>
-                                    <li>
-                                        <a href="single-product.html" class="dropdown-item">Single Product</a>
-                                    </li>
-                                    <li>
-                                        <a href="contact.html" class="dropdown-item">Contact</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <div class="user-items ps-5">
-                                    <ul class="d-flex justify-content-end list-unstyled">
-                                        <li class="search-item pe-3">
-                                            <a href="#" class="search-button">
-                                                <svg class="search">
-                                                    <use xlink:href="#search"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li class="pe-3">
-                                            <a href="#">
-                                                <svg class="user">
-                                                    <use xlink:href="#user"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="cart.html">
-                                                <svg class="cart">
-                                                    <use xlink:href="#cart"></use>
-                                                </svg>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header> -->
+
 
     <div class="container py-4">
         <!-- Product Header - Mobile -->
@@ -836,9 +715,78 @@ $descriptionPoints = array_filter(array_map('trim', explode('.', $productDescrip
                 </section>
             </div>
 
-            <?php
-            include '../includes/footer.php'
-            ?>
+            <!-- footer -->
+            <footer id="footer" class="overflow-hidden" style="color: #000; padding-top: 3rem; padding-bottom: 2rem;">
+                <div class="container">
+                    <div class="row footer-top-area d-flex flex-wrap justify-content-between">
+                        <div class="col-lg-4 col-sm-6 mb-4">
+                            <div class="footer-menu">
+                                <img src="../assets/images/download.png" class="logo" width="80px" height="80px" />
+                                <p>
+                                    Find the latest smartphones, accessories, and great deals all in one place.<br>
+                                    <span style="color: #0dcaf0;">Quality phones with reliable service just for you!</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-sm-6 mb-4">
+                            <div class="footer-menu text-uppercase">
+                                <h5 class="widget-title pb-2" style="color:#000;">Quick Links</h5>
+                                <ul class="menu-list list-unstyled text-uppercase">
+                                    <li class="menu-item pb-2">
+                                        <a href="../index.php" class="text-dark text-decoration-none">Home</a>
+                                    </li>
+                                    <li class="menu-item pb-2">
+                                        <a href="../pages/phones.php" class="text-dark text-decoration-none">Phones</a>
+                                    </li>
+                                    <li class="menu-item pb-2">
+                                        <a href="../pages/phones.php" class="text-dark text-decoration-none">Shop</a>
+                                    </li>
+                                    <li class="menu-item pb-2">
+                                        <a href="../pages/sign_in.php" class="text-dark text-decoration-none">Sign In</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6 mb-4">
+                            <div class="footer-menu contact-item">
+                                <h5 class="widget-title text-uppercase pb-2" style="color:#000;">Contact Us</h5>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <i class="fas fa-envelope me-2"></i>
+                                        <a href="mailto:mobimart@info.com" class="text-dark text-decoration-none">mobimart@info.com</a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-phone me-2"></i>
+                                        <a href="tel:+9477177111" class="text-dark text-decoration-none">+94 764975098</a>
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-map-marker-alt me-2"></i>
+                                        <span>No. 123, Main Street, Kegalle, Sri Lanka</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div id="footer-bottom">
+                        <div class="container">
+                            <div class="row d-flex flex-wrap justify-content-between">
+
+                                <div>
+                                    <div class="copyright">
+                                        <p class="justify-content-center text-center">
+                                            © Copyright 2023 MobiMart.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
 
             <script src="../assets/js/jquery-1.11.0.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>

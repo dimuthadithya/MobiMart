@@ -463,11 +463,11 @@ if (count($cartItems) == 0) {
   <!-- nav -->
   <header
     id="header"
-    class="site-header header-scrolled position-fixed text-black bg-light">
+    class="site-header header-scrolled text-black">
     <nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html">
-          <img src="../assets/images/main-logo.png" class="logo" />
+          <img src="../assets/images/download.png" class="logo" width="80px" height="80px" />
         </a>
         <button
           class="navbar-toggler d-flex d-lg-none order-3 p-2"
@@ -502,7 +502,7 @@ if (count($cartItems) == 0) {
               id="navbar"
               class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link me-4 active" href="../index.php">Home</a>
+                <a class="nav-link me-4" href="../index.php">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link me-4 active" href="../pages/phones.php">Phones</a>
@@ -510,15 +510,19 @@ if (count($cartItems) == 0) {
               <?php
               if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'admin') {
                 echo '<li class="nav-item">
-                                    <a class="nav-link me-4" href="../pages/Admin/dashboard.php">Dashboard</a>
+                                    <a class="nav-link me-4" href="./pages/Admin/dashboard.php">Dashboard</a>
                                   </li>';
               } elseif (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'user') {
                 echo '<li class="nav-item">
                                     <a class="nav-link me-4" href="../pages/User/dashboard.php">Dashboard</a>
                                   </li>';
-              } else {
+              } else if (!isset($_SESSION['user_type'])) {
                 echo '<li class="nav-item">
                                     <a class="nav-link me-4" href="../pages/sign_in.php">Sign In</a>
+                                  </li>';
+              } else if (isset($_SESSION['user_type'])) {
+                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href="../controller/user_logout_process.php">Log out</a>
                                   </li>';
               }
               ?>
@@ -527,10 +531,8 @@ if (count($cartItems) == 0) {
                 <div class="user-items ps-5">
                   <ul class="d-flex justify-content-end list-unstyled">
                     <li class="search-item pe-3">
-                      <a href="#" class="search-button">
-                        <svg class="search">
-                          <use xlink:href="#search"></use>
-                        </svg>
+                      <a href="#" class="search-button text-dark">
+                        <i class="fas fa-search"></i>
                       </a>
                     </li>
 
@@ -538,22 +540,18 @@ if (count($cartItems) == 0) {
                       <a href="<?php
 
                                 if (isset($_SESSION['user_type'])) {
-                                  echo $_SESSION['user_type'] === 'admin' ? '../pages/Admin/dashboard.php' : './pages/User/dashboard.php';
+                                  echo $_SESSION['user_type'] === 'admin' ? '../pages/Admin/dashboard.php' : '../pages/User/dashboard.php';
                                 } else {
                                   echo '../pages/sign_in.php';
                                 }
-                                ?>">
-                        <svg class="user">
-                          <use xlink:href="#user"></use>
-                        </svg>
+                                ?>" class="text-dark">
+                        <i class="fas fa-user"></i>
                       </a>
                     </li>
 
                     <li>
-                      <a href="../pages/cart.php">
-                        <svg class="cart">
-                          <use xlink:href="#cart"></use>
-                        </svg>
+                      <a href="../pages/cart.php" class="text-dark">
+                        <i class="fas fa-shopping-cart"></i>
                       </a>
                     </li>
                   </ul>
@@ -565,6 +563,8 @@ if (count($cartItems) == 0) {
       </div>
     </nav>
   </header>
+
+
 
   <!-- Checkout Content -->
   <div class="container checkout-container">
@@ -731,88 +731,68 @@ if (count($cartItems) == 0) {
   </div>
 
   <!-- footer -->
-  <footer id="footer" class="overflow-hidden">
+  <footer id="footer" class="overflow-hidden" style="color: #000; padding-top: 3rem; padding-bottom: 2rem;">
     <div class="container">
-      <div class="row">
-        <div class="footer-top-area">
-          <div class="row d-flex flex-wrap justify-content-between">
-            <div class="col-lg-3 col-sm-6 pb-3">
-              <div class="footer-menu">
-                <img src="../assets/images/main-logo.png" alt="logo" />
-                <p>
-                  "Find the latest smartphones, accessories, and great deals all in one place. Quality phones with reliable service just for you!"
-                </p>
-                <div class="social-links">
-                  <ul class="d-flex list-unstyled">
-                    <li>
-                      <a href="#">
-                        <svg class="facebook">
-                          <use xlink:href="#facebook" />
-                        </svg>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <svg class="instagram">
-                          <use xlink:href="#instagram" />
-                        </svg>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <svg class="twitter">
-                          <use xlink:href="#twitter" />
-                        </svg>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <svg class="linkedin">
-                          <use xlink:href="#linkedin" />
-                        </svg>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <svg class="youtube">
-                          <use xlink:href="#youtube" />
-                        </svg>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-2 col-sm-6 pb-3 text-decoration-none">
-              <div class="footer-menu text-uppercase">
-                <h5 class="widget-title pb-2">Quick Links</h5>
-                <ul class="menu-list list-unstyled text-uppercase">
-                  <li class="menu-item pb-2">
-                    <a href="../index.php">Home</a>
-                  </li>
-                  <li class="menu-item pb-2">
-                    <a href="../pages/phones.php">Phones</a>
-                  </li>
-                  <li class="menu-item pb-2">
-                    <a href="../pages/phones.php">Shop</a>
-                  </li>
-                  <li class="menu-item pb-2">
-                    <a href="../pages/sign_in.php">SignIn</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
+      <div class="row footer-top-area d-flex flex-wrap justify-content-between">
+        <div class="col-lg-4 col-sm-6 mb-4">
+          <div class="footer-menu">
+            <img src="../assets/images/download.png" class="logo" width="80px" height="80px" />
+            <p>
+              Find the latest smartphones, accessories, and great deals all in one place.<br>
+              <span style="color: #0dcaf0;">Quality phones with reliable service just for you!</span>
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-sm-6 mb-4">
+          <div class="footer-menu text-uppercase">
+            <h5 class="widget-title pb-2" style="color:#000;">Quick Links</h5>
+            <ul class="menu-list list-unstyled text-uppercase">
+              <li class="menu-item pb-2">
+                <a href="../index.php" class="text-dark text-decoration-none">Home</a>
+              </li>
+              <li class="menu-item pb-2">
+                <a href="../pages/phones.php" class="text-dark text-decoration-none">Phones</a>
+              </li>
+              <li class="menu-item pb-2">
+                <a href="../pages/phones.php" class="text-dark text-decoration-none">Shop</a>
+              </li>
+              <li class="menu-item pb-2">
+                <a href="../pages/sign_in.php" class="text-dark text-decoration-none">Sign In</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 mb-4">
+          <div class="footer-menu contact-item">
+            <h5 class="widget-title text-uppercase pb-2" style="color:#000;">Contact Us</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <i class="fas fa-envelope me-2"></i>
+                <a href="mailto:mobimart@info.com" class="text-dark text-decoration-none">mobimart@info.com</a>
+              </li>
+              <li class="mb-2">
+                <i class="fas fa-phone me-2"></i>
+                <a href="tel:+9477177111" class="text-dark text-decoration-none">+94 764975098</a>
+              </li>
+              <li>
+                <i class="fas fa-map-marker-alt me-2"></i>
+                <span>No. 123, Main Street, Kegalle, Sri Lanka</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-            <div class="col-lg-3 col-sm-6 pb-3">
-              <div class="footer-menu contact-item">
-                <h5 class="widget-title text-uppercase pb-2">Contact Us</h5>
-                <p>
-                  Do you have any queries or suggestions?
-                  <a href="mailto:">mobimart@info.com</a>
-                </p>
-                <p>
-                  If you need support? Just give us a call.
-                  <a href="">+94 77177111</a>
+      <hr />
+
+      <div id="footer-bottom">
+        <div class="container">
+          <div class="row d-flex flex-wrap justify-content-between">
+
+            <div>
+              <div class="copyright">
+                <p class="justify-content-center text-center">
+                  © Copyright 2023 MobiMart.
                 </p>
               </div>
             </div>
@@ -820,7 +800,6 @@ if (count($cartItems) == 0) {
         </div>
       </div>
     </div>
-    <hr />
   </footer>
 
 

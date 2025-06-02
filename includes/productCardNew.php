@@ -1,5 +1,5 @@
 <?php
-$product_image = $product['image_url'] ? "../assets/uploads/products/" . htmlspecialchars($product['image_url']) : "../assets/images/product-item1.jpg";
+$product_image = $productImage;
 $product_name = htmlspecialchars($product['product_name']);
 $brand_name = isset($product['brand_name']) && $product['brand_name'] ? htmlspecialchars($product['brand_name']) : 'Unknown Brand';
 $price = number_format($product['price'], 2);

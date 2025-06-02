@@ -324,7 +324,7 @@ if ($user_id) {
                             </li>
 
                             <li>
-                                <a href="../controller/user_logout_process.php">
+                                <a href="../../controller/user_logout_process.php">
                                     <i class="fas fa-cog"></i>
                                     <span>LogOut</span>
                                 </a>

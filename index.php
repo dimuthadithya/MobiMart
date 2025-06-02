@@ -219,13 +219,14 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
   <!-- <---Navbar  -->
+
   <header
     id="header"
-    class="site-header header-scrolled position-fixed text-black bg-light">
+    class="site-header header-scrolled text-black ">
     <nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html">
-          <img src="./assets/images/main-logo.png" class="logo" />
+          <img src="./assets/images/download.png" class="logo" width="80px" height="80px" />
         </a>
         <button
           class="navbar-toggler d-flex d-lg-none order-3 p-2"
@@ -263,7 +264,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <a class="nav-link me-4 active" href="./index.php">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4 active" href="./pages/phones.php">Phones</a>
+                <a class="nav-link me-4" href="./pages/phones.php">Phones</a>
               </li>
               <?php
               if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'admin') {
@@ -274,9 +275,13 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 echo '<li class="nav-item">
                                     <a class="nav-link me-4" href="./pages/User/dashboard.php">Dashboard</a>
                                   </li>';
-              } else {
+              } else if (!isset($_SESSION['user_type'])) {
                 echo '<li class="nav-item">
                                     <a class="nav-link me-4" href="./pages/sign_in.php">Sign In</a>
+                                  </li>';
+              } else if (isset($_SESSION['user_type'])) {
+                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href="./controller/user_logout_process.php">Log out</a>
                                   </li>';
               }
               ?>
@@ -465,6 +470,8 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <div class="swiper product-swiper">
           <div class="swiper-wrapper">
+
+
             <?php
             foreach ($products as $product) { ?>
               <div class="swiper-slide">
@@ -474,7 +481,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 $productPrice = $product['price'];
                 $productDescription = $product['description'];
                 $productId = $product['product_id'];
-
+                $productImage = "./assets/uploads/products/" . $product['image_url'];
                 $productDetailsPage = './includes/productDetails.php?product_id=' . $productId;
 
 
@@ -658,7 +665,78 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
   </section>
 
-  <footer id="footer" class="overflow-hidden">
+  <!-- footer -->
+  <footer id="footer" class="overflow-hidden" style="color: #000; padding-top: 3rem; padding-bottom: 2rem;">
+    <div class="container">
+      <div class="row footer-top-area d-flex flex-wrap justify-content-between">
+        <div class="col-lg-4 col-sm-6 mb-4">
+          <div class="footer-menu">
+            <img src="./assets/images/download.png" alt="MobiMart Logo" width="90px;" height="90px" class="mb-3" />
+            <p>
+              Find the latest smartphones, accessories, and great deals all in one place.<br>
+              <span style="color: #0dcaf0;">Quality phones with reliable service just for you!</span>
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-sm-6 mb-4">
+          <div class="footer-menu text-uppercase">
+            <h5 class="widget-title pb-2" style="color:#000;">Quick Links</h5>
+            <ul class="menu-list list-unstyled text-uppercase">
+              <li class="menu-item pb-2">
+                <a href="./index.php" class="text-dark text-decoration-none">Home</a>
+              </li>
+              <li class="menu-item pb-2">
+                <a href="./pages/phones.php" class="text-dark text-decoration-none">Phones</a>
+              </li>
+              <li class="menu-item pb-2">
+                <a href="../pages/phones.php" class="text-dark text-decoration-none">Shop</a>
+              </li>
+              <li class="menu-item pb-2">
+                <a href="./pages/sign_in.php" class="text-dark text-decoration-none">Sign In</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 mb-4">
+          <div class="footer-menu contact-item">
+            <h5 class="widget-title text-uppercase pb-2" style="color:#000;">Contact Us</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <i class="fas fa-envelope me-2"></i>
+                <a href="mailto:mobimart@info.com" class="text-dark text-decoration-none">mobimart@info.com</a>
+              </li>
+              <li class="mb-2">
+                <i class="fas fa-phone me-2"></i>
+                <a href="tel:+9477177111" class="text-dark text-decoration-none">+94 764975098</a>
+              </li>
+              <li>
+                <i class="fas fa-map-marker-alt me-2"></i>
+                <span>No. 123, Main Street, Kegalle, Sri Lanka</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <div id="footer-bottom">
+        <div class="container">
+          <div class="row d-flex flex-wrap justify-content-between">
+
+            <div>
+              <div class="copyright">
+                <p class="justify-content-center text-center">
+                  © Copyright 2023 MobiMart.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- <footer id="footer" class="overflow-hidden">
     <div class="container">
       <div class="row">
         <div class="footer-top-area">
@@ -763,7 +841,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
       </div>
     </div>
-  </footer>
+  </footer> -->
 
 
 
