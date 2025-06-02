@@ -38,7 +38,7 @@ $sku = htmlspecialchars($product['sku']);
                 <!-- Price and Add to Cart -->
                 <div class="mt-3 d-flex justify-content-between align-items-center">
                     <div class="price-wrapper">
-                        <span class="fw-bold fs-5">$<?= $price ?></span>
+                        <span class="fw-bold fs-5 text-white">LKR<?= $price ?></span>
                     </div>
                 </div>
             </div>

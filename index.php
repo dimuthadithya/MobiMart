@@ -217,6 +217,8 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
   </div>
 
+
+  <!-- <---Navbar  -->
   <header
     id="header"
     class="site-header header-scrolled position-fixed text-black bg-light">
@@ -592,7 +594,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
               href=""
               class="image-link position-relative">
               <img
-                src="./assets/images/insta-item2.jpg"
+                src="./assets/images/cart-item1.jpg"
                 alt="instagram"
                 class="insta-image" />
               <div
@@ -624,7 +626,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
               href=""
               class="image-link position-relative">
               <img
-                src="./assets/images/insta-item4.jpg"
+                src="./assets/images/product-item3.jpg"
                 alt="instagram"
                 class="insta-image" />
               <div
@@ -640,7 +642,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
               href=""
               class="image-link position-relative">
               <img
-                src="./assets/images/insta-item5.jpg"
+                src="./assets/images/single-image1.png"
                 alt="instagram"
                 class="insta-image" />
               <div
@@ -746,22 +748,24 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
       </div>
     </div>
     <hr />
-  </footer>
 
-  <div id="footer-bottom">
-    <div class="container">
-      <div class="row d-flex flex-wrap justify-content-between">
+    <div id="footer-bottom">
+      <div class="container">
+        <div class="row d-flex flex-wrap justify-content-between">
 
-        <div>
-          <div class="copyright">
-            <p class="justify-content-center text-center">
-              © Copyright 2023 MobiMart.
-            </p>
+          <div>
+            <div class="copyright">
+              <p class="justify-content-center text-center">
+                © Copyright 2023 MobiMart.
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </footer>
+
+
 
   <script src="./assets/js/jquery-1.11.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>

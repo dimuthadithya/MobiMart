@@ -25,7 +25,7 @@
                 aria-labelledby="bdNavbarOffcanvasLabel">
                 <div class="offcanvas-header px-4 pb-0">
                     <a class="navbar-brand" href="index.html">
-                        <img src="../assets/images/main-logo.png" class="logo" />
+                        <img src="./assets/images/main-logo.png" class="logo" />
                     </a>
                     <button
                         type="button"
@@ -39,16 +39,10 @@
                         id="navbar"
                         class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link me-4 active" href="../index.php">Home</a>
+                            <a class="nav-link me-4 active" href="./index.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4" href="../pages/phones.php">Phones</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link me-4" href="#company-services">Services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link me-4" href="#mobile-products">Products</a>
+                            <a class="nav-link me-4 active" href="./pages/phones.php">Phones</a>
                         </li>
                         <?php
                         if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'admin') {
@@ -65,6 +59,7 @@
                                   </li>';
                         }
                         ?>
+
                         <li class="nav-item">
                             <div class="user-items ps-5">
                                 <ul class="d-flex justify-content-end list-unstyled">
@@ -92,8 +87,8 @@
                                     </li>
 
                                     <li>
-                                        <a href="../pages/cart.php">
-                                            <svg class=" cart">
+                                        <a href="./pages/cart.php">
+                                            <svg class="cart">
                                                 <use xlink:href="#cart"></use>
                                             </svg>
                                         </a>

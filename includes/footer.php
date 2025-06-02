@@ -7,9 +7,7 @@
                         <div class="footer-menu">
                             <img src="../assets/images/main-logo.png" alt="logo" />
                             <p>
-                                Nisi, purus vitae, ultrices nunc. Sit ac sit suscipit
-                                hendrerit. Gravida massa volutpat aenean odio erat nullam
-                                fringilla.
+                                "Find the latest smartphones, accessories, and great deals all in one place. Quality phones with reliable service just for you!"
                             </p>
                             <div class="social-links">
                                 <ul class="d-flex list-unstyled">
@@ -60,42 +58,18 @@
                                     <a href="../index.php">Home</a>
                                 </li>
                                 <li class="menu-item pb-2">
-                                    <a href="#">About</a>
+                                    <a href="../pages/phones.php">Phones</a>
                                 </li>
                                 <li class="menu-item pb-2">
-                                    <a href="#">Shop</a>
+                                    <a href="../pages/phones.php">Shop</a>
                                 </li>
                                 <li class="menu-item pb-2">
-                                    <a href="#">Blogs</a>
-                                </li>
-                                <li class="menu-item pb-2">
-                                    <a href="#">Contact</a>
+                                    <a href="../pages/sign_in.php">SignIn</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6 pb-3">
-                        <div class="footer-menu text-uppercase">
-                            <h5 class="widget-title pb-2">Help & Info Help</h5>
-                            <ul class="menu-list list-unstyled">
-                                <li class="menu-item pb-2">
-                                    <a href="#">Track Your Order</a>
-                                </li>
-                                <li class="menu-item pb-2">
-                                    <a href="#">Returns Policies</a>
-                                </li>
-                                <li class="menu-item pb-2">
-                                    <a href="#">Shipping + Delivery</a>
-                                </li>
-                                <li class="menu-item pb-2">
-                                    <a href="#">Contact Us</a>
-                                </li>
-                                <li class="menu-item pb-2">
-                                    <a href="#">Faqs</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+
                     <div class="col-lg-3 col-sm-6 pb-3">
                         <div class="footer-menu contact-item">
                             <h5 class="widget-title text-uppercase pb-2">Contact Us</h5>
@@ -114,36 +88,19 @@
         </div>
     </div>
     <hr />
-</footer>
-<div id="footer-bottom">
-    <div class="container">
-        <div class="row d-flex flex-wrap justify-content-between">
-            <div class="col-md-4 col-sm-6">
-                <div class="Shipping d-flex">
-                    <p>We ship with:</p>
-                    <div class="card-wrap ps-2">
-                        <img src="../assets/images/dhl.png" alt="visa" />
-                        <img src="../assets/images/shippingcard.png" alt="mastercard" />
+
+    <div id="footer-bottom">
+        <div class="container">
+            <div class="row d-flex flex-wrap justify-content-between">
+
+                <div>
+                    <div class="copyright">
+                        <p class="justify-content-center text-center">
+                            © Copyright 2023 MobiMart.
+                        </p>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="payment-method d-flex">
-                    <p>Payment options:</p>
-                    <div class="card-wrap ps-2">
-                        <img src="../assets/images/visa.jpg" alt="visa" />
-                        <img src="../assets/images/mastercard.jpg" alt="mastercard" />
-                        <img src="../assets/images/paypal.jpg" alt="paypal" />
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="copyright">
-                    <p>
-                        © Copyright 2023 MiniStore.
-                    </p>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</footer>

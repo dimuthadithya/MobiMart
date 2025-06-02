@@ -2,3 +2,8 @@ create account karapuwama admin withari hedenne
 Filter & Sort Products 
 pages wala icon penanne netho
 nav active class
+Mobile Products photo eka add karanda one and unknown brand hadanda one and click parth eka 
+admin eke product eke brand id wenas kirima
+admin dashboard eke Inventory Management eke photo eka and store status incorrect
+add cart eke quantity eka hadanda thiyenaw deka deka add wenne
+order compelete eka update karanda one
