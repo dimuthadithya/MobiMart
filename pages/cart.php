@@ -399,7 +399,6 @@ foreach ($carts as $cart) {
   </header>
   <!-- end navbar -->
 
-  <!-- end nav  -->
 
 
   <!-- Cart Content -->

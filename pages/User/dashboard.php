@@ -310,14 +310,14 @@ if ($user_id) {
 
 
                             <li>
-                                <a href="./orders.html" class="active">
+                                <a href="./dashboard.php" class="active">
                                     <i class="fas fa-shopping-cart"></i>
                                     <span>Orders</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="./dashboard.html">
+                                <a href="./dashboard.php">
                                     <i class="fas fa-th-large"></i>
                                     <span>Profile</span>
                                 </a>
