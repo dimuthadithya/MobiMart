@@ -5,16 +5,18 @@ include_once '../config/db.php';
 $email = $_POST['email'];
 $password = $_POST['password'];
 
-$sql = "SELECT * FROM users WHERE email = :email AND password = :password";
+// First get the user by email only
+$sql = "SELECT * FROM users WHERE email = :email";
 $stmt = $conn->prepare($sql);
-$stmt->execute(['email' => $email, 'password' => $password]);
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$stmt->execute(['email' => $email]);
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (count($result) > 0) {
+// Verify the password against the hash
+if ($result && password_verify($password, $result['password'])) {
     session_start();
     $_SESSION['email'] = $email;
-    $_SESSION['user_id'] = $result[0]['user_id'];
-    $_SESSION['user_type'] = $result[0]['role'];
+    $_SESSION['user_id'] = $result['user_id'];
+    $_SESSION['user_type'] = $result['role'];
 
     header("location: ../index.php?login=success");
     exit();

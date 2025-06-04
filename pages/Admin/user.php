@@ -351,8 +351,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
             <!-- Main Content -->
-            <div class="col-lg-9 col-xl-10">
-                <!-- Page Header -->
+            <div class="col-lg-9 col-xl-10"> <!-- Page Header -->
                 <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
                     <div>
                         <h4 class="page-title">Registered Users</h4>
@@ -362,6 +361,11 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <li class="breadcrumb-item active" aria-current="page">Users</li>
                             </ol>
                         </nav>
+                    </div>
+                    <div>
+                        <a href="./admin-add.php" class="btn dark-btn">
+                            <i class="fas fa-plus me-2"></i>Add Admin User
+                        </a>
                     </div>
                 </div>
 
