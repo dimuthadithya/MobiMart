@@ -15,33 +15,38 @@ if ($user_id) {
     // Get user data
     $userStmt = $conn->prepare("SELECT * FROM users WHERE user_id = :user_id");
     $userStmt->execute([':user_id' => $user_id]);
-    $userData = $userStmt->fetch(PDO::FETCH_ASSOC);
-
-    // Get orders
-    $orderStmt = $conn->prepare("SELECT * FROM orders WHERE user_id = :user_id ORDER BY order_date DESC");
+    $userData = $userStmt->fetch(PDO::FETCH_ASSOC);    // Get orders with items in a single query using JOIN
+    $orderStmt = $conn->prepare("
+        SELECT DISTINCT o.*, 
+               GROUP_CONCAT(DISTINCT CONCAT(p.product_name) SEPARATOR ', ') as product_names
+        FROM orders o
+        LEFT JOIN order_items oi ON o.order_id = oi.order_id
+        LEFT JOIN products p ON oi.product_id = p.product_id
+        WHERE o.user_id = :user_id
+        GROUP BY o.order_id, o.order_date
+        ORDER BY o.order_date DESC
+    ");
     $orderStmt->execute([':user_id' => $user_id]);
     $orders = $orderStmt->fetchAll(PDO::FETCH_ASSOC);
 
     // Calculate order statistics
     $orderStats['total'] = count($orders);
+    $orderStats['pending'] = 0;
+    $orderStats['completed'] = 0;
+
     foreach ($orders as &$order) {
         if ($order['status'] === 'pending') {
             $orderStats['pending']++;
         } elseif ($order['status'] === 'completed') {
             $orderStats['completed']++;
         }
-
-        // Get order items
-        $itemStmt = $conn->prepare("
-            SELECT oi.*, p.product_name 
-            FROM order_items oi 
-            JOIN products p ON oi.product_id = p.product_id 
-            WHERE oi.order_id = :order_id
-        ");
-        $itemStmt->execute([':order_id' => $order['order_id']]);
-        $order['items'] = $itemStmt->fetchAll(PDO::FETCH_ASSOC);
+        // Add the items array for compatibility with existing code
+        $order['items'] = array_map(function ($name) {
+            return ['product_name' => $name];
+        }, explode(', ', $order['product_names']));
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -442,16 +447,21 @@ if ($user_id) {
                     <div class="card-header bg-white d-flex justify-content-between align-items-center">
                         <h5 class="card-title mb-0">Recent Orders</h5>
                     </div>
-
                     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                        <?php foreach ($orders as $order): ?>
+                        <?php
+                        $displayed_orders = []; // Track displayed orders
+                        foreach ($orders as $order):
+                            // Skip if we've already displayed this order
+                            if (in_array($order['order_id'], $displayed_orders)) continue;
+                            $displayed_orders[] = $order['order_id'];
+                        ?>
                             <div class="col">
                                 <div class="card h-100 border-0 shadow-lg rounded-4 bg-white">
                                     <div class="card-body px-4 py-3">
                                         <div class="d-flex justify-content-between align-items-center mb-3">
                                             <h5 class="card-title mb-0">Order #<?= htmlspecialchars($order['order_id']) ?></h5>
-                                            <span class="badge bg-<?= $order['status'] === 'Pending' ? 'warning text-dark' : 'success' ?> px-3 py-1 rounded-pill">
-                                                <i class="fas fa-<?= $order['status'] === 'Pending' ? 'clock' : 'check-circle' ?> me-1"></i>
+                                            <span class="badge bg-<?= strtolower($order['status']) === 'pending' ? 'warning text-dark' : 'success' ?> px-3 py-1 rounded-pill">
+                                                <i class="fas fa-<?= strtolower($order['status']) === 'pending' ? 'clock' : 'check-circle' ?> me-1"></i>
                                                 <?= htmlspecialchars($order['status']) ?>
                                             </span>
                                         </div>
@@ -459,9 +469,9 @@ if ($user_id) {
                                         <ul class="list-unstyled mb-3">
                                             <li><i class="fas fa-calendar-alt me-2 text-muted mt-2"></i><strong>Date:</strong> <?= htmlspecialchars(date('Y-m-d', strtotime($order['order_date']))) ?></li>
                                             <li><i class="fas fa-box-open me-2 text-muted mt-2"></i><strong>Items:</strong>
-                                                <?= implode(', ', array_column($order['items'], 'product_name')) ?>
+                                                <?= htmlspecialchars($order['product_names']) ?>
                                             </li>
-                                            <li><i class="fas fa-dollar-sign me-2 text-muted mt-2"></i><strong>Total:</strong> LKR <?= htmlspecialchars($order['total_amount']) ?></li>
+                                            <li><i class="fas fa-dollar-sign me-2 text-muted mt-2"></i><strong>Total:</strong> LKR <?= number_format($order['total_amount'], 2) ?></li>
                                         </ul>
 
                                         <div class="d-flex justify-content-end mt-4">
