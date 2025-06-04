@@ -584,7 +584,6 @@
             </div>
             <h2>Thank You For Your Order!</h2>
             <p>Your order has been placed and is being processed. You will receive an email confirmation shortly.</p>
-            <div class="order-number">Order #MNS-78912345</div>
 
             <!-- <div class="delivery-info">
                 <div class="delivery-icon">
