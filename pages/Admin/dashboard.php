@@ -396,7 +396,7 @@ $newOrders = $conn->query("SELECT COUNT(*) AS total FROM orders WHERE status = '
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-xl-3">
+                    <!-- <div class="col-md-6 col-xl-3">
                         <div class="card stat-card">
                             <div class="card-body p-3">
                                 <div class="d-flex align-items-center">
@@ -410,7 +410,7 @@ $newOrders = $conn->query("SELECT COUNT(*) AS total FROM orders WHERE status = '
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-md-6 col-xl-3">
                         <div class="card stat-card">
                             <div class="card-body p-3">

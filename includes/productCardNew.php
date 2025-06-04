@@ -1,7 +1,7 @@
 <?php
 $product_image = $productImage;
 $product_name = htmlspecialchars($product['product_name']);
-$brand_name = isset($product['brand_name']) && $product['brand_name'] ? htmlspecialchars($product['brand_name']) : 'Unknown Brand';
+$brand_name = isset($product['brand_name']) && $product['brand_name'] ? htmlspecialchars($product['brand_name']) : $product_name;
 $price = number_format($product['price'], 2);
 $quantity = (int)$product['quantity'];
 $sku = htmlspecialchars($product['sku']);

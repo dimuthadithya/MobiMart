@@ -586,7 +586,7 @@
             <p>Your order has been placed and is being processed. You will receive an email confirmation shortly.</p>
             <div class="order-number">Order #MNS-78912345</div>
 
-            <div class="delivery-info">
+            <!-- <div class="delivery-info">
                 <div class="delivery-icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="1" y="3" width="15" height="13"></rect>
@@ -596,13 +596,13 @@
                     </svg>
                 </div>
                 <div>
-                    <!-- <p><strong>Estimated delivery:</strong> May 12-15, 2025</p>
+                    <p><strong>Estimated delivery:</strong> May 12-15, 2025</p>
                     <p>Your items will be delivered to: 123 Main Street, Apt 4B, New York, NY 10001</p>
-                </div> -->
                 </div>
             </div>
+        </div> -->
 
-            <div class="order-grid">
+            <!-- <div class="order-grid">
                 <div class="order-details">
                     <h3 class="section-title">Order Information</h3>
 
@@ -724,7 +724,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="actions">
                 <a href="./User/dashboard.php" class="btn btn-outline">View Order History</a>
