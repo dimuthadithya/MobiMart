@@ -3,7 +3,7 @@ session_start();
 include_once('../../config/db.php');
 
 $barndSql = "SELECT * FROM brands ORDER BY RAND();";
-$stmt = $conn->prepare($barndSql);
+$stmt = $conn->prepare($brandSql);
 $stmt->execute();
 $brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

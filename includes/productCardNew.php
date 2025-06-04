@@ -31,7 +31,7 @@ $sku = htmlspecialchars($product['sku']);
                 <div class="text-muted text-uppercase small mb-1"><?= $brand_name ?></div>
                 <!-- Product Name -->
                 <h3 class="product-title mb-2">
-                    <a href="../pages/product-details.php?id=<?= $product['product_id'] ?>">
+                    <a href="../pages/product-details.php $product['product_id'] ?>">
                         <?= $product_name ?>
                     </a>
                 </h3>
