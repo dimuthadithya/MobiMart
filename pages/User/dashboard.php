@@ -2,25 +2,42 @@
 session_start();
 include '../../config/db.php';
 
-
 $user_id = $_SESSION['user_id'] ?? null;
-
 $orders = [];
+$userData = null;
+$orderStats = [
+    'total' => 0,
+    'pending' => 0,
+    'completed' => 0
+];
 
 if ($user_id) {
+    // Get user data
+    $userStmt = $conn->prepare("SELECT * FROM users WHERE user_id = :user_id");
+    $userStmt->execute([':user_id' => $user_id]);
+    $userData = $userStmt->fetch(PDO::FETCH_ASSOC);
 
-    $orderStmt = $conn->prepare("SELECT * FROM orders WHERE user_id = :user_id");
+    // Get orders
+    $orderStmt = $conn->prepare("SELECT * FROM orders WHERE user_id = :user_id ORDER BY order_date DESC");
     $orderStmt->execute([':user_id' => $user_id]);
     $orders = $orderStmt->fetchAll(PDO::FETCH_ASSOC);
 
-
+    // Calculate order statistics
+    $orderStats['total'] = count($orders);
     foreach ($orders as &$order) {
+        if ($order['status'] === 'pending') {
+            $orderStats['pending']++;
+        } elseif ($order['status'] === 'completed') {
+            $orderStats['completed']++;
+        }
+
+        // Get order items
         $itemStmt = $conn->prepare("
-    SELECT oi.*, p.product_name 
-    FROM order_items oi 
-    JOIN products p ON oi.product_id = p.product_id 
-    WHERE oi.order_id = :order_id
-");
+            SELECT oi.*, p.product_name 
+            FROM order_items oi 
+            JOIN products p ON oi.product_id = p.product_id 
+            WHERE oi.order_id = :order_id
+        ");
         $itemStmt->execute([':order_id' => $order['order_id']]);
         $order['items'] = $itemStmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -307,22 +324,12 @@ if ($user_id) {
                 <div class="card">
                     <div class="card-body">
                         <ul class="sidebar-menu">
-
-
                             <li>
-                                <a href="./dashboard.php" class="active">
-                                    <i class="fas fa-shopping-cart"></i>
-                                    <span>Orders</span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="./dashboard.php">
-                                    <i class="fas fa-th-large"></i>
+                                <a href="#profile" class="nav-link active" data-bs-toggle="tab">
+                                    <i class="fas fa-user"></i>
                                     <span>Profile</span>
                                 </a>
                             </li>
-
                             <li>
                                 <a href="../../controller/user_logout_process.php">
                                     <i class="fas fa-cog"></i>
@@ -340,64 +347,143 @@ if ($user_id) {
                 <div class="card">
                     <img src="../../assets/images/user_dashbord02.webp" alt="" class="img-fluid">
                 </div>
-            </div>
-
-            <!-- Main Content -->
+            </div> <!-- Main Content -->
             <div class="col-lg-9 col-xl-10">
-                <!-- Page Header -->
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <div>
-                        <h4 class="page-title">Orders</h4>
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Home</a></li>
-                                <li class="breadcrumb-item active">Orders</li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                    <?php foreach ($orders as $order): ?>
-                        <div class="col">
-                            <div class="card h-100 border-0 shadow-lg rounded-4 bg-white">
-                                <div class="card-body px-4 py-3">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h5 class="card-title mb-0">Order #<?= htmlspecialchars($order['order_id']) ?></h5>
-                                        <span class="badge bg-<?= $order['status'] === 'Pending' ? 'warning text-dark' : 'success' ?> px-3 py-1 rounded-pill">
-                                            <i class="fas fa-<?= $order['status'] === 'Pending' ? 'clock' : 'check-circle' ?> me-1"></i>
-                                            <?= htmlspecialchars($order['status']) ?>
-                                        </span>
+                <!-- Stats Cards -->
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <div class="card stat-card">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="stat-icon me-3">
+                                        <i class="fas fa-shopping-bag"></i>
                                     </div>
-
-                                    <ul class="list-unstyled mb-3">
-                                        <li><i class="fas fa-calendar-alt me-2 text-muted mt-2"></i><strong>Date:</strong> <?= htmlspecialchars(date('Y-m-d', strtotime($order['order_date']))) ?></li>
-                                        <li><i class="fas fa-box-open me-2 text-muted mt-2"></i><strong>Items:</strong>
-                                            <?= implode(', ', array_column($order['items'], 'product_name')) ?>
-                                        </li>
-                                        <li><i class="fas fa-dollar-sign me-2 text-muted mt-2"></i><strong>Total:</strong> LKR <?= htmlspecialchars($order['total_amount']) ?></li>
-                                    </ul>
-
-                                    <div class="d-flex justify-content-end mt-4">
-                                        <form action="cancel_order.php" method="POST" onsubmit="return confirm('Are you sure you want to cancel this order?');">
-                                            <input type="hidden" name="order_id" value="<?= htmlspecialchars($order['order_id']) ?>">
-                                        </form>
+                                    <div>
+                                        <h5 class="stat-number"><?php echo $orderStats['total'] ?></h5>
+                                        <p class="stat-label">Total Orders</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    <?php endforeach; ?>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card stat-card">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="stat-icon me-3">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="stat-number"><?php echo $orderStats['pending'] ?></h5>
+                                        <p class="stat-label">Pending Orders</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card stat-card">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="stat-icon me-3">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="stat-number"><?php echo $orderStats['completed'] ?></h5>
+                                        <p class="stat-label">Completed Orders</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
+                <!-- Profile Section -->
+                <div class="card mb-4">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title mb-0">Profile Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label text-muted">Username</label>
+                                    <p class="fs-5"><?php echo htmlspecialchars($userData['username'] ?? 'Not set'); ?></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label text-muted">Email</label>
+                                    <p class="fs-5"><?php echo htmlspecialchars($userData['email']); ?></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label text-muted">Phone Number</label>
+                                    <p class="fs-5"><?php echo htmlspecialchars($userData['phone'] ?? 'Not set'); ?></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label text-muted">Account Status</label>
+                                    <p class="fs-5">
+                                        <span class="badge bg-<?php echo $userData['status'] === 'active' ? 'success' : 'warning'; ?>">
+                                            <?php echo ucfirst(htmlspecialchars($userData['status'] ?? 'active')); ?>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Orders Section -->
+                <div class="card">
+                    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">Recent Orders</h5>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                        <?php foreach ($orders as $order): ?>
+                            <div class="col">
+                                <div class="card h-100 border-0 shadow-lg rounded-4 bg-white">
+                                    <div class="card-body px-4 py-3">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h5 class="card-title mb-0">Order #<?= htmlspecialchars($order['order_id']) ?></h5>
+                                            <span class="badge bg-<?= $order['status'] === 'Pending' ? 'warning text-dark' : 'success' ?> px-3 py-1 rounded-pill">
+                                                <i class="fas fa-<?= $order['status'] === 'Pending' ? 'clock' : 'check-circle' ?> me-1"></i>
+                                                <?= htmlspecialchars($order['status']) ?>
+                                            </span>
+                                        </div>
+
+                                        <ul class="list-unstyled mb-3">
+                                            <li><i class="fas fa-calendar-alt me-2 text-muted mt-2"></i><strong>Date:</strong> <?= htmlspecialchars(date('Y-m-d', strtotime($order['order_date']))) ?></li>
+                                            <li><i class="fas fa-box-open me-2 text-muted mt-2"></i><strong>Items:</strong>
+                                                <?= implode(', ', array_column($order['items'], 'product_name')) ?>
+                                            </li>
+                                            <li><i class="fas fa-dollar-sign me-2 text-muted mt-2"></i><strong>Total:</strong> LKR <?= htmlspecialchars($order['total_amount']) ?></li>
+                                        </ul>
+
+                                        <div class="d-flex justify-content-end mt-4">
+                                            <form action="cancel_order.php" method="POST" onsubmit="return confirm('Are you sure you want to cancel this order?');">
+                                                <input type="hidden" name="order_id" value="<?= htmlspecialchars($order['order_id']) ?>">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+
+
+
+                </div>
+                <!-- end main  -->
 
             </div>
-            <!-- end main  -->
-
         </div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
