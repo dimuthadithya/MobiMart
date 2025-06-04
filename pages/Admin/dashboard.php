@@ -3,9 +3,9 @@
 session_start();
 include_once('../../config/db.php');
 
-$products = $conn->query("SELECT * FROM products LIMIT 5")->fetchAll(PDO::FETCH_ASSOC);
+$products = $conn->query("SELECT * FROM products ")->fetchAll(PDO::FETCH_ASSOC);
 
-$orders = $conn->query("SELECT * FROM orders LIMIT 5")->fetchAll(PDO::FETCH_ASSOC);
+$orders = $conn->query("SELECT * FROM orders ")->fetchAll(PDO::FETCH_ASSOC);
 
 $totalSales = $conn->query("SELECT SUM(total_amount) AS total FROM orders")->fetchColumn();
 $totalProducts = $conn->query("SELECT COUNT(*) AS total FROM products")->fetchColumn();

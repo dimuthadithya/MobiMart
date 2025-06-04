@@ -292,9 +292,9 @@ if ($user_id) {
                         <a class="nav-link" href="#"><?php echo $_SESSION['email'] ?></a>
                     </li>
                 </ul>
-                <div class="d-flex align-items-center">
+                <!-- <div class="d-flex align-items-center">
                     <i class="fa fa-phone"></i>
-                </div>
+                </div> -->
             </div>
         </div>
     </nav>
