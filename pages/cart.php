@@ -364,11 +364,11 @@ foreach ($carts as $cart) {
               <li class="nav-item">
                 <div class="user-items ps-5">
                   <ul class="d-flex justify-content-end list-unstyled">
-                    <li class="search-item pe-3">
+                    <!-- <li class="search-item pe-3">
                       <a href="#" class="search-button text-dark">
                         <i class="fas fa-search"></i>
                       </a>
-                    </li>
+                    </li> -->
 
                     <li class="pe-3">
                       <a href="<?php

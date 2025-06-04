@@ -314,11 +314,11 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <li class="nav-item">
                                 <div class="user-items ps-5">
                                     <ul class="d-flex justify-content-end list-unstyled">
-                                        <li class="search-item pe-3">
+                                        <!-- <li class="search-item pe-3">
                                             <a href="#" class="search-button text-dark">
                                                 <i class="fas fa-search"></i>
                                             </a>
-                                        </li>
+                                        </li> -->
 
                                         <li class="pe-3">
                                             <a href="<?php
@@ -543,7 +543,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="row footer-top-area d-flex flex-wrap justify-content-between">
                 <div class="col-lg-4 col-sm-6 mb-4">
                     <div class="footer-menu">
-                        <img src="../assets/images/main-logo.png" alt="MobiMart Logo" style="max-width: 160px;" class="mb-3" />
+                        <img src="../assets/images/download.png" alt="MobiMart Logo" width="80px" height="80px" class="mb-3" />
                         <p>
                             Find the latest smartphones, accessories, and great deals all in one place.<br>
                             <span style="color: #0dcaf0;">Quality phones with reliable service just for you!</span>

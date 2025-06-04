@@ -427,13 +427,13 @@ $descriptionPoints = array_filter(array_map('trim', explode('.', $productDescrip
                             <li class="nav-item">
                                 <div class="user-items ps-5">
                                     <ul class="d-flex justify-content-end list-unstyled">
-                                        <li class="search-item pe-3">
+                                        <!-- <li class="search-item pe-3">
                                             <a href="#" class="search-button">
                                                 <svg class="search">
                                                     <use xlink:href="#search"></use>
                                                 </svg>
                                             </a>
-                                        </li>
+                                        </li> -->
 
                                         <li class="pe-3">
                                             <a href="<?php
@@ -601,23 +601,86 @@ $descriptionPoints = array_filter(array_map('trim', explode('.', $productDescrip
                     <label class="form-label">Quantity</label>
                     <form action="../controller/cart_process.php" method="post">
                         <div class="input-group" style="max-width: 150px">
-                            <button class="btn btn-outline-secondary" type="button">-</button>
-                            <input type="text" class="form-control text-center" name="quantity" value="1"
-                                data-max-stock="<?php echo $productStock; ?>" />
-                            <button class="btn btn-outline-secondary" type="button">+</button>
+                            <button class="btn btn-outline-secondary" type="button" id="decrementBtn">-</button>
+                            <input type="number" class="form-control text-center" name="quantity" id="quantityInput" value="1" min="1" max="<?php echo $productStock; ?>" readonly />
+                            <button class="btn btn-outline-secondary" type="button" id="incrementBtn">+</button>
                         </div>
                         <small class="text-muted">Available stock: <?php echo $productStock; ?></small>
-                </div><!-- Add to Cart Button -->
-                <div class="d-grid mb-4">
-                    <input type="hidden" name="product_id" value="<?php echo $productId; ?>" />
-                    <button type="submit" class="btn btn-primary btn-lg">
-                        Add to Cart
-                    </button>
+
+                        <!-- Add to Cart Button -->
+                        <div class="d-grid mt-3 mb-4">
+                            <input type="hidden" name="product_id" value="<?php echo $productId; ?>" />
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                Add to Cart
+                            </button>
+                        </div>
                     </form>
                 </div>
-                <br><br><br>
-            </div>
 
+                <!-- quantity java -->
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        // Get elements
+                        const quantityInput = document.getElementById('quantityInput');
+                        const decrementBtn = document.getElementById('decrementBtn');
+                        const incrementBtn = document.getElementById('incrementBtn');
+                        const maxStock = <?php echo $productStock; ?>;
+
+                        // Function to update quantity
+                        function updateQuantity(newValue) {
+                            // Ensure value is within bounds
+                            newValue = Math.max(1, Math.min(newValue, maxStock));
+                            quantityInput.value = newValue;
+
+                            // Update button states
+                            decrementBtn.disabled = newValue <= 1;
+                            incrementBtn.disabled = newValue >= maxStock;
+                        }
+
+                        // Decrement button click
+                        decrementBtn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const currentValue = parseInt(quantityInput.value) || 1;
+                            updateQuantity(currentValue - 1);
+                        });
+
+                        // Increment button click
+                        incrementBtn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const currentValue = parseInt(quantityInput.value) || 1;
+                            updateQuantity(currentValue + 1);
+                        });
+
+                        // Handle direct input
+                        quantityInput.addEventListener('input', function() {
+                            let value = parseInt(this.value);
+                            if (isNaN(value) || value < 1) {
+                                value = 1;
+                            } else if (value > maxStock) {
+                                value = maxStock;
+                            }
+                            updateQuantity(value);
+                        });
+
+                        // Initialize button states
+                        updateQuantity(1);
+
+                        // Rest of your existing JavaScript code...
+                        // Gallery Image Handling
+                        const thumbnails = document.querySelectorAll('.thumbnail-img');
+                        const mainImage = document.querySelector('.main-img');
+
+                        thumbnails.forEach(thumb => {
+                            thumb.addEventListener('click', function() {
+                                mainImage.src = this.dataset.full;
+                                mainImage.alt = this.alt;
+                                thumbnails.forEach(t => t.classList.remove('active'));
+                                this.classList.add('active');
+                            });
+                        });
+                    });
+                </script>
+            </div>
 
             <div>
                 <section

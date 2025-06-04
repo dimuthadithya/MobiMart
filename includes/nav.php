@@ -4,7 +4,7 @@
     <nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html">
-                <img src="../assets/images/main-logo.png" class="logo" />
+                <img src="../assets/images/download.png" class="logo" width="80px" height="80px" />
             </a>
             <button
                 class="navbar-toggler d-flex d-lg-none order-3 p-2"

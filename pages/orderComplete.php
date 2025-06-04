@@ -520,11 +520,11 @@
                             <li class="nav-item">
                                 <div class="user-items ps-5">
                                     <ul class="d-flex justify-content-end list-unstyled">
-                                        <li class="search-item pe-3">
+                                        <!-- <li class="search-item pe-3">
                                             <a href="#" class="search-button text-dark">
                                                 <i class="fas fa-search"></i>
                                             </a>
-                                        </li>
+                                        </li> -->
 
                                         <li class="pe-3">
                                             <a href="<?php
@@ -561,7 +561,7 @@
             <div class="step completed">
                 <div class="step-circle"><i class="fas fa-check"></i></div>
                 <div class="step-title">Shopping Cart</div>
-                <div class="step-line"></div>
+                <!-- <div class="step-line"></div> -->
             </div>
             <div class="step completed">
                 <div class="step-circle">2</div>
@@ -571,7 +571,7 @@
             <div class="step active">
                 <div class="step-circle">3</div>
                 <div class="step-title">Order Complete</div>
-                <div class="step-line"></div>
+                <!-- <div class="step-line"></div> -->
             </div>
         </div>
 
@@ -596,140 +596,140 @@
                     </svg>
                 </div>
                 <div>
-                    <p><strong>Estimated delivery:</strong> May 12-15, 2025</p>
+                    <!-- <p><strong>Estimated delivery:</strong> May 12-15, 2025</p>
                     <p>Your items will be delivered to: 123 Main Street, Apt 4B, New York, NY 10001</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="order-grid">
-            <div class="order-details">
-                <h3 class="section-title">Order Information</h3>
-
-                <div class="order-info-item">
-                    <div class="info-label">Order Date</div>
-                    <div class="info-value">May 8, 2025</div>
-                </div>
-
-                <div class="order-info-item">
-                    <div class="info-label">Order Number</div>
-                    <div class="info-value">MNS-78912345</div>
-                </div>
-
-                <div class="order-info-item">
-                    <div class="info-label">Payment Method</div>
-                    <div class="info-value">Credit Card (ending in 3456)</div>
-                </div>
-
-                <div class="divider"></div>
-
-                <h3 class="section-title">Shipping Information</h3>
-
-                <div class="order-info-item">
-                    <div class="info-label">Shipping Address</div>
-                    <div class="info-value">
-                        John Doe<br>
-                        123 Main Street, Apt 4B<br>
-                        New York, NY 10001<br>
-                        United States
-                    </div>
-                </div>
-
-                <div class="order-info-item">
-                    <div class="info-label">Shipping Method</div>
-                    <div class="info-value">Standard Delivery (3-5 business days)</div>
-                </div>
-
-                <div class="divider"></div>
-
-                <h3 class="section-title">Contact Information</h3>
-
-                <div class="order-info-item">
-                    <div class="info-label">Email</div>
-                    <div class="info-value">your@email.com</div>
-                </div>
-
-                <div class="order-info-item">
-                    <div class="info-label">Phone</div>
-                    <div class="info-value">(123) 456-7890</div>
+                </div> -->
                 </div>
             </div>
 
-            <div class="order-summary">
-                <h3 class="section-title">Order Summary (3 items)</h3>
+            <div class="order-grid">
+                <div class="order-details">
+                    <h3 class="section-title">Order Information</h3>
 
-                <div class="summary-item">
-                    <div class="item-image">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                            <line x1="8" y1="21" x2="16" y2="21"></line>
-                            <line x1="12" y1="17" x2="12" y2="21"></line>
-                        </svg>
+                    <div class="order-info-item">
+                        <div class="info-label">Order Date</div>
+                        <div class="info-value">May 8, 2025</div>
                     </div>
-                    <div class="item-details">
-                        <div class="item-name">iPhone 13 Pro</div>
-                        <div class="item-variant">Sierra Blue, 256GB</div>
+
+                    <div class="order-info-item">
+                        <div class="info-label">Order Number</div>
+                        <div class="info-value">MNS-78912345</div>
                     </div>
-                    <div class="item-price">$999.00</div>
+
+                    <div class="order-info-item">
+                        <div class="info-label">Payment Method</div>
+                        <div class="info-value">Credit Card (ending in 3456)</div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <h3 class="section-title">Shipping Information</h3>
+
+                    <div class="order-info-item">
+                        <div class="info-label">Shipping Address</div>
+                        <div class="info-value">
+                            John Doe<br>
+                            123 Main Street, Apt 4B<br>
+                            New York, NY 10001<br>
+                            United States
+                        </div>
+                    </div>
+
+                    <div class="order-info-item">
+                        <div class="info-label">Shipping Method</div>
+                        <div class="info-value">Standard Delivery (3-5 business days)</div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <h3 class="section-title">Contact Information</h3>
+
+                    <div class="order-info-item">
+                        <div class="info-label">Email</div>
+                        <div class="info-value">your@email.com</div>
+                    </div>
+
+                    <div class="order-info-item">
+                        <div class="info-label">Phone</div>
+                        <div class="info-value">(123) 456-7890</div>
+                    </div>
                 </div>
 
-                <div class="summary-item">
-                    <div class="item-image">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
-                            <path d="M2 12h1a4 4 0 0 1 4-4h9.5a4 4 0 0 1 0 8H7a4 4 0 0 1-4-4H2z"></path>
-                            <circle cx="9" cy="12" r="1"></circle>
-                        </svg>
-                    </div>
-                    <div class="item-details">
-                        <div class="item-name">AirPods Pro</div>
-                        <div class="item-variant">White, 2nd Generation</div>
-                    </div>
-                    <div class="item-price">$249.00</div>
-                </div>
+                <div class="order-summary">
+                    <h3 class="section-title">Order Summary (3 items)</h3>
 
-                <div class="summary-item">
-                    <div class="item-image">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
-                            <rect x="6" y="8" width="12" height="8" rx="1"></rect>
-                        </svg>
-                    </div>
-                    <div class="item-details">
-                        <div class="item-name">Silicone Case</div>
-                        <div class="item-variant">Midnight Blue, iPhone 13 Pro</div>
-                    </div>
-                    <div class="item-price">$49.00</div>
-                </div>
-
-                <div class="summary-totals">
-                    <div class="total-row">
-                        <div class="total-label">Subtotal</div>
-                        <div class="total-value">$1,297.00</div>
+                    <div class="summary-item">
+                        <div class="item-image">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg>
+                        </div>
+                        <div class="item-details">
+                            <div class="item-name">iPhone 13 Pro</div>
+                            <div class="item-variant">Sierra Blue, 256GB</div>
+                        </div>
+                        <div class="item-price">$999.00</div>
                     </div>
 
-                    <div class="total-row">
-                        <div class="total-label">Shipping</div>
-                        <div class="total-value">$0.00</div>
+                    <div class="summary-item">
+                        <div class="item-image">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                                <path d="M2 12h1a4 4 0 0 1 4-4h9.5a4 4 0 0 1 0 8H7a4 4 0 0 1-4-4H2z"></path>
+                                <circle cx="9" cy="12" r="1"></circle>
+                            </svg>
+                        </div>
+                        <div class="item-details">
+                            <div class="item-name">AirPods Pro</div>
+                            <div class="item-variant">White, 2nd Generation</div>
+                        </div>
+                        <div class="item-price">$249.00</div>
                     </div>
 
-                    <div class="total-row">
-                        <div class="total-label">Tax</div>
-                        <div class="total-value">$103.76</div>
+                    <div class="summary-item">
+                        <div class="item-image">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                                <rect x="6" y="8" width="12" height="8" rx="1"></rect>
+                            </svg>
+                        </div>
+                        <div class="item-details">
+                            <div class="item-name">Silicone Case</div>
+                            <div class="item-variant">Midnight Blue, iPhone 13 Pro</div>
+                        </div>
+                        <div class="item-price">$49.00</div>
                     </div>
 
-                    <div class="total-row grand-total">
-                        <div class="total-label">Total</div>
-                        <div class="total-value">$1,400.76</div>
+                    <div class="summary-totals">
+                        <div class="total-row">
+                            <div class="total-label">Subtotal</div>
+                            <div class="total-value">$1,297.00</div>
+                        </div>
+
+                        <div class="total-row">
+                            <div class="total-label">Shipping</div>
+                            <div class="total-value">$0.00</div>
+                        </div>
+
+                        <div class="total-row">
+                            <div class="total-label">Tax</div>
+                            <div class="total-value">$103.76</div>
+                        </div>
+
+                        <div class="total-row grand-total">
+                            <div class="total-label">Total</div>
+                            <div class="total-value">$1,400.76</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="actions">
-            <a href="./User/dashboard.php" class="btn btn-outline">View Order History</a>
-            <a href="../index.php" class="btn btn-primary">Continue Shopping</a>
-        </div>
+            <div class="actions">
+                <a href="./User/dashboard.php" class="btn btn-outline">View Order History</a>
+                <a href="../index.php" class="btn btn-primary">Continue Shopping</a>
+            </div>
     </main>
 
     <!-- footer -->

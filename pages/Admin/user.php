@@ -273,7 +273,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
         <div class="container">
             <a class="navbar-brand" href="../../index.php">
-                <img src="../../assets/images/main-logo.png" alt="Mobile Shop">
+                <img src="../../assets/images/download.png" alt="Mobile Shop">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -281,12 +281,12 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto w-100 d-flex justify-content-end p-3">
                     <li class="nav-item">
-                    <a class="nav-link" href="#"><?php echo $_SESSION['email'] ?></a>
+                        <a class="nav-link" href="#"><?php echo $_SESSION['email'] ?></a>
                     </li>
                 </ul>
-                <div class="d-flex align-items-center">
+                <!-- <div class="d-flex align-items-center">
                     <i class="fa fa-phone"></i>
-                </div>
+                </div> -->
             </div>
         </div>
     </nav>
@@ -380,12 +380,12 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 </thead>
                                 <tbody>
                                     <?php foreach ($users as $user): ?>
-                                    <tr>
-                                        <td><?= htmlspecialchars($user['user_id']) ?></td>
-                                        <td><?= htmlspecialchars($user['email']) ?></td>
-                                        <td><?= htmlspecialchars($user['role']) ?></td>
-                                        <td><?= htmlspecialchars($user['updated_at']) ?></td>
-                                    </tr>
+                                        <tr>
+                                            <td><?= htmlspecialchars($user['user_id']) ?></td>
+                                            <td><?= htmlspecialchars($user['email']) ?></td>
+                                            <td><?= htmlspecialchars($user['role']) ?></td>
+                                            <td><?= htmlspecialchars($user['updated_at']) ?></td>
+                                        </tr>
                                     <?php endforeach; ?>
                                     <!-- Add dynamic rows here -->
                                 </tbody>

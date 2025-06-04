@@ -289,13 +289,13 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
               <li class="nav-item">
                 <div class="user-items ps-5">
                   <ul class="d-flex justify-content-end list-unstyled">
-                    <li class="search-item pe-3">
+                    <!-- <li class="search-item pe-3">
                       <a href="#" class="search-button">
                         <svg class="search">
                           <use xlink:href="#search"></use>
                         </svg>
                       </a>
-                    </li>
+                    </li> -->
 
                     <li class="pe-3">
                       <a href="<?php
@@ -485,7 +485,8 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 $productDetailsPage = './includes/productDetails.php?product_id=' . $productId;
 
 
-                include 'includes/productCardNew.php'; ?>
+                include './includes/productCardNew.php'; ?>
+
               </div>
             <?php } ?>
           </div>

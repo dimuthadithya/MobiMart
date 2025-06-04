@@ -530,11 +530,11 @@ if (count($cartItems) == 0) {
               <li class="nav-item">
                 <div class="user-items ps-5">
                   <ul class="d-flex justify-content-end list-unstyled">
-                    <li class="search-item pe-3">
+                    <!-- <li class="search-item pe-3">
                       <a href="#" class="search-button text-dark">
                         <i class="fas fa-search"></i>
                       </a>
-                    </li>
+                    </li> -->
 
                     <li class="pe-3">
                       <a href="<?php
@@ -576,17 +576,17 @@ if (count($cartItems) == 0) {
         <div class="step completed">
           <div class="step-circle"><i class="fas fa-check"></i></div>
           <div class="step-title">Shopping Cart</div>
-          <div class="step-line"></div>
+          <!-- <div class="step-line"></div> -->
         </div>
         <div class="step active">
           <div class="step-circle">2</div>
           <div class="step-title">Checkout</div>
-          <div class="step-line"></div>
+          <!-- <div class="step-line"></div> -->
         </div>
         <div class="step">
           <div class="step-circle">3</div>
           <div class="step-title">Order Complete</div>
-          <div class="step-line"></div>
+          <!-- <div class="step-line"></div> -->
         </div>
       </div>
     </div>
@@ -632,12 +632,12 @@ if (count($cartItems) == 0) {
                 </label>
               </div>
 
-              <div class="form-check">
+              <!-- <div class="form-check">
                 <input class="form-check-input" type="radio" name="paymentMethod" id="cardPayment" value="card">
                 <label class="form-check-label" for="cardPayment">
                   <i class="fas fa-credit-card me-2"></i>Credit/Debit Card
                 </label>
-              </div>
+              </div> -->
             </div>
 
             <!-- Card Payment Details (Hidden by default) -->
