@@ -1,6 +1,7 @@
 <?php
 
 include_once '../config/db.php';
+session_start();
 
 if (isset($_GET['product_id'])) {
     $productId = $_GET['product_id'];
