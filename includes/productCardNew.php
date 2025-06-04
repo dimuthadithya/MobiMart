@@ -1,14 +1,23 @@
 <?php
 $product_image = $productImage;
 $product_name = htmlspecialchars($product['product_name']);
-$brand_name = isset($product['brand_name']) && $product['brand_name'] ? htmlspecialchars($product['brand_name']) : $product_name;
+$brand_id = $product['brand_id'];
 $price = number_format($product['price'], 2);
 $quantity = (int)$product['quantity'];
 $sku = htmlspecialchars($product['sku']);
+$stmt = $conn->prepare("SELECT brand_name FROM brands WHERE brand_id = :brand_id");
+$stmt->execute(['brand_id' => $brand_id]);
+$brand = $stmt->fetch(PDO::FETCH_ASSOC);
+if ($brand) {
+    $brand_name = htmlspecialchars($brand['brand_name']);
+} else {
+    $brand_name = 'Unknown';
+}
+
 ?>
 
 <div class="col">
-    <a href="../includes/productDetails.php?product_id=<?= $product['product_id'] ?>" class="text-decoration-none text-dark">
+    <a href="<?php echo $productDetailsPage ?>" class="text-decoration-none text-dark">
         <div class="product-card shadow-sm">
             <!-- Product Image -->
             <div class="product-image-wrapper">

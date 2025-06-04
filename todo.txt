@@ -1,5 +1,3 @@
-index page Mobile Products click parth eka 
-admin eke product eke brand id wenas kirima
 order complete eka update karanda one
-dashboard Recent Orders sedima
+http://localhost/MobiMart/pages/User/dashboard.php duplicate last order
 

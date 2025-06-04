@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS ministore;
-USE ministore;
+CREATE DATABASE IF NOT EXISTS mobimart;
+USE mobimart;
 
 -- Users Table
 CREATE TABLE users (

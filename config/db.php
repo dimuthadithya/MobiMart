@@ -1,7 +1,7 @@
 <?php
 
 $host = 'localhost';
-$db   = 'ministore';
+$db   = 'mobimart';
 $user = 'root';
 $pass = '';
 
