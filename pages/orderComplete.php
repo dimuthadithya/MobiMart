@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +23,7 @@
         }
 
         body {
-            background-color: #f5f7fa;
+            background-color: #f8f9fa;
         }
 
         .container {
@@ -445,6 +449,28 @@
         .step.completed .step-line {
             background-color: #198754;
         }
+
+        .payment-status .paid {
+            color: #198754;
+            /* Bootstrap success color */
+            font-weight: bold;
+        }
+
+        .payment-status .pending {
+            color: #ffc107;
+            /* Bootstrap warning color */
+            font-weight: bold;
+        }
+
+        .payment-status .failed {
+            color: #dc3545;
+            /* Bootstrap danger color */
+            font-weight: bold;
+        }
+
+        .order-complete {
+            max-width: 800px;
+        }
     </style>
 </head>
 
@@ -500,15 +526,15 @@
                             <?php
                             if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'admin') {
                                 echo '<li class="nav-item">
-                                    <a class="nav-link me-4" href="./pages/Admin/dashboard.php">Dashboard</a>
+                                    <a class="nav-link me-4" href="./Admin/dashboard.php">Dashboard</a>
                                   </li>';
                             } elseif (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'user') {
                                 echo '<li class="nav-item">
-                                    <a class="nav-link me-4" href="../pages/User/dashboard.php">Dashboard</a>
+                                    <a class="nav-link me-4" href="./User/dashboard.php">Dashboard</a>
                                   </li>';
                             } else if (!isset($_SESSION['user_type'])) {
                                 echo '<li class="nav-item">
-                                    <a class="nav-link me-4" href="../pages/sign_in.php">Sign In</a>
+                                    <a class="nav-link me-4" href="./sign_in.php">Sign In</a>
                                   </li>';
                             } else if (isset($_SESSION['user_type'])) {
                                 echo '<li class="nav-item">
@@ -724,6 +750,110 @@
                     </div>
                 </div>
             </div> -->
+
+            <div class="order-grid">
+                <div class="order-details">
+                    <h3 class="section-title">Order Information</h3>
+
+                    <div class="order-info-item">
+                        <div class="info-label">Order Date</div>
+                        <div class="info-value"><?php echo $order['order_date']; ?></div>
+                    </div>
+
+                    <div class="order-info-item">
+                        <div class="info-label">Order Number</div>
+                        <div class="info-value"><?php echo $order['order_number']; ?></div>
+                    </div>
+
+                    <div class="order-info-item">
+                        <div class="info-label">Payment Method</div>
+                        <div class="info-value"><?php echo $order['payment_method']; ?></div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <h3 class="section-title">Shipping Information</h3>
+
+                    <div class="order-info-item">
+                        <div class="info-label">Shipping Address</div>
+                        <div class="info-value">
+                            <?php echo nl2br(htmlspecialchars($order['shipping_address'])); ?>
+                        </div>
+                    </div>
+
+                    <div class="order-info-item">
+                        <div class="info-label">Shipping Method</div>
+                        <div class="info-value"><?php echo $order['shipping_method']; ?></div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <h3 class="section-title">Contact Information</h3>
+
+                    <div class="order-info-item">
+                        <div class="info-label">Email</div>
+                        <div class="info-value"><?php echo $order['email']; ?></div>
+                    </div>
+
+                    <div class="order-info-item">
+                        <div class="info-label">Phone</div>
+                        <div class="info-value"><?php echo $order['phone']; ?></div>
+                    </div>
+                </div>
+
+                <div class="order-summary">
+                    <h3 class="section-title">Order Summary (<?php echo count($orderItems); ?> items)</h3>
+
+                    <?php foreach ($orderItems as $item): ?>
+                        <div class="summary-item">
+                            <div class="item-image">
+                                <img src="<?php echo $item['image_url']; ?>" alt="<?php echo $item['product_name']; ?>" width="60" height="60">
+                            </div>
+                            <div class="item-details">
+                                <div class="item-name"><?php echo $item['product_name']; ?></div>
+                                <div class="item-variant"><?php echo $item['variant']; ?></div>
+                            </div>
+                            <div class="item-price">$<?php echo number_format($item['price'], 2); ?></div>
+                        </div>
+                    <?php endforeach; ?>
+
+                    <div class="summary-totals">
+                        <div class="total-row">
+                            <div class="total-label">Subtotal</div>
+                            <div class="total-value">$<?php echo number_format($subtotal, 2); ?></div>
+                        </div>
+
+                        <div class="total-row">
+                            <div class="total-label">Shipping</div>
+                            <div class="total-value">$<?php echo number_format($shippingCost, 2); ?></div>
+                        </div>
+
+                        <div class="total-row">
+                            <div class="total-label">Tax</div>
+                            <div class="total-value">$<?php echo number_format($tax, 2); ?></div>
+                        </div>
+
+                        <div class="total-row grand-total">
+                            <div class="total-label">Total</div>
+                            <div class="total-value">$<?php echo number_format($totalPrice, 2); ?></div>
+                        </div>
+
+                        <?php
+                        // Get payment status
+                        $paymentSql = "SELECT payment_status FROM payments WHERE order_id = :order_id";
+                        $stmt = $conn->prepare($paymentSql);
+                        $stmt->execute(['order_id' => $orderId]);
+                        $payment = $stmt->fetch(PDO::FETCH_ASSOC);
+                        ?>
+                        <div class="total-row payment-status">
+                            <div class="total-label">Payment Status</div>
+                            <div class="total-value <?php echo $payment['payment_status']; ?>">
+                                <?php echo ucfirst($payment['payment_status']); ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="actions">
                 <a href="./User/dashboard.php" class="btn btn-outline">View Order History</a>
