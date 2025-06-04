@@ -7,7 +7,7 @@ $password = $_POST['password'];
 $confirmPassword = $_POST['confirmPassword'];
 
 if ($password == $confirmPassword) {
-    $sql = "INSERT INTO users (email, password) VALUES ('$email', '$password')";
+    $sql = "INSERT INTO users (email, password,role) VALUES ('$email', '$password', 'customer')";
     $result = $conn->query($sql);
     if ($result) {
         header("location: ../pages/sign_in.php");
