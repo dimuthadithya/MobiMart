@@ -1,4 +1,3 @@
 order complete eka update karanda one
 http://localhost/MobiMart/pages/User/dashboard.php duplicate last order
 http://localhost/MobiMart/pages/User/dashboard.php  profile eka
-hadana account eka admin account withari hedenne user account hedenne ne

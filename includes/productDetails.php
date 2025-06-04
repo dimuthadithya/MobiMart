@@ -403,23 +403,23 @@ $descriptionPoints = array_filter(array_map('trim', explode('.', $productDescrip
                             id="navbar"
                             class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
                             <li class="nav-item">
-                                <a class="nav-link me-4 active" href="./index.php">Home</a>
+                                <a class="nav-link me-4 active" href="../index.php">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link me-4 active" href="./pages/phones.php">Phones</a>
+                                <a class="nav-link me-4 active" href="../pages/phones.php">Phones</a>
                             </li>
                             <?php
                             if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'admin') {
                                 echo '<li class="nav-item">
-                                    <a class="nav-link me-4" href="./pages/Admin/dashboard.php">Dashboard</a>
+                                    <a class="nav-link me-4" href=".../pages/Admin/dashboard.php">Dashboard</a>
                                   </li>';
                             } elseif (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'user') {
                                 echo '<li class="nav-item">
-                                    <a class="nav-link me-4" href="./pages/User/dashboard.php">Dashboard</a>
+                                    <a class="nav-link me-4" href="../pages/User/dashboard.php">Dashboard</a>
                                   </li>';
                             } else {
                                 echo '<li class="nav-item">
-                                    <a class="nav-link me-4" href="./pages/sign_in.php">Sign In</a>
+                                    <a class="nav-link me-4" href="../pages/sign_in.php">Sign In</a>
                                   </li>';
                             }
                             ?>
