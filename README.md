@@ -121,8 +121,3 @@ This project is open source and available under the MIT License.
 ### Admin Dashboard
 
 ![Shopping Cart](assets/images/admin.png)
-
-### Payment & Shipping
-
-![PayPal](assets/images/paypal.jpg) ![Mastercard](assets/images/mastercard.jpg) ![Visa](assets/images/visa.jpg)
-![DHL](assets/images/dhl.png) ![Shipping Options](assets/images/shippingcard.png)
