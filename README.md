@@ -59,17 +59,20 @@
    ```
 
 2. Set up your local environment:
+
    - Install XAMPP (or similar) if you haven't already
    - Start Apache and MySQL services
    - Place the project in `htdocs` folder
 
 3. Database setup:
+
    - Open phpMyAdmin ([http://localhost/phpmyadmin](http://localhost/phpmyadmin))
    - Create a new database named 'ministore'
    - Import `sql/ministore.sql`
    - (Optional) Import `sql/dummyData.sql` for test data
 
 4. Configure the application:
+
    - Navigate to `config/db.php`
    - Update database credentials if needed
 
@@ -96,36 +99,27 @@ This project is open source and available under the MIT License.
 ## 📸 Screenshots
 
 ### Home Page
+
 ![Home Page Banner](assets/images/banner-image.png)
 
 ### Product Catalog
-<div style="display: flex; gap: 10px;">
-    <img src="assets/images/product-item1.jpg" alt="Product Catalog" width="200"/>
-    <img src="assets/images/product-item2.jpg" alt="Product Display" width="200"/>
-    <img src="assets/images/product-item3.jpg" alt="Featured Products" width="200"/>
-</div>
+
+![Product Catalog](assets/images/product-item1.jpg)
+![Product Display](assets/images/product-item2.jpg)
 
 ### Product Details
+
 ![Product Details](assets/images/singel-product-item.jpg)
 
 ### User Dashboard
-<div style="display: flex; gap: 10px;">
-    <img src="assets/images/user_dashbord01.webp" alt="User Dashboard" width="300"/>
-    <img src="assets/images/user_dashbord02.webp" alt="Order History" width="300"/>
-</div>
 
-### Shopping Cart & Checkout
+![User Dashboard](assets/images/user_dashbord01.webp)
+
+### Shopping Cart
+
 ![Shopping Cart](assets/images/cart-item1.jpg)
 
-### Payment Options
-<div style="display: flex; gap: 10px; align-items: center;">
-    <img src="assets/images/paypal.jpg" alt="PayPal" height="30"/>
-    <img src="assets/images/mastercard.jpg" alt="Mastercard" height="30"/>
-    <img src="assets/images/visa.jpg" alt="Visa" height="30"/>
-</div>
+### Payment & Shipping
 
-### Shipping Partners
-<div style="display: flex; gap: 10px; align-items: center;">
-    <img src="assets/images/dhl.png" alt="DHL" height="40"/>
-    <img src="assets/images/shippingcard.png" alt="Shipping Options" height="40"/>
-</div>
+![PayPal](assets/images/paypal.jpg) ![Mastercard](assets/images/mastercard.jpg) ![Visa](assets/images/visa.jpg)
+![DHL](assets/images/dhl.png) ![Shipping Options](assets/images/shippingcard.png)
