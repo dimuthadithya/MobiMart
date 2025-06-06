@@ -1,6 +1,6 @@
 <?php
 require_once '../config/db.php';
-
+session_start();
 // Fetch all phones from the database with brand information
 $query = "SELECT p.*, b.brand_name 
           FROM products p 
@@ -20,6 +20,10 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MobiMart - Mobile Phones</title>
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link
+        rel="stylesheet"
+        type="text/css"
+        href="./assets/css/bootstrap.min.css" />
     <link href="../assets/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -239,9 +243,111 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
 
-    <?php
-    include '../includes/nav.php';
-    ?>
+    <!-- nav -->
+    <header
+        id="header"
+        class="site-header header-scrolled position-fixed text-black bg-light">
+        <nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img src="../assets/images/main-logo.png" class="logo" />
+                </a>
+                <button
+                    class="navbar-toggler d-flex d-lg-none order-3 p-2"
+                    type="button"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#bdNavbar"
+                    aria-controls="bdNavbar"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <svg class="navbar-icon">
+                        <use xlink:href="#navbar-icon"></use>
+                    </svg>
+                </button>
+                <div
+                    class="offcanvas offcanvas-end"
+                    tabindex="-1"
+                    id="bdNavbar"
+                    aria-labelledby="bdNavbarOffcanvasLabel">
+                    <div class="offcanvas-header px-4 pb-0">
+                        <a class="navbar-brand" href="index.html">
+                            <img src="../assets/images/main-logo.png" class="logo" />
+                        </a>
+                        <button
+                            type="button"
+                            class="btn-close btn-close-black"
+                            data-bs-dismiss="offcanvas"
+                            aria-label="Close"
+                            data-bs-target="#bdNavbar"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul
+                            id="navbar"
+                            class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link me-4" href="../index.php">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link me-4 active" href="../pages/phones.php">Phones</a>
+                            </li>
+                            <?php
+                            if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'admin') {
+                                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href="../pages/Admin/dashboard.php">Dashboard</a>
+                                  </li>';
+                            } elseif (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'user') {
+                                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href="../pages/User/dashboard.php">Dashboard</a>
+                                  </li>';
+                            } else {
+                                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href="../pages/sign_in.php">Sign In</a>
+                                  </li>';
+                            }
+                            ?>
+
+                            <li class="nav-item">
+                                <div class="user-items ps-5">
+                                    <ul class="d-flex justify-content-end list-unstyled">
+                                        <li class="search-item pe-3">
+                                            <a href="#" class="search-button">
+                                                <svg class="search">
+                                                    <use xlink:href="#search"></use>
+                                                </svg>
+                                            </a>
+                                        </li>
+
+                                        <li class="pe-3">
+                                            <a href="<?php
+
+                                                        if (isset($_SESSION['user_type'])) {
+                                                            echo $_SESSION['user_type'] === 'admin' ? '../pages/Admin/dashboard.php' : './pages/User/dashboard.php';
+                                                        } else {
+                                                            echo '../pages/sign_in.php';
+                                                        }
+                                                        ?>">
+                                                <svg class="user">
+                                                    <use xlink:href="#user"></use>
+                                                </svg>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="../pages/cart.php">
+                                                <svg class="cart">
+                                                    <use xlink:href="#cart"></use>
+                                                </svg>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
 
     <!-- Hero Section -->
     <div class="hero-section">
@@ -379,9 +485,114 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </script>
     </div>
 
-    <?php
-    include '../includes/footer.php';
-    ?>
+
+    <!-- footer -->
+    <footer id="footer" class="overflow-hidden">
+        <div class="container">
+            <div class="row">
+                <div class="footer-top-area">
+                    <div class="row d-flex flex-wrap justify-content-between">
+                        <div class="col-lg-3 col-sm-6 pb-3">
+                            <div class="footer-menu">
+                                <img src="../assets/images/main-logo.png" alt="logo" />
+                                <p>
+                                    "Find the latest smartphones, accessories, and great deals all in one place. Quality phones with reliable service just for you!"
+                                </p>
+                                <div class="social-links">
+                                    <ul class="d-flex list-unstyled">
+                                        <li>
+                                            <a href="#">
+                                                <svg class="facebook">
+                                                    <use xlink:href="#facebook" />
+                                                </svg>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <svg class="instagram">
+                                                    <use xlink:href="#instagram" />
+                                                </svg>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <svg class="twitter">
+                                                    <use xlink:href="#twitter" />
+                                                </svg>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <svg class="linkedin">
+                                                    <use xlink:href="#linkedin" />
+                                                </svg>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <svg class="youtube">
+                                                    <use xlink:href="#youtube" />
+                                                </svg>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-sm-6 pb-3 text-decoration-none">
+                            <div class="footer-menu text-uppercase">
+                                <h5 class="widget-title pb-2">Quick Links</h5>
+                                <ul class="menu-list list-unstyled text-uppercase">
+                                    <li class="menu-item pb-2">
+                                        <a href="../index.php">Home</a>
+                                    </li>
+                                    <li class="menu-item pb-2">
+                                        <a href="../pages/phones.php">Phones</a>
+                                    </li>
+                                    <li class="menu-item pb-2">
+                                        <a href="../pages/phones.php">Shop</a>
+                                    </li>
+                                    <li class="menu-item pb-2">
+                                        <a href="../pages/sign_in.php">SignIn</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-sm-6 pb-3">
+                            <div class="footer-menu contact-item">
+                                <h5 class="widget-title text-uppercase pb-2">Contact Us</h5>
+                                <p>
+                                    Do you have any queries or suggestions?
+                                    <a href="mailto:">mobimart@info.com</a>
+                                </p>
+                                <p>
+                                    If you need support? Just give us a call.
+                                    <a href="">+94 77177111</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+    </footer>
+
+    <div id="footer-bottom">
+        <div class="container">
+            <div class="row d-flex flex-wrap justify-content-between">
+
+                <div>
+                    <div class="copyright">
+                        <p class="justify-content-center text-center">
+                            © Copyright 2023 MobiMart.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="../assets/js/jquery-1.11.0.min.js"></script>
