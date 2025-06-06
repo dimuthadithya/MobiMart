@@ -1,7 +1,7 @@
 <tr>
     <td>
         <div class="d-flex align-items-center">
-            <img src="/api/placeholder/80/80" alt="iPhone" class="product-img me-2">
+            <img src="../../assets/uploads/products/<?= htmlspecialchars($product['image_url']) ?>" class="product-img" alt="<?= htmlspecialchars($product['product_name']) ?>" width="40" height="40">
             <span><?php echo $productName ?></span>
         </div>
     </td>
@@ -17,7 +17,7 @@
                 echo 'Out of Stock'; ?>
             </span>
         <?php
-        } else if ($productStock > 10) { ?>
+        } else if ($productStock <= 5) { ?>
             <span class="badge bg-warning">
                 <?php
                 echo 'Low Stock';

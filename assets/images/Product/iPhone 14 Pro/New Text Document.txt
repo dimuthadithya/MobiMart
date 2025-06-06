@@ -1,0 +1,4 @@
+Size: 6.1" 2556 pixels
+Camera: 48MP
+RAM: 6GB RAM
+Battery: 3200mAh

@@ -1,6 +1,7 @@
 <?php
 
 include_once '../config/db.php';
+session_start();
 
 if (isset($_GET['product_id'])) {
     $productId = $_GET['product_id'];
@@ -359,56 +360,16 @@ $descriptionPoints = array_filter(array_map('trim', explode('.', $productDescrip
         </symbol>
     </svg>
 
-    <div class="search-popup">
-        <div class="search-popup-container">
-            <form role="search" method="get" class="search-form" action="">
-                <input
-                    type="search"
-                    id="search-form"
-                    class="search-field"
-                    placeholder="Type and press enter"
-                    value=""
-                    name="s" />
-                <button type="submit" class="search-submit">
-                    <svg class="search">
-                        <use xlink:href="#search"></use>
-                    </svg>
-                </button>
-            </form>
 
-            <h5 class="cat-list-title">Browse Categories</h5>
+    <!-- Navbar -->
 
-            <ul class="cat-list">
-                <li class="cat-list-item">
-                    <a href="#" title="Mobile Phones">Mobile Phones</a>
-                </li>
-                <li class="cat-list-item">
-                    <a href="#" title="Smart Watches">Smart Watches</a>
-                </li>
-                <li class="cat-list-item">
-                    <a href="#" title="Headphones">Headphones</a>
-                </li>
-                <li class="cat-list-item">
-                    <a href="#" title="Accessories">Accessories</a>
-                </li>
-                <li class="cat-list-item">
-                    <a href="#" title="Monitors">Monitors</a>
-                </li>
-                <li class="cat-list-item">
-                    <a href="#" title="Speakers">Speakers</a>
-                </li>
-                <li class="cat-list-item">
-                    <a href="#" title="Memory Cards">Memory Cards</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <header id="header" class="site-header header-scrolled text-black bg-light">
+    <header
+        id="header"
+        class="site-header header-scrolled text-black bg-light">
         <nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.html">
-                    <img src="../assets/images/main-logo.png" class="logo" />
+                    <img src="../assets/images/download.png" class="logo" width="80px" height="80px" />
                 </a>
                 <button
                     class="navbar-toggler d-flex d-lg-none order-3 p-2"
@@ -429,7 +390,7 @@ $descriptionPoints = array_filter(array_map('trim', explode('.', $productDescrip
                     aria-labelledby="bdNavbarOffcanvasLabel">
                     <div class="offcanvas-header px-4 pb-0">
                         <a class="navbar-brand" href="index.html">
-                            <img src="../assets/images/main-logo.png" class="logo" />
+                            <img src="./assets/images/main-logo.png" class="logo" />
                         </a>
                         <button
                             type="button"
@@ -446,73 +407,52 @@ $descriptionPoints = array_filter(array_map('trim', explode('.', $productDescrip
                                 <a class="nav-link me-4 active" href="../index.php">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link me-4" href="#company-services">Services</a>
+                                <a class="nav-link me-4 active" href="../pages/phones.php">Phones</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link me-4" href="#mobile-products">Products</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link me-4" href="#smart-watches">Watches</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link me-4" href="#yearly-sale">Sale</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link me-4" href="#latest-blog">Blog</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a
-                                    class="nav-link me-4 dropdown-toggle link-dark"
-                                    data-bs-toggle="dropdown"
-                                    href="#"
-                                    role="button"
-                                    aria-expanded="false">Pages</a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="about.html" class="dropdown-item">About</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog.html" class="dropdown-item">Blog</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop.html" class="dropdown-item">Shop</a>
-                                    </li>
-                                    <li>
-                                        <a href="cart.html" class="dropdown-item">Cart</a>
-                                    </li>
-                                    <li>
-                                        <a href="checkout.html" class="dropdown-item">Checkout</a>
-                                    </li>
-                                    <li>
-                                        <a href="single-post.html" class="dropdown-item">Single Post</a>
-                                    </li>
-                                    <li>
-                                        <a href="single-product.html" class="dropdown-item">Single Product</a>
-                                    </li>
-                                    <li>
-                                        <a href="contact.html" class="dropdown-item">Contact</a>
-                                    </li>
-                                </ul>
-                            </li>
+                            <?php
+                            if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'admin') {
+                                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href=".../pages/Admin/dashboard.php">Dashboard</a>
+                                  </li>';
+                            } elseif (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'user') {
+                                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href="../pages/User/dashboard.php">Dashboard</a>
+                                  </li>';
+                            } else {
+                                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href="../pages/sign_in.php">Sign In</a>
+                                  </li>';
+                            }
+                            ?>
+
                             <li class="nav-item">
                                 <div class="user-items ps-5">
                                     <ul class="d-flex justify-content-end list-unstyled">
-                                        <li class="search-item pe-3">
+                                        <!-- <li class="search-item pe-3">
                                             <a href="#" class="search-button">
                                                 <svg class="search">
                                                     <use xlink:href="#search"></use>
                                                 </svg>
                                             </a>
-                                        </li>
+                                        </li> -->
+
                                         <li class="pe-3">
-                                            <a href="#">
+                                            <a href="<?php
+
+                                                        if (isset($_SESSION['user_type'])) {
+                                                            echo $_SESSION['user_type'] === 'admin' ? './pages/Admin/dashboard.php' : './pages/User/dashboard.php';
+                                                        } else {
+                                                            echo './pages/sign_in.php';
+                                                        }
+                                                        ?>">
                                                 <svg class="user">
                                                     <use xlink:href="#user"></use>
                                                 </svg>
                                             </a>
                                         </li>
+
                                         <li>
-                                            <a href="cart.html">
+                                            <a href="./pages/cart.php">
                                                 <svg class="cart">
                                                     <use xlink:href="#cart"></use>
                                                 </svg>
@@ -527,6 +467,9 @@ $descriptionPoints = array_filter(array_map('trim', explode('.', $productDescrip
             </div>
         </nav>
     </header>
+
+
+
 
     <div class="container py-4">
         <!-- Product Header - Mobile -->
@@ -659,694 +602,354 @@ $descriptionPoints = array_filter(array_map('trim', explode('.', $productDescrip
                     <label class="form-label">Quantity</label>
                     <form action="../controller/cart_process.php" method="post">
                         <div class="input-group" style="max-width: 150px">
-                            <button class="btn btn-outline-secondary" type="button">-</button>
-                            <input type="text" class="form-control text-center" name="quantity" value="1"
-                                data-max-stock="<?php echo $productStock; ?>" />
-                            <button class="btn btn-outline-secondary" type="button">+</button>
+                            <button class="btn btn-outline-secondary" type="button" id="decrementBtn">-</button>
+                            <input type="number" class="form-control text-center" name="quantity" id="quantityInput" value="1" min="1" max="<?php echo $productStock; ?>" readonly />
+                            <button class="btn btn-outline-secondary" type="button" id="incrementBtn">+</button>
                         </div>
                         <small class="text-muted">Available stock: <?php echo $productStock; ?></small>
-                </div><!-- Add to Cart Button -->
-                <div class="d-grid mb-4">
-                    <input type="hidden" name="product_id" value="<?php echo $productId; ?>" />
-                    <button type="submit" class="btn btn-primary btn-lg">
-                        Add to Cart
-                    </button>
+
+                        <!-- Add to Cart Button -->
+                        <div class="d-grid mt-3 mb-4">
+                            <input type="hidden" name="product_id" value="<?php echo $productId; ?>" />
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                Add to Cart
+                            </button>
+                        </div>
                     </form>
                 </div>
 
-                <!-- Cart Status Message -->
-                <div id="cartMessage" class="alert d-none"></div>
+                <!-- quantity java -->
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        // Get elements
+                        const quantityInput = document.getElementById('quantityInput');
+                        const decrementBtn = document.getElementById('decrementBtn');
+                        const incrementBtn = document.getElementById('incrementBtn');
+                        const maxStock = <?php echo $productStock; ?>;
 
-                <!-- Payment Info -->
-                <div class="card mb-4">
-                    <div class="card-body">
+                        // Function to update quantity
+                        function updateQuantity(newValue) {
+                            // Ensure value is within bounds
+                            newValue = Math.max(1, Math.min(newValue, maxStock));
+                            quantityInput.value = newValue;
+
+                            // Update button states
+                            decrementBtn.disabled = newValue <= 1;
+                            incrementBtn.disabled = newValue >= maxStock;
+                        }
+
+                        // Decrement button click
+                        decrementBtn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const currentValue = parseInt(quantityInput.value) || 1;
+                            updateQuantity(currentValue - 1);
+                        });
+
+                        // Increment button click
+                        incrementBtn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const currentValue = parseInt(quantityInput.value) || 1;
+                            updateQuantity(currentValue + 1);
+                        });
+
+                        // Handle direct input
+                        quantityInput.addEventListener('input', function() {
+                            let value = parseInt(this.value);
+                            if (isNaN(value) || value < 1) {
+                                value = 1;
+                            } else if (value > maxStock) {
+                                value = maxStock;
+                            }
+                            updateQuantity(value);
+                        });
+
+                        // Initialize button states
+                        updateQuantity(1);
+
+                        // Rest of your existing JavaScript code...
+                        // Gallery Image Handling
+                        const thumbnails = document.querySelectorAll('.thumbnail-img');
+                        const mainImage = document.querySelector('.main-img');
+
+                        thumbnails.forEach(thumb => {
+                            thumb.addEventListener('click', function() {
+                                mainImage.src = this.dataset.full;
+                                mainImage.alt = this.alt;
+                                thumbnails.forEach(t => t.classList.remove('active'));
+                                this.classList.add('active');
+                            });
+                        });
+                    });
+                </script>
+            </div>
+
+            <div>
+                <section
+                    id="instagram"
+                    class="padding-large overflow-hidden no-padding-top">
+                    <div class="container">
                         <div class="row">
-                            <div class="col-6">
-                                <p class="mb-2">Payment Methods - Cash On Delivery</p>
-                                <div class="payment-icons">
-                                    <img
-                                        src="/api/placeholder/30/20"
-                                        alt="Payment Method"
-                                        class="me-1" />
-                                    <img
-                                        src="/api/placeholder/30/20"
-                                        alt="Payment Method"
-                                        class="me-1" />
-                                    <img
-                                        src="/api/placeholder/30/20"
-                                        alt="Payment Method"
-                                        class="me-1" />
-                                    <img src="/api/placeholder/30/20" alt="Payment Method" />
-                                </div>
+                            <div class="display-header text-uppercase text-dark text-center pb-3">
+                                <h2 class="display-7">Shop Our Insta</h2>
                             </div>
-                            <div class="col-6">
-                                <p class="mb-2">Delivery | Atlas | USPS</p>
-                                <div class="delivery-icons">
-                                    <img
-                                        src="/api/placeholder/30/20"
-                                        alt="Delivery Method"
-                                        class="me-1" />
-                                    <img
-                                        src="/api/placeholder/30/20"
-                                        alt="Delivery Method"
-                                        class="me-1" />
-                                    <img src="/api/placeholder/30/20" alt="Delivery Method" />
-                                </div>
+                            <div class="d-flex flex-wrap">
+                                <figure class="instagram-item pe-2">
+                                    <a
+                                        href=""
+                                        class="image-link position-relative">
+                                        <img
+                                            src="../assets/images/insta-item1.jpg"
+                                            alt="instagram"
+                                            class="insta-image" />
+                                        <div
+                                            class="icon-overlay position-absolute d-flex justify-content-center">
+                                            <svg class="instagram">
+                                                <use xlink:href="#instagram"></use>
+                                            </svg>
+                                        </div>
+                                    </a>
+                                </figure>
+                                <figure class="instagram-item pe-2">
+                                    <a
+                                        href=""
+                                        class="image-link position-relative">
+                                        <img
+                                            src="../assets/images/cart-item1.jpg"
+                                            alt="instagram"
+                                            class="insta-image" />
+                                        <div
+                                            class="icon-overlay position-absolute d-flex justify-content-center">
+                                            <svg class="instagram">
+                                                <use xlink:href="#instagram"></use>
+                                            </svg>
+                                        </div>
+                                    </a>
+                                </figure>
+                                <figure class="instagram-item pe-2">
+                                    <a
+                                        href=""
+                                        class="image-link position-relative">
+                                        <img
+                                            src="../assets/images/insta-item3.jpg"
+                                            alt="instagram"
+                                            class="insta-image" />
+                                        <div
+                                            class="icon-overlay position-absolute d-flex justify-content-center">
+                                            <svg class="instagram">
+                                                <use xlink:href="#instagram"></use>
+                                            </svg>
+                                        </div>
+                                    </a>
+                                </figure>
+                                <figure class="instagram-item pe-2">
+                                    <a
+                                        href=""
+                                        class="image-link position-relative">
+                                        <img
+                                            src="../assets/images/product-item3.jpg"
+                                            alt="instagram"
+                                            class="insta-image" />
+                                        <div
+                                            class="icon-overlay position-absolute d-flex justify-content-center">
+                                            <svg class="instagram">
+                                                <use xlink:href="#instagram"></use>
+                                            </svg>
+                                        </div>
+                                    </a>
+                                </figure>
+                                <figure class="instagram-item pe-2">
+                                    <a
+                                        href=""
+                                        class="image-link position-relative">
+                                        <img
+                                            src="../assets/images/single-image1.png"
+                                            alt="instagram"
+                                            class="insta-image" />
+                                        <div
+                                            class="icon-overlay position-absolute d-flex justify-content-center">
+                                            <svg class="instagram">
+                                                <use xlink:href="#instagram"></use>
+                                            </svg>
+                                        </div>
+                                    </a>
+                                </figure>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Share -->
-                <div class="d-flex align-items-center mb-4">
-                    <span class="me-2">Share:</span>
-                    <a href="#" class="text-muted me-2"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="text-muted me-2"><i class="bi bi-twitter"></i></a>
-                    <a href="#" class="text-muted me-2"><i class="bi bi-instagram"></i></a>
-                    <a href="#" class="text-muted"><i class="bi bi-pinterest"></i></a>
-                </div>
+                </section>
             </div>
-        </div>
 
-        <!-- Product Details -->
-        <div class="row mt-4">
-            <div class="col-12">
-                <h2 class="h4 mb-4">Product details</h2>
-
-                <!-- Description -->
-                <div class="mb-4">
-                    <h3 class="h6">Description</h3>
-                    <div class="mb-4">
-                        <h4 class="h5">Rounded design aesthetic</h4>
-                        <p>
-                            The rounded design is like a shining star in the night sky,
-                            popping out from the device body and creating a sense of visual
-                            harmony and elegance.
-                        </p>
-                    </div>
-
-                    <div class="mb-4">
-                        <h4 class="h5">The beauty of nature</h4>
-                        <p>
-                            Inspired by the serene tranquility of nature and crafted with
-                            exquisite artistry, carry beauty in the palm of your hand at all
-                            times.
-                        </p>
-                    </div>
-
-                    <div class="mb-4">
-                        <h4 class="h5">
-                            6.88" cinema-view display, immersive large screen
-                        </h4>
-                        <p>
-                            Revel in Redmi Series' first-ever 6.88" display, providing a
-                            more cinematic, immersive view for your favorite content. Paired
-                            with its auto-adjusting high refresh rate of up to 120Hz, Redmi
-                            14C takes your visual experience to the next level.
-                        </p>
-                    </div>
-
-                    <div class="mb-4">
-                        <h4 class="h5">Two TÜV Rheinland certifications</h4>
-                        <p>
-                            Next-generation low blue light display with consistent DC
-                            dimming, low blue light, visible flicker-free, and dark mode,
-                            both software and hardware provide dual protection for your
-                            eyes, effectively reducing eye strain and damage to the eyes
-                            from prolonged use.
-                        </p>
-                    </div>
-
-                    <div class="mb-4">
-                        <h4 class="h5">Capturing clear images</h4>
-                        <p>
-                            Powerful AI dual camera system. Capture every frame in stunning
-                            detail with an ultra-high-resolution main camera. Paired with
-                            the powerful Kairon Imaging Engine, optimize picture quality and
-                            speed from the underlying technology to bring every moment to
-                            life.
-                        </p>
-                    </div>
-
-                    <div class="mb-4">
-                        <h4 class="h5">Massive 5160mAh (typ) battery</h4>
-                        <p>
-                            With fast charging, a perfect combination of massive battery and
-                            fast-charging. Redmi 14C also features Smart Charging Engine and
-                            safe battery technology, ensuring a long-lasting and healthy
-                            battery.
-                        </p>
+            <!-- footer -->
+            <footer id="footer" class="overflow-hidden" style="color: #000; padding-top: 3rem; padding-bottom: 2rem;">
+                <div class="container">
+                    <div class="row footer-top-area d-flex flex-wrap justify-content-between">
+                        <div class="col-lg-4 col-sm-6 mb-4">
+                            <div class="footer-menu">
+                                <img src="../assets/images/download.png" class="logo" width="80px" height="80px" />
+                                <p>
+                                    Find the latest smartphones, accessories, and great deals all in one place.<br>
+                                    <span style="color: #0dcaf0;">Quality phones with reliable service just for you!</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-sm-6 mb-4">
+                            <div class="footer-menu text-uppercase">
+                                <h5 class="widget-title pb-2" style="color:#000;">Quick Links</h5>
+                                <ul class="menu-list list-unstyled text-uppercase">
+                                    <li class="menu-item pb-2">
+                                        <a href="../index.php" class="text-dark text-decoration-none">Home</a>
+                                    </li>
+                                    <li class="menu-item pb-2">
+                                        <a href="../pages/phones.php" class="text-dark text-decoration-none">Phones</a>
+                                    </li>
+                                    <li class="menu-item pb-2">
+                                        <a href="../pages/phones.php" class="text-dark text-decoration-none">Shop</a>
+                                    </li>
+                                    <li class="menu-item pb-2">
+                                        <a href="../pages/sign_in.php" class="text-dark text-decoration-none">Sign In</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6 mb-4">
+                            <div class="footer-menu contact-item">
+                                <h5 class="widget-title text-uppercase pb-2" style="color:#000;">Contact Us</h5>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <i class="fas fa-envelope me-2"></i>
+                                        <a href="mailto:mobimart@info.com" class="text-dark text-decoration-none">mobimart@info.com</a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-phone me-2"></i>
+                                        <a href="tel:+9477177111" class="text-dark text-decoration-none">+94 764975098</a>
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-map-marker-alt me-2"></i>
+                                        <span>No. 123, Main Street, Kegalle, Sri Lanka</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
 
                     <hr />
 
-                    <div class="mb-4">
-                        <p class="text-muted small">Disclaimer:</p>
-                        <p class="text-muted small">
-                            *Water and dust resistance were tested under controlled lab
-                            conditions. Resistance may fail due to wear and tear or over
-                            time. Damage caused by immersion in liquid, cosmetic damages
-                            such as wear & tear, scratch marks, color fades & others will
-                            not be applicable for warranty.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    <div id="footer-bottom">
+                        <div class="container">
+                            <div class="row d-flex flex-wrap justify-content-between">
 
-        <!-- Customer Reviews -->
-        <div class="row mt-4">
-            <div class="col-12">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h2 class="h4 mb-0">Customer Reviews</h2>
-                    <div>
-                        <div class="rating-stars">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-half"></i>
-                        </div>
-                        <span class="text-muted">5.0 out of 5</span>
-                        <p class="text-muted small mb-0">Based on 4 reviews</p>
-                    </div>
-                    <div>
-                        <button class="btn btn-primary">Write a review</button>
-                        <button class="btn btn-outline-secondary ms-2">
-                            Ask a question
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Review List -->
-                <div class="review-list">
-                    <!-- Review 1 -->
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between mb-2">
-                                <div class="d-flex align-items-center">
-                                    <div class="review-avatar me-2">K</div>
-                                    <div>
-                                        <h5 class="mb-0">
-                                            Katherine C.
-                                            <span class="verified-badge">Verified</span>
-                                        </h5>
-                                        <div class="rating-stars">
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                        </div>
+                                <div>
+                                    <div class="copyright">
+                                        <p class="justify-content-center text-center">
+                                            © Copyright 2023 MobiMart.
+                                        </p>
                                     </div>
-                                </div>
-                                <div class="text-muted small">05/03/2025</div>
-                            </div>
-                            <h6 class="fw-bold">Good</h6>
-                            <p class="mb-0">
-                                The product quality is excellent. Would recommend!
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Review 2 -->
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between mb-2">
-                                <div class="d-flex align-items-center">
-                                    <div class="review-avatar me-2">M</div>
-                                    <div>
-                                        <h5 class="mb-0">
-                                            Michael S. <span class="verified-badge">Verified</span>
-                                        </h5>
-                                        <div class="rating-stars">
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-muted small">03/12/2025</div>
-                            </div>
-                            <h6 class="fw-bold">Super</h6>
-                            <p class="mb-0">
-                                Amazing product with great features. The camera is excellent!
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Review 3 -->
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between mb-2">
-                                <div class="d-flex align-items-center">
-                                    <div class="review-avatar me-2">A</div>
-                                    <div>
-                                        <h5 class="mb-0">
-                                            Amy R. <span class="verified-badge">Verified</span>
-                                        </h5>
-                                        <div class="rating-stars">
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-muted small">03/7/2025</div>
-                            </div>
-                            <h6 class="fw-bold">Good service</h6>
-                            <p class="mb-0">
-                                Fast delivery and good packaging. The phone works perfectly!
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Review 4 -->
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between mb-2">
-                                <div class="d-flex align-items-center">
-                                    <div class="review-avatar me-2">P</div>
-                                    <div>
-                                        <h5 class="mb-0">
-                                            Patrick O. <span class="verified-badge">Verified</span>
-                                        </h5>
-                                        <div class="rating-stars">
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-muted small">02/28/2025</div>
-                            </div>
-                            <h6 class="fw-bold">Best overall</h6>
-                            <p class="mb-0">
-                                I bought many items from this store. Recommended for all kind
-                                of modern electric tools. Good customer service. Products also
-                                branded and best quality - Thank you simply the best.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- FAQ Section -->
-        <div class="row mt-5">
-            <div class="col-12">
-                <h2 class="h4 mb-4">Frequently Asked Questions</h2>
-                <div class="accordion" id="faqAccordion">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button
-                                class="accordion-button collapsed"
-                                type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#faq1">
-                                How long does it take for the delivery and what are the
-                                charges?
-                            </button>
-                        </h2>
-                        <div
-                            id="faq1"
-                            class="accordion-collapse collapse"
-                            data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                <p>
-                                    Delivery time depends on your location. For local areas,
-                                    delivery takes 1-2 business days. For remote areas, it may
-                                    take 3-5 business days. Delivery is free for orders above Rs
-                                    5,000.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button
-                                class="accordion-button collapsed"
-                                type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#faq2">
-                                What is store/site's return and refund policy?
-                            </button>
-                        </h2>
-                        <div
-                            id="faq2"
-                            class="accordion-collapse collapse"
-                            data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                <p>
-                                    We offer a 14-day return policy. If you are not satisfied
-                                    with your purchase, you can return it within 14 days for a
-                                    full refund. The product must be in its original packaging
-                                    and condition.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button
-                                class="accordion-button collapsed"
-                                type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#faq3">
-                                What is the warranty period for electronics?
-                            </button>
-                        </h2>
-                        <div
-                            id="faq3"
-                            class="accordion-collapse collapse"
-                            data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                <p>
-                                    All Xiaomi smartphones come with a 1-year manufacturer
-                                    warranty. This covers any manufacturing defects but does not
-                                    cover physical damage or water damage.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- You May Also Like -->
-        <div class="row mt-5">
-            <div class="col-12">
-                <h2 class="h4 mb-4">You may also like</h2>
-                <p class="text-muted">Combine your style with these products</p>
-
-                <div class="row">
-                    <!-- Product 1 -->
-                    <div class="col-6 col-md-3 mb-4">
-                        <div class="card h-100">
-                            <div class="position-absolute top-0 end-0 p-2">
-                                <span class="badge bg-danger">HOT</span>
-                            </div>
-                            <img
-                                src="/api/placeholder/200/200"
-                                class="card-img-top"
-                                alt="Smartphone" />
-                            <div class="card-body">
-                                <h5 class="card-title">Xiaomi Redmi Note 11 4G Smartphone</h5>
-                                <p class="card-text text-muted small">From Rs 39,999.00</p>
-                                <div class="d-flex align-items-center">
-                                    <div class="rating-stars small">
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-half"></i>
-                                    </div>
-                                    <span class="ms-1 text-muted small">(4.5)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product 2 -->
-                    <div class="col-6 col-md-3 mb-4">
-                        <div class="card h-100">
-                            <div class="position-absolute top-0 end-0 p-2">
-                                <span class="badge bg-danger">SALE</span>
-                            </div>
-                            <img
-                                src="/api/placeholder/200/200"
-                                class="card-img-top"
-                                alt="Earbuds" />
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    Xiaomi Earbuds BDS True Wireless Earbuds
-                                </h5>
-                                <p class="card-text text-muted small">Rs 8,499.00</p>
-                                <div class="d-flex align-items-center">
-                                    <div class="rating-stars small">
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star"></i>
-                                    </div>
-                                    <span class="ms-1 text-muted small">(4.0)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product 3 -->
-                    <div class="col-6 col-md-3 mb-4">
-                        <div class="card h-100">
-                            <img
-                                src="/api/placeholder/200/200"
-                                class="card-img-top"
-                                alt="Smartphone" />
-                            <div class="card-body">
-                                <h5 class="card-title">Redmi A2 Smartphone</h5>
-                                <p class="card-text text-muted small">From Rs 27,499.00</p>
-                                <div class="d-flex align-items-center">
-                                    <div class="rating-stars small">
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-half"></i>
-                                    </div>
-                                    <span class="ms-1 text-muted small">(4.5)</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product 4 -->
-                    <div class="col-6 col-md-3 mb-4">
-                        <div class="card h-100">
-                            <img
-                                src="/api/placeholder/200/200"
-                                class="card-img-top"
-                                alt="Earbuds" />
-                            <div class="card-body">
-                                <h5 class="card-title">Xiaomi Redmi Buds 3 - Earbuds</h5>
-                                <p class="card-text text-muted small">Rs 5,999.00</p>
-                                <div class="d-flex align-items-center">
-                                    <div class="rating-stars small">
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star"></i>
-                                    </div>
-                                    <span class="ms-1 text-muted small">(4.0)</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </footer>
+
+
+            <script src="../assets/js/jquery-1.11.0.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+            <script
+                type="text/javascript"
+                src="../assets/js/bootstrap.bundle.min.js"></script>
+            <script type="text/javascript" src="../assets/js/plugins.js"></script>
+            <script type="text/javascript" src="../assets/js/script.js"></script>
+            <!-- Product Details Specific Script -->
+            <script type="text/javascript" src="../assets/js/product-details.js"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Gallery Image Handling
+                    const thumbnails = document.querySelectorAll('.thumbnail-img');
+                    const mainImage = document.querySelector('.main-img');
+
+                    thumbnails.forEach(thumb => {
+                        thumb.addEventListener('click', function() {
+                            mainImage.src = this.dataset.full;
+                            mainImage.alt = this.alt;
+                            thumbnails.forEach(t => t.classList.remove('active'));
+                            this.classList.add('active');
+                        });
+                    });
+
+                    // Quantity Controls
+                    const quantityInput = document.querySelector('input[type="text"].form-control');
+                    const decrementBtn = quantityInput.previousElementSibling;
+                    const incrementBtn = quantityInput.nextElementSibling;
+                    const maxStock = <?php echo $productStock; ?>;
+
+                    function updateQuantity(newValue) {
+                        newValue = Math.max(1, Math.min(newValue, maxStock));
+                        quantityInput.value = newValue;
+                    }
+
+                    decrementBtn.addEventListener('click', () => {
+                        updateQuantity(parseInt(quantityInput.value) - 1);
+                    });
+
+                    incrementBtn.addEventListener('click', () => {
+                        updateQuantity(parseInt(quantityInput.value) + 1);
+                    });
+
+                    // Add to Cart
+                    const addToCartBtn = document.getElementById('addToCartBtn');
+                    const cartMessage = document.getElementById('cartMessage');
+
+                    addToCartBtn.addEventListener('click', function() {
+                        const productId = this.getAttribute('data-product-id');
+                        const productName = this.getAttribute('data-product-name');
+                        const productPrice = this.getAttribute('data-product-price');
+                        const quantity = quantityInput.value;
+
+                        // AJAX request to add the product to the cart
+                        fetch('../api/add_to_cart.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    product_id: productId,
+                                    product_name: productName,
+                                    product_price: productPrice,
+                                    quantity: quantity
+                                })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    cartMessage.classList.remove('d-none', 'alert-danger');
+                                    cartMessage.classList.add('alert-success');
+                                    cartMessage.innerHTML = 'Product added to cart successfully!';
+                                } else {
+                                    cartMessage.classList.remove('d-none', 'alert-success');
+                                    cartMessage.classList.add('alert-danger');
+                                    cartMessage.innerHTML = 'Failed to add product to cart. Please try again.';
+                                }
+
+                                // Optionally, update the cart icon/badge here
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                cartMessage.classList.remove('d-none', 'alert-success');
+                                cartMessage.classList.add('alert-danger');
+                                cartMessage.innerHTML = 'An error occurred. Please try again.';
+                            });
+                    });
+
+                    // Initialize Bootstrap tooltips
+                    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+                    var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+                        return new bootstrap.Tooltip(tooltipTriggerEl);
+                    });
+                });
+            </script>
         </div>
     </div>
 
-    <section
-        id="instagram"
-        class="padding-large overflow-hidden no-padding-top">
-        <div class="container">
-            <div class="row">
-                <div class="display-header text-uppercase text-dark text-center pb-3">
-                    <h2 class="display-7">Shop Our Insta</h2>
-                </div>
-                <div class="d-flex flex-wrap">
-                    <figure class="instagram-item pe-2">
-                        <a
-                            href="https://templatesjungle.com/"
-                            class="image-link position-relative">
-                            <img
-                                src="../assets/images/insta-item1.jpg"
-                                alt="instagram"
-                                class="insta-image" />
-                            <div
-                                class="icon-overlay position-absolute d-flex justify-content-center">
-                                <svg class="instagram">
-                                    <use xlink:href="#instagram"></use>
-                                </svg>
-                            </div>
-                        </a>
-                    </figure>
-                    <figure class="instagram-item pe-2">
-                        <a
-                            href="https://templatesjungle.com/"
-                            class="image-link position-relative">
-                            <img
-                                src="../assets/images/insta-item2.jpg"
-                                alt="instagram"
-                                class="insta-image" />
-                            <div
-                                class="icon-overlay position-absolute d-flex justify-content-center">
-                                <svg class="instagram">
-                                    <use xlink:href="#instagram"></use>
-                                </svg>
-                            </div>
-                        </a>
-                    </figure>
-                    <figure class="instagram-item pe-2">
-                        <a
-                            href="https://templatesjungle.com/"
-                            class="image-link position-relative">
-                            <img
-                                src="../assets/images/insta-item3.jpg"
-                                alt="instagram"
-                                class="insta-image" />
-                            <div
-                                class="icon-overlay position-absolute d-flex justify-content-center">
-                                <svg class="instagram">
-                                    <use xlink:href="#instagram"></use>
-                                </svg>
-                            </div>
-                        </a>
-                    </figure>
-                    <figure class="instagram-item pe-2">
-                        <a
-                            href="https://templatesjungle.com/"
-                            class="image-link position-relative">
-                            <img
-                                src="../assets/images/insta-item4.jpg"
-                                alt="instagram"
-                                class="insta-image" />
-                            <div
-                                class="icon-overlay position-absolute d-flex justify-content-center">
-                                <svg class="instagram">
-                                    <use xlink:href="#instagram"></use>
-                                </svg>
-                            </div>
-                        </a>
-                    </figure>
-                    <figure class="instagram-item pe-2">
-                        <a
-                            href="https://templatesjungle.com/"
-                            class="image-link position-relative">
-                            <img
-                                src="../assets/images/insta-item5.jpg"
-                                alt="instagram"
-                                class="insta-image" />
-                            <div
-                                class="icon-overlay position-absolute d-flex justify-content-center">
-                                <svg class="instagram">
-                                    <use xlink:href="#instagram"></use>
-                                </svg>
-                            </div>
-                        </a>
-                    </figure>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <?php
-    include '../includes/footer.php'
-    ?>
-
-    <script src="../assets/js/jquery-1.11.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-    <script
-        type="text/javascript"
-        src="../assets/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="../assets/js/plugins.js"></script>
-    <script type="text/javascript" src="../assets/js/script.js"></script>
-    <!-- Product Details Specific Script -->
-    <script type="text/javascript" src="../assets/js/product-details.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Gallery Image Handling
-            const thumbnails = document.querySelectorAll('.thumbnail-img');
-            const mainImage = document.querySelector('.main-img');
-
-            thumbnails.forEach(thumb => {
-                thumb.addEventListener('click', function() {
-                    mainImage.src = this.dataset.full;
-                    mainImage.alt = this.alt;
-                    thumbnails.forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                });
-            });
-
-            // Quantity Controls
-            const quantityInput = document.querySelector('input[type="text"].form-control');
-            const decrementBtn = quantityInput.previousElementSibling;
-            const incrementBtn = quantityInput.nextElementSibling;
-            const maxStock = <?php echo $productStock; ?>;
-
-            function updateQuantity(newValue) {
-                newValue = Math.max(1, Math.min(newValue, maxStock));
-                quantityInput.value = newValue;
-            }
-
-            decrementBtn.addEventListener('click', () => {
-                updateQuantity(parseInt(quantityInput.value) - 1);
-            });
-
-            incrementBtn.addEventListener('click', () => {
-                updateQuantity(parseInt(quantityInput.value) + 1);
-            });
-
-            // Add to Cart
-            const addToCartBtn = document.getElementById('addToCartBtn');
-            const cartMessage = document.getElementById('cartMessage');
-
-            addToCartBtn.addEventListener('click', function() {
-                const productId = this.getAttribute('data-product-id');
-                const productName = this.getAttribute('data-product-name');
-                const productPrice = this.getAttribute('data-product-price');
-                const quantity = quantityInput.value;
-
-                // AJAX request to add the product to the cart
-                fetch('../api/add_to_cart.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            product_id: productId,
-                            product_name: productName,
-                            product_price: productPrice,
-                            quantity: quantity
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            cartMessage.classList.remove('d-none', 'alert-danger');
-                            cartMessage.classList.add('alert-success');
-                            cartMessage.innerHTML = 'Product added to cart successfully!';
-                        } else {
-                            cartMessage.classList.remove('d-none', 'alert-success');
-                            cartMessage.classList.add('alert-danger');
-                            cartMessage.innerHTML = 'Failed to add product to cart. Please try again.';
-                        }
-
-                        // Optionally, update the cart icon/badge here
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        cartMessage.classList.remove('d-none', 'alert-success');
-                        cartMessage.classList.add('alert-danger');
-                        cartMessage.innerHTML = 'An error occurred. Please try again.';
-                    });
-            });
-
-            // Initialize Bootstrap tooltips
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl);
-            });
-        });
-    </script>
 </body>
 
 </html>

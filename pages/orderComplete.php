@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +23,7 @@
         }
 
         body {
-            background-color: #f5f7fa;
+            background-color: #f8f9fa;
         }
 
         .container {
@@ -28,7 +32,7 @@
             padding: 0 20px;
         }
 
-        .navbar {
+        /* .navbar {
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
@@ -116,7 +120,7 @@
             text-align: center;
             font-size: 14px;
             color: #adb5bd;
-        }
+        } */
 
         main {
             padding: 40px 0;
@@ -445,74 +449,136 @@
         .step.completed .step-line {
             background-color: #198754;
         }
+
+        .payment-status .paid {
+            color: #198754;
+            /* Bootstrap success color */
+            font-weight: bold;
+        }
+
+        .payment-status .pending {
+            color: #ffc107;
+            /* Bootstrap warning color */
+            font-weight: bold;
+        }
+
+        .payment-status .failed {
+            color: #dc3545;
+            /* Bootstrap danger color */
+            font-weight: bold;
+        }
+
+        .order-complete {
+            max-width: 800px;
+        }
     </style>
 </head>
 
 <body>
-    <!-- <header>
-        <div class="container">
-            <div class="header-content">
-                <a href="#" class="logo">MiniStore</a>
-                <div class="nav-links">
-                    <a href="#">Home</a>
-                    <a href="#">Shop</a>
-                    <a href="#">Deals</a>
-                    <a href="#">Support</a>
-                </div>
-                <div class="header-icons">
-                    <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></a>
-                    <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></a>
-                    <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></a>
-                    <a href="#" class="cart-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                        <span class="cart-count">3</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header> -->
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="../index.php">
-                <img src="../assets/images/main-logo.png" alt="Mobile Shop">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto w-100 d-flex justify-content-end p-3">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.php">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Shop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Deals</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Support</a>
-                    </li>
-                </ul>
-                <div class="d-flex align-items-center">
-                    <a href="#" class="nav-icon">
-                        <i class="fas fa-search"></i>
-                    </a>
-                    <a href="#" class="nav-icon">
-                        <i class="fas fa-user"></i>
-                    </a>
-                    <a href="#" class="nav-icon">
-                        <i class="fas fa-heart"></i>
-                    </a>
-                    <a href="../cart.php" class="nav-icon">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count">3</span>
-                    </a>
+    <!-- nav -->
+    <header
+        id="header"
+        class="site-header header-scrolled text-black">
+        <nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img src="../assets/images/download.png" class="logo" width="80px" height="80px" />
+                </a>
+                <button
+                    class="navbar-toggler d-flex d-lg-none order-3 p-2"
+                    type="button"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#bdNavbar"
+                    aria-controls="bdNavbar"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <svg class="navbar-icon">
+                        <use xlink:href="#navbar-icon"></use>
+                    </svg>
+                </button>
+                <div
+                    class="offcanvas offcanvas-end"
+                    tabindex="-1"
+                    id="bdNavbar"
+                    aria-labelledby="bdNavbarOffcanvasLabel">
+                    <div class="offcanvas-header px-4 pb-0">
+                        <a class="navbar-brand" href="index.html">
+                            <img src="../assets/images/main-logo.png" class="logo" />
+                        </a>
+                        <button
+                            type="button"
+                            class="btn-close btn-close-black"
+                            data-bs-dismiss="offcanvas"
+                            aria-label="Close"
+                            data-bs-target="#bdNavbar"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul
+                            id="navbar"
+                            class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link me-4" href="../index.php">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link me-4 active" href="../pages/phones.php">Phones</a>
+                            </li>
+                            <?php
+                            if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'admin') {
+                                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href="./Admin/dashboard.php">Dashboard</a>
+                                  </li>';
+                            } elseif (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'user') {
+                                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href="./User/dashboard.php">Dashboard</a>
+                                  </li>';
+                            } else if (!isset($_SESSION['user_type'])) {
+                                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href="./sign_in.php">Sign In</a>
+                                  </li>';
+                            } else if (isset($_SESSION['user_type'])) {
+                                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href="../controller/user_logout_process.php">Log out</a>
+                                  </li>';
+                            }
+                            ?>
+
+                            <li class="nav-item">
+                                <div class="user-items ps-5">
+                                    <ul class="d-flex justify-content-end list-unstyled">
+                                        <!-- <li class="search-item pe-3">
+                                            <a href="#" class="search-button text-dark">
+                                                <i class="fas fa-search"></i>
+                                            </a>
+                                        </li> -->
+
+                                        <li class="pe-3">
+                                            <a href="<?php
+
+                                                        if (isset($_SESSION['user_type'])) {
+                                                            echo $_SESSION['user_type'] === 'admin' ? '../pages/Admin/dashboard.php' : '../pages/User/dashboard.php';
+                                                        } else {
+                                                            echo '../pages/sign_in.php';
+                                                        }
+                                                        ?>" class="text-dark">
+                                                <i class="fas fa-user"></i>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="../pages/cart.php" class="text-dark">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
     <main class="container p-3">
         <h1>Order Complete</h1>
@@ -521,7 +587,7 @@
             <div class="step completed">
                 <div class="step-circle"><i class="fas fa-check"></i></div>
                 <div class="step-title">Shopping Cart</div>
-                <div class="step-line"></div>
+                <!-- <div class="step-line"></div> -->
             </div>
             <div class="step completed">
                 <div class="step-circle">2</div>
@@ -531,7 +597,7 @@
             <div class="step active">
                 <div class="step-circle">3</div>
                 <div class="step-title">Order Complete</div>
-                <div class="step-line"></div>
+                <!-- <div class="step-line"></div> -->
             </div>
         </div>
 
@@ -544,9 +610,8 @@
             </div>
             <h2>Thank You For Your Order!</h2>
             <p>Your order has been placed and is being processed. You will receive an email confirmation shortly.</p>
-            <div class="order-number">Order #MNS-78912345</div>
 
-            <div class="delivery-info">
+            <!-- <div class="delivery-info">
                 <div class="delivery-icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="1" y="3" width="15" height="13"></rect>
@@ -560,236 +625,310 @@
                     <p>Your items will be delivered to: 123 Main Street, Apt 4B, New York, NY 10001</p>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <div class="order-grid">
-            <div class="order-details">
-                <h3 class="section-title">Order Information</h3>
+            <!-- <div class="order-grid">
+                <div class="order-details">
+                    <h3 class="section-title">Order Information</h3>
 
-                <div class="order-info-item">
-                    <div class="info-label">Order Date</div>
-                    <div class="info-value">May 8, 2025</div>
-                </div>
+                    <div class="order-info-item">
+                        <div class="info-label">Order Date</div>
+                        <div class="info-value">May 8, 2025</div>
+                    </div>
 
-                <div class="order-info-item">
-                    <div class="info-label">Order Number</div>
-                    <div class="info-value">MNS-78912345</div>
-                </div>
+                    <div class="order-info-item">
+                        <div class="info-label">Order Number</div>
+                        <div class="info-value">MNS-78912345</div>
+                    </div>
 
-                <div class="order-info-item">
-                    <div class="info-label">Payment Method</div>
-                    <div class="info-value">Credit Card (ending in 3456)</div>
-                </div>
+                    <div class="order-info-item">
+                        <div class="info-label">Payment Method</div>
+                        <div class="info-value">Credit Card (ending in 3456)</div>
+                    </div>
 
-                <div class="divider"></div>
+                    <div class="divider"></div>
 
-                <h3 class="section-title">Shipping Information</h3>
+                    <h3 class="section-title">Shipping Information</h3>
 
-                <div class="order-info-item">
-                    <div class="info-label">Shipping Address</div>
-                    <div class="info-value">
-                        John Doe<br>
-                        123 Main Street, Apt 4B<br>
-                        New York, NY 10001<br>
-                        United States
+                    <div class="order-info-item">
+                        <div class="info-label">Shipping Address</div>
+                        <div class="info-value">
+                            John Doe<br>
+                            123 Main Street, Apt 4B<br>
+                            New York, NY 10001<br>
+                            United States
+                        </div>
+                    </div>
+
+                    <div class="order-info-item">
+                        <div class="info-label">Shipping Method</div>
+                        <div class="info-value">Standard Delivery (3-5 business days)</div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <h3 class="section-title">Contact Information</h3>
+
+                    <div class="order-info-item">
+                        <div class="info-label">Email</div>
+                        <div class="info-value">your@email.com</div>
+                    </div>
+
+                    <div class="order-info-item">
+                        <div class="info-label">Phone</div>
+                        <div class="info-value">(123) 456-7890</div>
                     </div>
                 </div>
 
-                <div class="order-info-item">
-                    <div class="info-label">Shipping Method</div>
-                    <div class="info-value">Standard Delivery (3-5 business days)</div>
+                <div class="order-summary">
+                    <h3 class="section-title">Order Summary (3 items)</h3>
+
+                    <div class="summary-item">
+                        <div class="item-image">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg>
+                        </div>
+                        <div class="item-details">
+                            <div class="item-name">iPhone 13 Pro</div>
+                            <div class="item-variant">Sierra Blue, 256GB</div>
+                        </div>
+                        <div class="item-price">$999.00</div>
+                    </div>
+
+                    <div class="summary-item">
+                        <div class="item-image">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                                <path d="M2 12h1a4 4 0 0 1 4-4h9.5a4 4 0 0 1 0 8H7a4 4 0 0 1-4-4H2z"></path>
+                                <circle cx="9" cy="12" r="1"></circle>
+                            </svg>
+                        </div>
+                        <div class="item-details">
+                            <div class="item-name">AirPods Pro</div>
+                            <div class="item-variant">White, 2nd Generation</div>
+                        </div>
+                        <div class="item-price">$249.00</div>
+                    </div>
+
+                    <div class="summary-item">
+                        <div class="item-image">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                                <rect x="6" y="8" width="12" height="8" rx="1"></rect>
+                            </svg>
+                        </div>
+                        <div class="item-details">
+                            <div class="item-name">Silicone Case</div>
+                            <div class="item-variant">Midnight Blue, iPhone 13 Pro</div>
+                        </div>
+                        <div class="item-price">$49.00</div>
+                    </div>
+
+                    <div class="summary-totals">
+                        <div class="total-row">
+                            <div class="total-label">Subtotal</div>
+                            <div class="total-value">$1,297.00</div>
+                        </div>
+
+                        <div class="total-row">
+                            <div class="total-label">Shipping</div>
+                            <div class="total-value">$0.00</div>
+                        </div>
+
+                        <div class="total-row">
+                            <div class="total-label">Tax</div>
+                            <div class="total-value">$103.76</div>
+                        </div>
+
+                        <div class="total-row grand-total">
+                            <div class="total-label">Total</div>
+                            <div class="total-value">$1,400.76</div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="order-grid">
+                <div class="order-details">
+                    <h3 class="section-title">Order Information</h3>
+
+                    <div class="order-info-item">
+                        <div class="info-label">Order Date</div>
+                        <div class="info-value"><?php echo $order['order_date']; ?></div>
+                    </div>
+
+                    <div class="order-info-item">
+                        <div class="info-label">Order Number</div>
+                        <div class="info-value"><?php echo $order['order_number']; ?></div>
+                    </div>
+
+                    <div class="order-info-item">
+                        <div class="info-label">Payment Method</div>
+                        <div class="info-value"><?php echo $order['payment_method']; ?></div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <h3 class="section-title">Shipping Information</h3>
+
+                    <div class="order-info-item">
+                        <div class="info-label">Shipping Address</div>
+                        <div class="info-value">
+                            <?php echo nl2br(htmlspecialchars($order['shipping_address'])); ?>
+                        </div>
+                    </div>
+
+                    <div class="order-info-item">
+                        <div class="info-label">Shipping Method</div>
+                        <div class="info-value"><?php echo $order['shipping_method']; ?></div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <h3 class="section-title">Contact Information</h3>
+
+                    <div class="order-info-item">
+                        <div class="info-label">Email</div>
+                        <div class="info-value"><?php echo $order['email']; ?></div>
+                    </div>
+
+                    <div class="order-info-item">
+                        <div class="info-label">Phone</div>
+                        <div class="info-value"><?php echo $order['phone']; ?></div>
+                    </div>
                 </div>
 
-                <div class="divider"></div>
+                <div class="order-summary">
+                    <h3 class="section-title">Order Summary (<?php echo count($orderItems); ?> items)</h3>
 
-                <h3 class="section-title">Contact Information</h3>
+                    <?php foreach ($orderItems as $item): ?>
+                        <div class="summary-item">
+                            <div class="item-image">
+                                <img src="<?php echo $item['image_url']; ?>" alt="<?php echo $item['product_name']; ?>" width="60" height="60">
+                            </div>
+                            <div class="item-details">
+                                <div class="item-name"><?php echo $item['product_name']; ?></div>
+                                <div class="item-variant"><?php echo $item['variant']; ?></div>
+                            </div>
+                            <div class="item-price">$<?php echo number_format($item['price'], 2); ?></div>
+                        </div>
+                    <?php endforeach; ?>
 
-                <div class="order-info-item">
-                    <div class="info-label">Email</div>
-                    <div class="info-value">your@email.com</div>
-                </div>
+                    <div class="summary-totals">
+                        <div class="total-row">
+                            <div class="total-label">Subtotal</div>
+                            <div class="total-value">$<?php echo number_format($subtotal, 2); ?></div>
+                        </div>
 
-                <div class="order-info-item">
-                    <div class="info-label">Phone</div>
-                    <div class="info-value">(123) 456-7890</div>
+                        <div class="total-row">
+                            <div class="total-label">Shipping</div>
+                            <div class="total-value">$<?php echo number_format($shippingCost, 2); ?></div>
+                        </div>
+
+                        <div class="total-row">
+                            <div class="total-label">Tax</div>
+                            <div class="total-value">$<?php echo number_format($tax, 2); ?></div>
+                        </div>
+
+                        <div class="total-row grand-total">
+                            <div class="total-label">Total</div>
+                            <div class="total-value">$<?php echo number_format($totalPrice, 2); ?></div>
+                        </div>
+
+                        <?php
+                        // Get payment status
+                        $paymentSql = "SELECT payment_status FROM payments WHERE order_id = :order_id";
+                        $stmt = $conn->prepare($paymentSql);
+                        $stmt->execute(['order_id' => $orderId]);
+                        $payment = $stmt->fetch(PDO::FETCH_ASSOC);
+                        ?>
+                        <div class="total-row payment-status">
+                            <div class="total-label">Payment Status</div>
+                            <div class="total-value <?php echo $payment['payment_status']; ?>">
+                                <?php echo ucfirst($payment['payment_status']); ?>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="order-summary">
-                <h3 class="section-title">Order Summary (3 items)</h3>
-
-                <div class="summary-item">
-                    <div class="item-image">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                            <line x1="8" y1="21" x2="16" y2="21"></line>
-                            <line x1="12" y1="17" x2="12" y2="21"></line>
-                        </svg>
-                    </div>
-                    <div class="item-details">
-                        <div class="item-name">iPhone 13 Pro</div>
-                        <div class="item-variant">Sierra Blue, 256GB</div>
-                    </div>
-                    <div class="item-price">$999.00</div>
-                </div>
-
-                <div class="summary-item">
-                    <div class="item-image">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
-                            <path d="M2 12h1a4 4 0 0 1 4-4h9.5a4 4 0 0 1 0 8H7a4 4 0 0 1-4-4H2z"></path>
-                            <circle cx="9" cy="12" r="1"></circle>
-                        </svg>
-                    </div>
-                    <div class="item-details">
-                        <div class="item-name">AirPods Pro</div>
-                        <div class="item-variant">White, 2nd Generation</div>
-                    </div>
-                    <div class="item-price">$249.00</div>
-                </div>
-
-                <div class="summary-item">
-                    <div class="item-image">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
-                            <rect x="6" y="8" width="12" height="8" rx="1"></rect>
-                        </svg>
-                    </div>
-                    <div class="item-details">
-                        <div class="item-name">Silicone Case</div>
-                        <div class="item-variant">Midnight Blue, iPhone 13 Pro</div>
-                    </div>
-                    <div class="item-price">$49.00</div>
-                </div>
-
-                <div class="summary-totals">
-                    <div class="total-row">
-                        <div class="total-label">Subtotal</div>
-                        <div class="total-value">$1,297.00</div>
-                    </div>
-
-                    <div class="total-row">
-                        <div class="total-label">Shipping</div>
-                        <div class="total-value">$0.00</div>
-                    </div>
-
-                    <div class="total-row">
-                        <div class="total-label">Tax</div>
-                        <div class="total-value">$103.76</div>
-                    </div>
-
-                    <div class="total-row grand-total">
-                        <div class="total-label">Total</div>
-                        <div class="total-value">$1,400.76</div>
-                    </div>
-                </div>
+            <div class="actions">
+                <a href="./User/dashboard.php" class="btn btn-outline">View Order History</a>
+                <a href="../index.php" class="btn btn-primary">Continue Shopping</a>
             </div>
-        </div>
-
-        <div class="actions">
-            <a href="./User/dashboard.php" class="btn btn-outline">View Order History</a>
-            <a href="#" class="btn btn-primary">Continue Shopping</a>
-        </div>
     </main>
 
-    <!-- <footer>
+    <!-- footer -->
+    <footer id="footer" class="overflow-hidden" style="color: #000; padding-top: 3rem; padding-bottom: 2rem;">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Mobile Shop</h3>
-                    <p>The best place to buy the latest smartphones and accessories at competitive prices.</p>
-                    <div class="social-links">
-                        <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-                        <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
-                        <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-                        <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg></a>
+            <div class="row footer-top-area d-flex flex-wrap justify-content-between">
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <div class="footer-menu">
+                        <img src="../assets/images/download.png" class="logo" width="80px" height="80px" />
+                        <p>
+                            Find the latest smartphones, accessories, and great deals all in one place.<br>
+                            <span style="color: #0dcaf0;">Quality phones with reliable service just for you!</span>
+                        </p>
                     </div>
                 </div>
-                
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">FAQs</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Customer Service</h3>
-                    <ul>
-                        <li><a href="#">Shipping Policy</a></li>
-                        <li><a href="#">Returns & Refunds</a></li>
-                        <li><a href="#">Order Tracking</a></li>
-                        <li><a href="#">Warranty & Support</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Contact Info</h3>
-                    <p>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 5px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                        123 Tech Street, City, Country
-                    </p>
-                    <p>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 5px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                        +1 (555) 123 4567
-                    </p>
-                    <p>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 5px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                        support@mobileshop.com
-                    </p>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                © 2025 Mobile Shop. All Rights Reserved.
-            </div>
-        </div>
-    </footer> -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 mb-4 mb-md-0">
-                    <h5 class="footer-title">Mobile Shop</h5>
-                    <p class="text-muted">The best place to buy the latest smartphones and accessories at competitive prices.</p>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                <div class="col-lg-2 col-sm-6 mb-4">
+                    <div class="footer-menu text-uppercase">
+                        <h5 class="widget-title pb-2" style="color:#000;">Quick Links</h5>
+                        <ul class="menu-list list-unstyled text-uppercase">
+                            <li class="menu-item pb-2">
+                                <a href="../index.php" class="text-dark text-decoration-none">Home</a>
+                            </li>
+                            <li class="menu-item pb-2">
+                                <a href="../pages/phones.php" class="text-dark text-decoration-none">Phones</a>
+                            </li>
+                            <li class="menu-item pb-2">
+                                <a href="../pages/phones.php" class="text-dark text-decoration-none">Shop</a>
+                            </li>
+                            <li class="menu-item pb-2">
+                                <a href="../pages/sign_in.php" class="text-dark text-decoration-none">Sign In</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="col-md-3 mb-4 mb-md-0">
-                    <h5 class="footer-title">Quick Links</h5>
-                    <ul class="footer-links">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">FAQs</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 mb-4 mb-md-0">
-                    <h5 class="footer-title">Customer Service</h5>
-                    <ul class="footer-links">
-                        <li><a href="#">Shipping Policy</a></li>
-                        <li><a href="#">Returns & Refunds</a></li>
-                        <li><a href="#">Order Tracking</a></li>
-                        <li><a href="#">Warranty & Support</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h5 class="footer-title">Contact Info</h5>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt me-2"></i> 123 Tech Street, Kegalle, Sri Lanka</li>
-                        <li><i class="fas fa-phone-alt me-2"></i> +94 77177111</li>
-                        <li><i class="fas fa-envelope me-2"></i> mobimart@info.com</li>
-                    </ul>
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <div class="footer-menu contact-item">
+                        <h5 class="widget-title text-uppercase pb-2" style="color:#000;">Contact Us</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="fas fa-envelope me-2"></i>
+                                <a href="mailto:mobimart@info.com" class="text-dark text-decoration-none">mobimart@info.com</a>
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-phone me-2"></i>
+                                <a href="tel:+9477177111" class="text-dark text-decoration-none">+94 764975098</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-map-marker-alt me-2"></i>
+                                <span>No. 123, Main Street, Kegalle, Sri Lanka</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="copyright">
-                <p>&copy; 2025 Mobile Shop. All Rights Reserved.</p>
+
+            <hr />
+
+            <div id="footer-bottom">
+                <div class="container">
+                    <div class="row d-flex flex-wrap justify-content-between">
+
+                        <div>
+                            <div class="copyright">
+                                <p class="justify-content-center text-center">
+                                    © Copyright 2023 MobiMart.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>

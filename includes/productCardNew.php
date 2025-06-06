@@ -1,14 +1,23 @@
 <?php
-$product_image = $product['image_url'] ? "../assets/uploads/products/" . htmlspecialchars($product['image_url']) : "../assets/images/product-item1.jpg";
+$product_image = $productImage;
 $product_name = htmlspecialchars($product['product_name']);
-$brand_name = isset($product['brand_name']) && $product['brand_name'] ? htmlspecialchars($product['brand_name']) : 'Unknown Brand';
+$brand_id = $product['brand_id'];
 $price = number_format($product['price'], 2);
 $quantity = (int)$product['quantity'];
 $sku = htmlspecialchars($product['sku']);
+$stmt = $conn->prepare("SELECT brand_name FROM brands WHERE brand_id = :brand_id");
+$stmt->execute(['brand_id' => $brand_id]);
+$brand = $stmt->fetch(PDO::FETCH_ASSOC);
+if ($brand) {
+    $brand_name = htmlspecialchars($brand['brand_name']);
+} else {
+    $brand_name = 'Unknown';
+}
+
 ?>
 
 <div class="col">
-    <a href="../includes/productDetails.php?product_id=<?= $product['product_id'] ?>" class="text-decoration-none text-dark">
+    <a href="<?php echo $productDetailsPage ?>" class="text-decoration-none text-dark">
         <div class="product-card shadow-sm">
             <!-- Product Image -->
             <div class="product-image-wrapper">
@@ -31,14 +40,14 @@ $sku = htmlspecialchars($product['sku']);
                 <div class="text-muted text-uppercase small mb-1"><?= $brand_name ?></div>
                 <!-- Product Name -->
                 <h3 class="product-title mb-2">
-                    <a href="../pages/product-details.php?id=<?= $product['product_id'] ?>">
+                    <a href="<?php echo $productDetailsPage ?>">
                         <?= $product_name ?>
                     </a>
                 </h3>
                 <!-- Price and Add to Cart -->
                 <div class="mt-3 d-flex justify-content-between align-items-center">
                     <div class="price-wrapper">
-                        <span class="fw-bold fs-5">$<?= $price ?></span>
+                        <span class="fw-bold fs-5 text-white">LKR<?= $price ?></span>
                     </div>
                 </div>
             </div>

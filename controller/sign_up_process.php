@@ -7,9 +7,16 @@ $password = $_POST['password'];
 $confirmPassword = $_POST['confirmPassword'];
 
 if ($password == $confirmPassword) {
-    $sql = "INSERT INTO users (email, password) VALUES ('$email', '$password')";
-    $result = $conn->query($sql);
-    if ($result) {
+    // Hash password before storing
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    // Use prepared statement to prevent SQL injection
+    $sql = "INSERT INTO users (email, password, role) VALUES (:email, :password, 'customer')";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':password', $hashedPassword);
+
+    if ($stmt->execute()) {
         header("location: ../pages/sign_in.php");
     }
 } else {
