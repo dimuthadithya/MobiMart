@@ -100,24 +100,27 @@ This project is open source and available under the MIT License.
 
 ### Home Page
 
-![Home Page Banner](assets/images/banner-image.png)
+![Home Page Banner](assets/images/home.png)
 
 ### Product Catalog
 
-![Product Catalog](assets/images/product-item1.jpg)
-![Product Display](assets/images/product-item2.jpg)
+![Product Catalog](assets/images/phones.png)
 
 ### Product Details
 
-![Product Details](assets/images/singel-product-item.jpg)
+![Product Details](assets/images/product_details.png)
 
 ### User Dashboard
 
-![User Dashboard](assets/images/user_dashbord01.webp)
+![User Dashboard](assets/images/dashboard.png)
 
 ### Shopping Cart
 
-![Shopping Cart](assets/images/cart-item1.jpg)
+![Shopping Cart](assets/images/cart.png)
+
+### Admin Dashboard
+
+![Shopping Cart](assets/images/admin.png)
 
 ### Payment & Shipping
 
