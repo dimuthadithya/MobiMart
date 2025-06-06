@@ -2,8 +2,8 @@
 session_start();
 include_once('../../config/db.php');
 
-$barndSql = "SELECT * FROM brands ORDER BY RAND();";
-$stmt = $conn->prepare($barndSql);
+$brandSql = "SELECT * FROM brands ORDER BY RAND();";
+$stmt = $conn->prepare($brandSql);
 $stmt->execute();
 $brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -267,7 +267,7 @@ $brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
         <div class="container">
             <a class="navbar-brand" href="../../index.php">
-                <img src="../../assets/images/main-logo.png" alt="Mobile Shop">
+                <img src="../../assets/images/download.png" alt="Mobile Shop">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -278,9 +278,9 @@ $brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <a class="nav-link" href="#"><?php echo $_SESSION['email'] ?></a>
                     </li>
                 </ul>
-                <div class="d-flex align-items-center">
+                <!-- <div class="d-flex align-items-center">
                     <i class="fa fa-phone"></i>
-                </div>
+                </div> -->
             </div>
         </div>
     </nav>

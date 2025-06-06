@@ -1,6 +1,6 @@
 <?php
 require_once '../config/db.php';
-
+session_start();
 // Fetch all phones from the database with brand information
 $query = "SELECT p.*, b.brand_name 
           FROM products p 
@@ -20,8 +20,13 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MobiMart - Mobile Phones</title>
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link
+        rel="stylesheet"
+        type="text/css"
+        href="./assets/css/bootstrap.min.css" />
     <link href="../assets/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         .hero-section {
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/images/banner-image.png');
@@ -239,9 +244,110 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
 
-    <?php
-    include '../includes/nav.php';
-    ?>
+    <!-- navbar -->
+    <header
+        id="header"
+        class="site-header header-scrolled text-black">
+        <nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img src="../assets/images/download.png" class="logo" width="80px" height="80px" />
+                </a>
+                <button
+                    class="navbar-toggler d-flex d-lg-none order-3 p-2"
+                    type="button"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#bdNavbar"
+                    aria-controls="bdNavbar"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <svg class="navbar-icon">
+                        <use xlink:href="#navbar-icon"></use>
+                    </svg>
+                </button>
+                <div
+                    class="offcanvas offcanvas-end"
+                    tabindex="-1"
+                    id="bdNavbar"
+                    aria-labelledby="bdNavbarOffcanvasLabel">
+                    <div class="offcanvas-header px-4 pb-0">
+                        <a class="navbar-brand" href="index.html">
+                            <img src="../assets/images/main-logo.png" class="logo" />
+                        </a>
+                        <button
+                            type="button"
+                            class="btn-close btn-close-black"
+                            data-bs-dismiss="offcanvas"
+                            aria-label="Close"
+                            data-bs-target="#bdNavbar"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul
+                            id="navbar"
+                            class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link me-4" href="../index.php">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link me-4 active" href="../pages/phones.php">Phones</a>
+                            </li>
+                            <?php
+                            if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'admin') {
+                                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href="./pages/Admin/dashboard.php">Dashboard</a>
+                                  </li>';
+                            } elseif (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'user') {
+                                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href="../pages/User/dashboard.php">Dashboard</a>
+                                  </li>';
+                            } else if (!isset($_SESSION['user_type'])) {
+                                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href="../pages/sign_in.php">Sign In</a>
+                                  </li>';
+                            } else if (isset($_SESSION['user_type'])) {
+                                echo '<li class="nav-item">
+                                    <a class="nav-link me-4" href="../controller/user_logout_process.php">Log out</a>
+                                  </li>';
+                            }
+                            ?>
+
+                            <li class="nav-item">
+                                <div class="user-items ps-5">
+                                    <ul class="d-flex justify-content-end list-unstyled">
+                                        <!-- <li class="search-item pe-3">
+                                            <a href="#" class="search-button text-dark">
+                                                <i class="fas fa-search"></i>
+                                            </a>
+                                        </li> -->
+
+                                        <li class="pe-3">
+                                            <a href="<?php
+
+                                                        if (isset($_SESSION['user_type'])) {
+                                                            echo $_SESSION['user_type'] === 'admin' ? '../pages/Admin/dashboard.php' : '../pages/User/dashboard.php';
+                                                        } else {
+                                                            echo '../pages/sign_in.php';
+                                                        }
+                                                        ?>" class="text-dark">
+                                                <i class="fas fa-user"></i>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="../pages/cart.php" class="text-dark">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
 
     <!-- Hero Section -->
     <div class="hero-section">
@@ -268,15 +374,6 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </div>
                 <div class="col-md-3">
                     <select class="form-select">
-                        <option selected>Price Range</option>
-                        <option>Under $500</option>
-                        <option>$500 - $800</option>
-                        <option>$800 - $1200</option>
-                        <option>Above $1200</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <select class="form-select">
                         <option selected>Sort By</option>
                         <option>Newest First</option>
                         <option>Price: Low to High</option>
@@ -291,13 +388,15 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </div>
             </div>
         </div> <!-- Products Grid -->
+
+
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 mb-4">
             <?php foreach ($products as $product):
                 $productName = $product['product_name'];
                 $productPrice = $product['price'];
                 $productDescription = $product['description'];
                 $productId = $product['product_id'];
-
+                $productImage = "../assets/uploads/products/" . $product['image_url'];
                 $productDetailsPage = '../includes/productDetails.php?product_id=' . $productId;
 
                 include '../includes/productCardNew.php';
@@ -376,12 +475,140 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     toast.show();
                 });
             });
+
+            document.addEventListener('DOMContentLoaded', function() {
+                // Get filter elements
+                const brandSelect = document.querySelector('.filters select:nth-child(1), .filters .col-md-3:nth-child(1) select');
+                const sortSelect = document.querySelector('.filters select:nth-child(2), .filters .col-md-3:nth-child(2) select');
+                const filterBtn = document.querySelector('.btn-filter');
+                const productCards = document.querySelectorAll('.product-card');
+
+                // Filtering function
+                function filterProducts() {
+                    const brand = brandSelect.value;
+                    const sort = sortSelect.value;
+
+                    let filtered = Array.from(productCards);
+
+                    // Filter by brand
+                    if (brand !== 'Select Brand') {
+                        filtered = filtered.filter(card => {
+                            const cardBrand = card.querySelector('.text-uppercase')?.textContent.trim();
+                            return cardBrand && cardBrand.toLowerCase().includes(brand.toLowerCase());
+                        });
+                    }
+
+                    // Hide all cards first
+                    productCards.forEach(card => card.parentElement.style.display = 'none');
+
+                    // Show filtered cards
+                    filtered.forEach(card => card.parentElement.style.display = '');
+
+                    // Sort
+                    if (sort === 'Price: Low to High') {
+                        filtered.sort((a, b) => {
+                            const aPrice = parseInt(a.querySelector('.price-tag, .price-wrapper span')?.textContent.replace(/[^\d]/g, ''), 10);
+                            const bPrice = parseInt(b.querySelector('.price-tag, .price-wrapper span')?.textContent.replace(/[^\d]/g, ''), 10);
+                            return aPrice - bPrice;
+                        });
+                    } else if (sort === 'Price: High to Low') {
+                        filtered.sort((a, b) => {
+                            const aPrice = parseInt(a.querySelector('.price-tag, .price-wrapper span')?.textContent.replace(/[^\d]/g, ''), 10);
+                            const bPrice = parseInt(b.querySelector('.price-tag, .price-wrapper span')?.textContent.replace(/[^\d]/g, ''), 10);
+                            return bPrice - aPrice;
+                        });
+                    } else if (sort === 'Newest First') {
+                        // Assuming cards are already in newest order
+                    }
+
+                    // Reorder DOM for sorting
+                    const grid = document.querySelector('.row.row-cols-2');
+                    if (grid && (sort === 'Price: Low to High' || sort === 'Price: High to Low')) {
+                        filtered.forEach(card => grid.appendChild(card.parentElement));
+                    }
+                }
+
+                filterBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    filterProducts();
+                });
+            });
         </script>
     </div>
 
-    <?php
-    include '../includes/footer.php';
-    ?>
+
+    <!-- footer -->
+    <footer id="footer" class="overflow-hidden" style="color: #000; padding-top: 3rem; padding-bottom: 2rem;">
+        <div class="container">
+            <div class="row footer-top-area d-flex flex-wrap justify-content-between">
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <div class="footer-menu">
+                        <img src="../assets/images/download.png" alt="MobiMart Logo" width="80px" height="80px" class="mb-3" />
+                        <p>
+                            Find the latest smartphones, accessories, and great deals all in one place.<br>
+                            <span style="color: #0dcaf0;">Quality phones with reliable service just for you!</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6 mb-4">
+                    <div class="footer-menu text-uppercase">
+                        <h5 class="widget-title pb-2" style="color:#000;">Quick Links</h5>
+                        <ul class="menu-list list-unstyled text-uppercase">
+                            <li class="menu-item pb-2">
+                                <a href="../index.php" class="text-dark text-decoration-none">Home</a>
+                            </li>
+                            <li class="menu-item pb-2">
+                                <a href="../pages/phones.php" class="text-dark text-decoration-none">Phones</a>
+                            </li>
+                            <li class="menu-item pb-2">
+                                <a href="../pages/phones.php" class="text-dark text-decoration-none">Shop</a>
+                            </li>
+                            <li class="menu-item pb-2">
+                                <a href="../pages/sign_in.php" class="text-dark text-decoration-none">Sign In</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <div class="footer-menu contact-item">
+                        <h5 class="widget-title text-uppercase pb-2" style="color:#000;">Contact Us</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="fas fa-envelope me-2"></i>
+                                <a href="mailto:mobimart@info.com" class="text-dark text-decoration-none">mobimart@info.com</a>
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-phone me-2"></i>
+                                <a href="tel:+9477177111" class="text-dark text-decoration-none">+94 764975098</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-map-marker-alt me-2"></i>
+                                <span>No. 123, Main Street, Kegalle, Sri Lanka</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+
+            <div id="footer-bottom">
+                <div class="container">
+                    <div class="row d-flex flex-wrap justify-content-between">
+
+                        <div>
+                            <div class="copyright">
+                                <p class="justify-content-center text-center">
+                                    © Copyright 2023 MobiMart.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
 
     <!-- Scripts -->
     <script src="../assets/js/jquery-1.11.0.min.js"></script>

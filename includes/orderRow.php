@@ -8,9 +8,9 @@
             <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($orderId); ?>">
             <select class="form-select form-select-sm" aria-label="Delivery status" name="delivery_status">
                 <option value="pending" <?php echo (strtolower($deliveryStatus) == 'pending') ? 'selected' : ''; ?>>Pending</option>
-                <option value="processing" <?php echo (strtolower($deliveryStatus) == 'processing') ? 'selected' : ''; ?>>Shipped</option>
-                <option value="completed" <?php echo (strtolower($deliveryStatus) == 'completed') ? 'selected' : ''; ?>>Delivered</option>
-                <option value="cancelled" <?php echo (strtolower($deliveryStatus) == 'cancelled') ? 'selected' : ''; ?>>Failed</option>
+                <option value="processing" <?php echo (strtolower($deliveryStatus) == 'processing') ? 'selected' : ''; ?>>processing</option>
+                <option value="completed" <?php echo (strtolower($deliveryStatus) == 'completed') ? 'selected' : ''; ?>>completed</option>
+                <option value="cancelled" <?php echo (strtolower($deliveryStatus) == 'cancelled') ? 'selected' : ''; ?>>cancelled</option>
             </select>
     </td>
     <td>

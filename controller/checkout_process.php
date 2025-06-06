@@ -11,9 +11,11 @@ if (!$userId) {
 }
 
 // Validate required fields
-if (!isset($_POST['fullName']) || !isset($_POST['streetAddress']) || 
-    !isset($_POST['city']) || !isset($_POST['district']) || 
-    !isset($_POST['phone']) || !isset($_POST['paymentMethod'])) {
+if (
+    !isset($_POST['fullName']) || !isset($_POST['streetAddress']) ||
+    !isset($_POST['city']) || !isset($_POST['district']) ||
+    !isset($_POST['phone']) || !isset($_POST['paymentMethod'])
+) {
     header("Location: ../pages/checkout.php?error=missing_fields");
     exit();
 }
@@ -39,8 +41,10 @@ foreach ($cartItems as $item) {
 }
 
 // Validate POST data
-if (!isset($_POST['fullName']) || !isset($_POST['streetAddress']) || !isset($_POST['city']) || 
-    !isset($_POST['district']) || !isset($_POST['phone']) || !isset($_POST['paymentMethod'])) {
+if (
+    !isset($_POST['fullName']) || !isset($_POST['streetAddress']) || !isset($_POST['city']) ||
+    !isset($_POST['district']) || !isset($_POST['phone']) || !isset($_POST['paymentMethod'])
+) {
     header("Location: ../pages/checkout.php?error=missing_fields");
     exit();
 }
@@ -105,6 +109,18 @@ try {
 
     $orderId = $conn->lastInsertId();
 
+    // Create payment record
+    $paymentSql = "INSERT INTO payments (order_id, amount, payment_method, payment_status) 
+                   VALUES (:order_id, :amount, :payment_method, :payment_status)";
+    $stmt = $conn->prepare($paymentSql);
+    $stmt->execute([
+        'order_id' => $orderId,
+        'amount' => $totalPrice,
+        'payment_method' => $paymentMethod,
+        'payment_status' => ($paymentMethod === 'cash' ? 'pending' : 'paid') // Cash on delivery is pending until delivered
+    ]);
+
+    // Add order items
     foreach ($cartItems as $item) {
         $orderItemsSql = "INSERT INTO order_items (order_id, product_id, quantity, price) 
                          VALUES (:order_id, :product_id, :quantity, :price)";

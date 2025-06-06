@@ -252,7 +252,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="../../assets/images/main-logo.png" alt="Mobile Shop">
+                <img src="../../assets/images/download.png" alt="Mobile Shop">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -263,9 +263,9 @@
                         <a class="nav-link" href="#">User Name</a>
                     </li>
                 </ul>
-                <div class="d-flex align-items-center">
+                <!-- <div class="d-flex align-items-center">
                     <i class="fa fa-phone"></i>
-                </div>
+                </div> -->
             </div>
         </div>
     </nav>
@@ -350,7 +350,7 @@
                 <!-- Add Brand Form -->
                 <div class="card shadow-sm">
                     <div class="card-body">
-                    <form id="addBrandForm" action="./controller/brand_add.php" method="POST">
+                        <form id="addBrandForm" action="./controller/brand_add.php" method="POST">
                             <div class="row justify-content-center">
                                 <div class="col-md-6">
                                     <div class="mb-4">

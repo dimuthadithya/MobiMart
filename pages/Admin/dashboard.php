@@ -3,9 +3,9 @@
 session_start();
 include_once('../../config/db.php');
 
-$products = $conn->query("SELECT * FROM products LIMIT 5")->fetchAll(PDO::FETCH_ASSOC);
+$products = $conn->query("SELECT * FROM products ")->fetchAll(PDO::FETCH_ASSOC);
 
-$orders = $conn->query("SELECT * FROM orders LIMIT 5")->fetchAll(PDO::FETCH_ASSOC);
+$orders = $conn->query("SELECT * FROM orders ")->fetchAll(PDO::FETCH_ASSOC);
 
 $totalSales = $conn->query("SELECT SUM(total_amount) AS total FROM orders")->fetchColumn();
 $totalProducts = $conn->query("SELECT COUNT(*) AS total FROM products")->fetchColumn();
@@ -271,7 +271,7 @@ $newOrders = $conn->query("SELECT COUNT(*) AS total FROM orders WHERE status = '
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
         <div class="container">
             <a class="navbar-brand" href="../../index.php">
-                <img src="../../assets/images/main-logo.png" alt="Mobile Shop">
+                <img src="../../assets/images/download.png" alt="Mobile Shop">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -282,9 +282,9 @@ $newOrders = $conn->query("SELECT COUNT(*) AS total FROM orders WHERE status = '
                         <a class="nav-link" href="#"><?php echo $_SESSION['email'] ?></a>
                     </li>
                 </ul>
-                <div class="d-flex align-items-center">
+                <!-- <div class="d-flex align-items-center">
                     <i class="fa fa-phone"></i>
-                </div>
+                </div> -->
             </div>
         </div>
     </nav>
@@ -396,7 +396,7 @@ $newOrders = $conn->query("SELECT COUNT(*) AS total FROM orders WHERE status = '
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-xl-3">
+                    <!-- <div class="col-md-6 col-xl-3">
                         <div class="card stat-card">
                             <div class="card-body p-3">
                                 <div class="d-flex align-items-center">
@@ -410,7 +410,7 @@ $newOrders = $conn->query("SELECT COUNT(*) AS total FROM orders WHERE status = '
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-md-6 col-xl-3">
                         <div class="card stat-card">
                             <div class="card-body p-3">

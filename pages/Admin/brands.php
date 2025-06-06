@@ -268,25 +268,25 @@ $brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="../../index.php">
-                <img src="../../assets/images/main-logo.png" alt="Mobile Shop">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto w-100 d-flex justify-content-end p-3">
-                    <li class="nav-item">
-                    <a class="nav-link" href="#"><?php echo $_SESSION['email'] ?></a>
-                    </li>
-                </ul>
-                <div class="d-flex align-items-center">
-                    <i class="fa fa-phone"></i>
-                </div>
-            </div>
+    <div class="container">
+      <a class="navbar-brand" href="../../index.php">
+        <img src="../../assets/images/download.png" alt="Mobile Shop">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto w-100 d-flex justify-content-end p-3">
+          <li class="nav-item">
+            <a class="nav-link" href="#"><?php echo $_SESSION['email'] ?></a>
+          </li>
+        </ul>
+        <!-- <div class="d-flex align-items-center">
+          <i class="fa fa-phone"></i>
         </div>
-    </nav>
+      </div> -->
+      </div>
+  </nav>
 
   <div class="container-fluid px-4 py-4">
     <div class="row">
@@ -364,10 +364,10 @@ $brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <!-- Alert for successful product addition -->
         <?php if (isset($_GET['success'])): ?>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <strong>Success!</strong> Brand has been added successfully.
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success!</strong> Brand has been added successfully.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
         <?php endif; ?>
 
 
@@ -389,7 +389,7 @@ $brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
               <div class="col-md-10">
                 <div class="d-flex flex-wrap justify-content-center gap-2">
                   <?php foreach ($brands as $brand): ?>
-                  <a href="#" class="btn btn-lg btn-outline-dark mb-2 px-4"><?= htmlspecialchars($brand['brand_name']) ?></a>
+                    <a href="#" class="btn btn-lg btn-outline-dark mb-2 px-4"><?= htmlspecialchars($brand['brand_name']) ?></a>
                   <?php endforeach; ?>
                 </div>
               </div>
