@@ -8,7 +8,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Complete - MiniStore</title>
+    <title>Order Complete - MobiMart</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -751,7 +751,7 @@ session_start();
                 </div>
             </div> -->
 
-            <div class="order-grid">
+            <!-- <div class="order-grid">
                 <div class="order-details">
                     <h3 class="section-title">Order Information</h3>
 
@@ -853,7 +853,7 @@ session_start();
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="actions">
                 <a href="./User/dashboard.php" class="btn btn-outline">View Order History</a>
@@ -862,7 +862,7 @@ session_start();
     </main>
 
     <!-- footer -->
-    <footer id="footer" class="overflow-hidden" style="color: #000; padding-top: 3rem; padding-bottom: 2rem;">
+    <!-- <footer id="footer" class="overflow-hidden" style="color: #000; padding-top: 3rem; padding-bottom: 2rem;">
         <div class="container">
             <div class="row footer-top-area d-flex flex-wrap justify-content-between">
                 <div class="col-lg-4 col-sm-6 mb-4">
@@ -931,7 +931,7 @@ session_start();
                 </div>
             </div>
         </div>
-    </footer>
+    </footer> -->
 
 </body>
 
