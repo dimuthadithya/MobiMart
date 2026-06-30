@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+// Fix: Verify admin role (CWE-306)
+if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin') {
+    header("Location: ../../pages/sign_in.php");
+    exit();
+}
 require_once '../../../config/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id'])) {
